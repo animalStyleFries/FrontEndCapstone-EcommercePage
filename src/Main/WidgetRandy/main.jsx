@@ -51,7 +51,7 @@ const MainRandy = (props) => {
   return (<div>
     {APIResults.product.id === undefined && <div>You aint got nothing yet son</div>}
     {APIResults.product.id !== undefined && <div>
-      <ImageGallery />
+      <ImageGallery styleArray={APIResults.styles.results} style={style} />
       <ProductInformation APIResults={APIResults} style={style} />
       <StyleSelector styleArray={APIResults.styles.results} style={style} setStyle={setStyle} />
       <AddtoCart />

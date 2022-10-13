@@ -1,7 +1,26 @@
 import React from 'react'
+import { useState } from 'react'
+import SmallerImage from './SmallerComponents/SmallerImage.jsx'
 
-const ImageGallery = (props) => {
-  return (<div>I am ImageGallery Placeholder </div>)
+const ImageGallery = ({ styleArray, style }) => {
+
+  // setting up index count
+  let count = 0
+
+  // by default, use first image
+  const [currentImage, setCurrentImage] = useState(0)
+
+
+  return (<div>
+
+    {/* main picture */}
+    <img src={styleArray[style].photos[currentImage].url}></img>
+
+    {/* map over remainder of entries to smaller images */}
+    {styleArray[style].photos.map(entry => (
+      <SmallerImage entry={entry} key={entry.style_id} index={count++} setCurrentImage={setCurrentImage} />
+    ))}
+  </div>)
 }
 
 export default ImageGallery

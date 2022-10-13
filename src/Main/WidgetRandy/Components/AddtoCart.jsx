@@ -1,7 +1,7 @@
 import React from 'react'
 
 const AddtoCart = (props) => {
-  return (<div>I am AddtoCart Placeholder </div>)
+  return (<div>Add to Cart Placeholder </div>)
 }
 
 export default AddtoCart
