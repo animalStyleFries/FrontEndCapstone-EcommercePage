@@ -1,7 +1,7 @@
 import React from 'react'
 
 const ImageGallery = (props) => {
-  return (<>I am ImageGallery Placeholder </>)
+  return (<div>I am ImageGallery Placeholder </div>)
 }
 
 export default ImageGallery
