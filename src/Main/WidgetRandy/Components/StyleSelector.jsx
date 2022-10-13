@@ -1,5 +1,5 @@
 import React from 'react'
-import StyleSelectorCard from './ProductInformationComponents/StyleSelectorCard.jsx'
+import StyleSelectorCard from './SmallerComponents/StyleSelectorCard.jsx'
 
 const StyleSelector = ({ styleArray, style, setStyle }) => {
   let count = 0

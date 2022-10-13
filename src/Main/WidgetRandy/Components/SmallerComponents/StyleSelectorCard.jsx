@@ -1,11 +1,12 @@
 import React from 'react'
 
-const StyleSelectorCard = ({ setStyle, index }) => {
+const StyleSelectorCard = ({ entry, setStyle, index }) => {
 
   // onClick, changes the style
   const clicker = () => {
     setStyle(index)
   }
-  return (<div onClick={clicker}> hi i am card</div>)
+  return (<div onClick={clicker}>{entry.name} --- I am Clickable!</div>)
 }
+
 export default StyleSelectorCard
