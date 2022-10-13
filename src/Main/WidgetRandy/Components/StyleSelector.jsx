@@ -1,7 +1,15 @@
 import React from 'react'
+import StyleSelectorCard from './ProductInformationComponents/StyleSelectorCard.jsx'
 
-const StyleSelector = (props) => {
-  return (<>I am StyleSelector Placeholder </>)
+const StyleSelector = ({ styleArray, style, setStyle }) => {
+  let count = 0
+  // display all but in rows of 4
+
+  return (<div>
+    {styleArray.map(entry => (
+      <StyleSelectorCard entry={entry} setStyle={setStyle} index={count++} key={entry.style_id} />
+    ))}
+  </div>)
 }
 
 export default StyleSelector
