@@ -1,4 +1,4 @@
-import gitToken from '../../hidden.js'
+import gitToken from './hidden.js'
 
 const API = {
   gitToken: gitToken,

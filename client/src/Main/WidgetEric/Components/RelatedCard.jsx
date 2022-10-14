@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import API from '../API.js';
 import axios from 'axios';
 
@@ -7,31 +7,31 @@ const RelatedCard = ({ relatedProductId }) => {
   const [allProductInfo, setAllProductInfo] = useState()
 
   useEffect(() => {
-    const getRelatedProducts = axios.get(`${API.server}products/${relatedProductId}`, { headers: {'Authorization': API.gitToken}})
-    const getRelatedStyles = axios.get(`${API.server}products/${relatedProductId}/styles`, { headers: {'Authorization': API.gitToken}})
-    const getRelatedReview = axios.get(`${API.server}reviews/?product_id=${relatedProductId}`, { headers: {'Authorization': API.gitToken}})
+    const getRelatedProducts = axios.get(`${API.server}products/${relatedProductId}`, { headers: { 'Authorization': API.gitToken } })
+    const getRelatedStyles = axios.get(`${API.server}products/${relatedProductId}/styles`, { headers: { 'Authorization': API.gitToken } })
+    const getRelatedReview = axios.get(`${API.server}reviews/?product_id=${relatedProductId}`, { headers: { 'Authorization': API.gitToken } })
 
-    Promise.all( [getRelatedProducts, getRelatedStyles, getRelatedReview] )
-    .then((results) => {
-      let container = {}
-      container.productArrays = results[0].data
-      container.styleArrays = results[1].data
-      container.reviewArrays = results[2].data
-      setAllProductInfo(container)
-    })
+    Promise.all([getRelatedProducts, getRelatedStyles, getRelatedReview])
+      .then((results) => {
+        let container = {}
+        container.productArrays = results[0].data
+        container.styleArrays = results[1].data
+        container.reviewArrays = results[2].data
+        setAllProductInfo(container)
+      })
   }, [])
 
-    const getRating = (allProductInfo) => {
-      let sum = 0
-      let reviews = allProductInfo.reviewArrays.results
-      for (var i = 0; i < reviews.length; i++) {
-        sum += reviews[i].rating
-      }
-      return sum / reviews.length
+  const getRating = (allProductInfo) => {
+    let sum = 0
+    let reviews = allProductInfo.reviewArrays.results
+    for (var i = 0; i < reviews.length; i++) {
+      sum += reviews[i].rating
     }
+    return sum / reviews.length
+  }
 
 
-  console.log(allProductInfo)
+  // console.log(allProductInfo)
 
   if (allProductInfo) {
     return (
