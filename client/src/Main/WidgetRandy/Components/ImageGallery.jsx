@@ -18,7 +18,7 @@ const ImageGallery = ({ styleArray, style }) => {
 
     {/* map over remainder of entries to smaller images */}
     {styleArray[style].photos.map(entry => (
-      <SmallerImage entry={entry} key={entry.style_id} index={count++} setCurrentImage={setCurrentImage} />
+      <SmallerImage entry={entry} index={count++} setCurrentImage={setCurrentImage} key={count} />
     ))}
   </div>)
 }

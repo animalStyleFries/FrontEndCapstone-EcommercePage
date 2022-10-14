@@ -6,7 +6,6 @@ import axios from 'axios'
 // p.s. not every component needs an import
 
 const ProductInformation = ({ APIResults, style }) => {
-  // console.log(APIResults)
   // calculating average stars
   let total = 0;
   for (let i of APIResults.review.results) {
