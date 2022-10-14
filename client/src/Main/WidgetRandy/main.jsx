@@ -1,3 +1,4 @@
+//imports
 import React from 'react'
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
@@ -15,6 +16,7 @@ const MainRandy = (props) => {
     review: {},
     styles: {},
   };
+
   // set state of product, this state contains all info of the product
   // (ps, eventually we will want to set product state to the highest level)
   const [APIResults, setAPIResults] = useState(initialState)
