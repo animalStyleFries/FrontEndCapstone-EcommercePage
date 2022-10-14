@@ -1,7 +1,7 @@
-// require("dotenv").config();
+import gitToken from '../../hidden.js'
 
 const API = {
-  gitToken: process.env.REACT_APP_GITTOKEN,
+  gitToken: gitToken,
   server: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/'
 }
 

@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "react-dev": "webpack --mode development --watch"
+    "react-dev": "webpack --mode development --watch",
+    "server-dev": "npx nodemon --watch server server/index.js"
   },
   "browser": {
     "fs": false,

@@ -1,4 +1,4 @@
-// require("dotenv").config();
+require("dotenv").config();
 var path = require("path");
 var SRC_DIR = path.join(__dirname, "/client/src");
 var DIST_DIR = path.join(__dirname, "/client/dist");
@@ -18,7 +18,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?/,
-        // exclude: /node_modules/,
+        exclude: /node_modules/,
         use: {
           loader: "babel-loader",
         },

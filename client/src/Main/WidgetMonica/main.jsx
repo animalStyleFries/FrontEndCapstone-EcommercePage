@@ -6,7 +6,7 @@ import SearchBar from './components/FrontSide/SearchBar.jsx';
 import AddQuestion from './components/BottomSide/AddQuestion.jsx';
 import MoreAnsweredQuestions from './components/BottomSide/MoreAnsweredQuestions.jsx';
 import cors from 'cors';
-// require("dotenv").config();
+import gitToken from '../../hidden.js' // dotenv substitute
 
 const MainMonica = (product_id) => {
   product_id = "40348"
@@ -16,7 +16,7 @@ const MainMonica = (product_id) => {
   let options = {
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}`,
     headers: {
-      'Authorization': process.env.REACT_APP_GITTOKEN
+      'Authorization': gitToken
     },
     method: 'get'
   };

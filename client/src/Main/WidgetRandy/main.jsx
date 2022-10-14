@@ -8,7 +8,6 @@ import StyleSelector from './Components/StyleSelector.jsx'
 import AddtoCart from './Components/AddtoCart.jsx'
 import API from './API.js'
 
-console.log(process.env.REACT_APP_GITTOKEN)
 const MainRandy = (props) => {
 
   const initialState = {
