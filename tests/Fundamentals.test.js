@@ -7,6 +7,5 @@ it('Should render a title and 3 widgets', () => {
     <App />,
   );
   let tree = component.toJSON()
-  console.log('this is the tree', tree)
   expect(tree.children.length).toBe(4)
 })
