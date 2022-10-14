@@ -1,5 +1,7 @@
+import gitToken from '../../hidden.js'
+
 const API = {
-  gitToken: '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',
+  gitToken: gitToken,
   server: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/'
 }
 
