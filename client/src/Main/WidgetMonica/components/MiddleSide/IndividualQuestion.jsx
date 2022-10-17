@@ -10,11 +10,11 @@ const IndividualQuestion = (props) => {
 
     <span>
       <div style={{display: 'flex'}}>
-      <div>Q: {props.question.question_body}</div>
-      <p>Helpful?</p>
-      <button>Yes</button>
-      <p>{props.question.question_helpfulness}</p>
-      <AddAnswer></AddAnswer>
+        <p>Q: {props.question.question_body}</p>
+        <p>Helpful?</p>
+        <button>Yes</button>
+        <p>{props.question.question_helpfulness}</p>
+        <AddAnswer></AddAnswer>
       </div>
       <br></br>
       <Answers questionid={props.question.question_id}></Answers>

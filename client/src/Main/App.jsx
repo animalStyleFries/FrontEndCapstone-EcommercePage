@@ -50,7 +50,7 @@ const App = () => {
     <AppContainer>
       <h1>Project Atelier</h1>
       <MainRandy APIResults={APIResults} />
-      <MainMonica product_id={APIResults.product.id} />
+      {APIResults.product.id ? <MainMonica product_id={APIResults.product.id} /> : null}
       <MainEric />
     </AppContainer>
   )

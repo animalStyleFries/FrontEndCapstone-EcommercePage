@@ -16,7 +16,7 @@ const MainMonica = ({ product_id }) => {
   const [questions, setQuestions] = useState([])
   // call api to get some data;
 
-  // useEffect(() => {
+  useEffect(() => {
   const options = {
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}`,
     headers: {
@@ -26,14 +26,13 @@ const MainMonica = ({ product_id }) => {
   };
   axios(options)
     .then((response) => {
-      // console.log('this is the', response);
+      console.log('aaaa')
       setQuestions(response.data.results)
     })
     .catch((err) => {
       console.log(err);
     })
-  // }, [])
-
+  }, [product_id])
 
   return (<div>
     <h1> Questions & Answers</h1>

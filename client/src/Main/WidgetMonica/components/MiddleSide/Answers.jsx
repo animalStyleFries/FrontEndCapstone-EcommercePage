@@ -7,7 +7,9 @@ var Answers = function (props) {
   const[answerNumber, setAnswerNumber] =useState(2);
   const[displayAnswer, setDisplayAnswer] = useState([])
 
-  useEffect(() => {
+
+
+  const fetch = function () {
     const options = {
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/${props.questionid}/answers?count=100`,
       headers: {
@@ -23,7 +25,11 @@ var Answers = function (props) {
       .catch((err) => {
         console.log(err);
       })
-  },[])
+  }
+
+  useEffect(() => {
+    fetch()
+   },[])
 
   var sortingAnswer = function (displayAnswer) {
     var res = displayAnswer.slice();
@@ -59,8 +65,17 @@ var Answers = function (props) {
       filter(answerNumber, displayAnswer).map((each) => {
         console.log('ddd', each)
         return(
-
-        <div>{each.body}</div>
+        <div>
+          <br></br>
+          {each.body}
+          <br></br>
+          <div style={{display: 'flex'}}>
+            <p>by {each.answerer_name}</p>
+            <p>Helpful?</p>
+            <button>Yes</button>
+            <p>{each.helpfulness}</p>
+           </div>
+        </div>
 
       )
       })}
