@@ -23,6 +23,7 @@ const App = () => {
 
   // use effect to get all get requests needed in the beginning.
   useEffect(() => {
+    console.log('App axios get request in progress')
     let holder = {}
     axios.get(API.server + 'products', { headers: { "Authorization": API.gitToken } })
       .then(productResult => {
@@ -40,6 +41,7 @@ const App = () => {
             holder.review = resultArray[0].data
             holder.styles = resultArray[1].data
             setAPIResults(holder)
+            console.log('App axios get request completed!')
           })
           .catch(err => console.log(err))
       })
