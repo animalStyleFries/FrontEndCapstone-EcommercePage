@@ -21,7 +21,7 @@ const ProductInformation = ({ APIResults, style }) => {
       <h1>{APIResults.product.name}</h1>
       <p>{avg}</p>
       <p>{APIResults.product.category}</p>
-      <p>{price}</p>
+      <p>${price}</p>
       <p>{APIResults.product.description}</p> {/* maybe add slogan as well eventually */}
       <p>Share on social media</p>
     </div>
