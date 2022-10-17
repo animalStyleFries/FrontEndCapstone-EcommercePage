@@ -8,7 +8,9 @@ import MoreAnsweredQuestions from './components/BottomSide/MoreAnsweredQuestions
 import cors from 'cors';
 import gitToken from '../../hidden.js' // dotenv substitute
 
+console.log(gitToken)
 const MainMonica = ({ product_id }) => {
+  console.log("product_id", product_id);
   // product_id = "40348"
   // setup the whole status;
   const [questions, setQuestions] = useState([])
