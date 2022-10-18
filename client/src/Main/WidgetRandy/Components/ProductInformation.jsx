@@ -4,7 +4,6 @@ import axios from 'axios'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro'
-import { faTwitter, faFontAwesome } from '@fortawesome/free-brands-svg-icons'
 
 
 
@@ -38,15 +37,10 @@ const ProductInformation = ({ APIResults, style }) => {
         {halfStar && <FontAwesomeIcon icon={icon({ name: 'star-half' })} />}
       </StarContainer>
       <h1>{APIResults.product.name}</h1>
-      <p>{APIResults.product.category}</p>
-      <p>${price}</p>
-      <p>{APIResults.product.description}</p> {/* maybe add slogan as well eventually */}
-      <SocialMediaContainer>
-        {/* <FontAwesomeIcon icon="fa-brands fa-twitter" /> */}
-        <FontAwesomeIcon icon={brands('facebook')} onClick={() => window.open('https://www.facebook.com/', '_blank')} />
-        <FontAwesomeIcon icon={brands('twitter')} onClick={() => window.open('https://www.twitter.com/', '_blank')} />
-        <FontAwesomeIcon icon={brands('pinterest')} onClick={() => window.open('https://www.pinterest.com/', '_blank')} />
-      </SocialMediaContainer>
+      <h3>{APIResults.product.slogan}</h3>
+      <p>Category: {APIResults.product.category}</p>
+      <p>Price: ${price}</p>
+      <p>Description: <br></br>{APIResults.product.description}</p> {/* maybe add slogan as well eventually */}
     </div>
   )
 }
