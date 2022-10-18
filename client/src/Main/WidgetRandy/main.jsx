@@ -1,51 +1,69 @@
 //imports
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 import ImageGallery from './Components/ImageGallery.jsx'
 import ProductInformation from './Components/ProductInformation.jsx'
 import StyleSelector from './Components/StyleSelector.jsx'
 import AddtoCart from './Components/AddtoCart.jsx'
+import ExpandImage from './Components/SmallerComponents/ExpandImage.jsx'
+import SocialMedia from './Components/SmallerComponents/SocialMedia.jsx'
 
 const MainRandy = ({ APIResults }) => {
   // set initial style
   const [style, setStyle] = useState(0)
+  const [expand, setExpand] = useState(false)
   const styleArray = APIResults.styles.results || []
+  let expandURL = useRef()
 
   return (<div>
-    <NavBar>
-      <Header>R.E.M</Header>
+    <NavBar onClick={() => console.log(test)}>
+      <LogoContainer>
+        <Header>R.E.M</Header>
+        <Slogan>Remember Every Moment</Slogan>
+      </LogoContainer>
     </NavBar>
     <EmptySpace></EmptySpace>
     {APIResults.product.id === undefined && <div>Loading...</div>}
-    {APIResults.product.id !== undefined && <ContainerGrid>
-      <ImageGallery styleArray={styleArray} style={style} />
+    {APIResults.product.id !== undefined && expand && <ExpandImage setExpand={setExpand} expandURL={expandURL} />}
+    {APIResults.product.id !== undefined && !expand && <ContainerGrid>
+      <ImageGallery styleArray={styleArray} style={style} setExpand={setExpand} expandURL={expandURL} />
       <CointainerProductInfo>
         <ProductInformation APIResults={APIResults} style={style} />
         <StyleSelector styleArray={styleArray} style={style} setStyle={setStyle} />
         <AddtoCart styleArray={styleArray} style={style} />
+        <SocialMedia />
       </CointainerProductInfo>
     </ContainerGrid>}
   </div>)
 }
-
-const Header = styled.h1`
-  position: fixed;
-  top: 0;
-  margin: 0;
-  font-family: 'Brush Script Std';
-`
 
 const NavBar = styled.div`
   background-color:lightblue;
   position: fixed;
   top: 0;
   width: 100%;
-  height: 2.5rem;
+  height: 4rem;
+  z-index: 2;
 `
+
+const LogoContainer = styled.div`
+`
+
+const Header = styled.h1`
+  top: 0;
+  margin: 0;
+  font-family: 'Brush Script Std';
+`
+const Slogan = styled.p`
+  top: 0;
+  margin: 0;
+  font-family: 'Snell Roundhand';
+`
+
 const EmptySpace = styled.div`
-  height: 2.3rem;
+  height: 4.1rem;
 `
 
 const ContainerGrid = styled.div`
