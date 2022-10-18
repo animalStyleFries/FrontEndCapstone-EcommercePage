@@ -13,6 +13,7 @@ const ImageGallery = ({ styleArray, style }) => {
   const [currentImage, setCurrentImage] = useState(0)
 
 
+  // 7 dumbnails per column
   return (<div>
 
     {/* main picture */}

@@ -31,13 +31,13 @@ const ProductInformation = ({ APIResults, style }) => {
 
   return (
     <div>
-      <h1>{APIResults.product.name}</h1>
       <StarContainer>
         {starArray.map(entry => (
           <FontAwesomeIcon icon={icon({ name: 'star' })} />
         ))}
         {halfStar && <FontAwesomeIcon icon={icon({ name: 'star-half' })} />}
       </StarContainer>
+      <h1>{APIResults.product.name}</h1>
       <p>{APIResults.product.category}</p>
       <p>${price}</p>
       <p>{APIResults.product.description}</p> {/* maybe add slogan as well eventually */}
@@ -53,9 +53,8 @@ const ProductInformation = ({ APIResults, style }) => {
 
 const StarContainer = styled.div`
   display: flex;
-  color: yellow;
-  background-color: black;
-  width: 6rem
+  color: orange;
+  width: 6rem;
 `
 
 const Star = styled.span`

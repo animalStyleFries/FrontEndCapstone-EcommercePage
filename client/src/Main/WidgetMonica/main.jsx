@@ -14,23 +14,23 @@ const MainMonica = ({ product_id }) => {
   const [questions, setQuestions] = useState([])
   // call api to get some data;
 
-  // useEffect(() => {
-  const options = {
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}`,
-    headers: {
-      'Authorization': gitToken
-    },
-    method: 'get'
-  };
-  axios(options)
-    .then((response) => {
-      // console.log('this is the', response);
-      setQuestions(response.data.results)
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  // }, [])
+  useEffect(() => {
+    const options = {
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}`,
+      headers: {
+        'Authorization': gitToken
+      },
+      method: 'get'
+    };
+    axios(options)
+      .then((response) => {
+        // console.log('this is the', response);
+        setQuestions(response.data.results)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }, [product_id])
 
 
   return (<div>
