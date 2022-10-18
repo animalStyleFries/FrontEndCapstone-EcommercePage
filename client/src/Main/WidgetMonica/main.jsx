@@ -28,7 +28,6 @@ const MainMonica = ({ product_id }) => {
   // };
   // console.log('this is ', options)
     .then((response) => {
-      // console.log('aaaa')
       console.log('Injected response',response)
       setQuestions(response.data.results);
     })

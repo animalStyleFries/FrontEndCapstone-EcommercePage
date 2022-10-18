@@ -6,6 +6,7 @@ var Answers = function (props) {
 
   const[answerNumber, setAnswerNumber] =useState(2);
   const[displayAnswer, setDisplayAnswer] = useState([])
+  const[helpfulness,setHelpfulness] = useState()
 
   const fetch = function () {
     const options = {
@@ -18,7 +19,13 @@ var Answers = function (props) {
     axios(options)
       .then((response) => {
         console.log('this is the answer', response);
-        setDisplayAnswer(sortingAnswer(response.data.results));
+        var sortedAnswers = sortingAnswer(response.data.results);
+        var helpful = {}
+        sortedAnswers.forEach((each) => {
+          helpful[each.answer_id] = each.helpfulness
+        })
+        setHelpfulness(helpful);
+        setDisplayAnswer(sortedAnswers);
       })
       .catch((err) => {
         console.log(err);
@@ -29,18 +36,35 @@ var Answers = function (props) {
     fetch()
    },[])
 
-  var sortingAnswer = function (displayAnswer) {
+   var sortingAnswer = function (displayAnswer) {
+
     var res = displayAnswer.slice();
     console.log('res is ', res)
-    for (var j = 0; j <res.length-1; j++) {
-      if(res[j].helpfulness < res[j+1].helpfulness) {
-        var originalanswer = res[j]
-        res[j] = res[j+1];
-        res[j+1] = originalanswer;
+    var resOthers = []
+    var resSeller = [];
+    for (var j = 0; j <res.length; j++) {
+      if(res[j].answerer_name === 'seller' || res[j].answerer_name === 'Seller' || res[j].answerer_name === 'SELLER') {
+        resSeller.push(res[j])
+      } else {
+        resOthers.push(res[j])
       }
     }
-    return res;
+    var sortingAll = function (res) {
+      for (var i = 0; i < res.length-1; i++) {
+        if(res[i].helpfulness < res[i+1].helpfulness) {
+          var originalanswer = res[i]
+          res[i] = res[i+1];
+          res[i+1] = originalanswer;
+        }
+      }
+      return res;
+    }
+    var sortedOthers = sortingAll(resOthers);
+    var sortedSeller = sortingAll(resSeller);
+    var finalRes = sortedSeller.concat(sortedOthers);
+    return finalRes;
   }
+
 
   var filter = function (number, all) {
     var res = [];
@@ -55,27 +79,57 @@ var Answers = function (props) {
     setAnswerNumber(current+5)
   }
 
+  var handleHelpful = function (e, id) {
+    e.preventDefault()
+    if(e.target.disabled === true) {
+      return;
+    }
+    var newState =JSON.parse(JSON.stringify(helpfulness));
+    newState[id] = newState[id]+1;
+    setHelpfulness(newState);
+    axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/answers/${id}/helpful`, null , { headers: { "Authorization": gitToken } })
+    .then ((response) => {
+      console.log('update answer helpful succeed')
+    }).catch((err) => {
+      console.log('we found', err);
+    })
+    console.log('event', e)
+    e.target.disabled = true
+  }
+
+
   var render = function () {
 
     return (
-    <div>
+    <div key={props.questionid}>
       A: {
       filter(answerNumber, displayAnswer).map((each, index) => {
         console.log('ddd', each)
         return(
-        <div id ={index}>
+        <div key={index}>
           <br></br>
           {each.body}
           <br></br>
-          <div style={{display: 'flex'}}>
-            <p>by {each.answerer_name}</p>
-            {/* {each.date.slice(0,10)} */}
-            <p>Helpful?</p>
-            <button>Yes</button>
-            <p>{each.helpfulness}</p>
-           </div>
+          <div>
+            <div>
+            {
+              (each.photos).map((eachPhoto) => (
+                <img src={eachPhoto.url}></img>
+              ))
+            }
+            </div>
+            <div style={{display: 'flex'}}>
+              <p>by {each.answerer_name}&nbsp;&nbsp;&nbsp;</p>
+              <p>{new Date(each.date.slice(0,10)).toUTCString().substring(0, 16)}&nbsp;&nbsp;&nbsp;</p>
+              <p>Helpful?&nbsp;</p>
+              <p><a href="" onClick={(e) => {handleHelpful(e, each.answer_id)}}>Yes&nbsp;</a></p>
+              <p>{helpfulness[each.answer_id]}</p>
+              <p>
+                <a href="">Report</a>
+              </p>
+            </div>
+          </div>
         </div>
-
       )
       })}
 
@@ -89,3 +143,4 @@ var Answers = function (props) {
 }
 
 export default Answers;
+
