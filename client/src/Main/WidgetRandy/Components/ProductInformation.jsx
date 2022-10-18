@@ -46,11 +46,16 @@ const ProductInformation = ({ APIResults, style }) => {
           <TestStar className="fa-solid fa-star" left={0} right={0} />
         ))}
       </StarContainer>
-      <h2>{APIResults.product.name}</h2>
-      <h3>{APIResults.product.slogan}</h3>
-      <p>Category: {APIResults.product.category}</p>
-      <p>Price: ${price}</p>
-      <p>Description: <br></br>{APIResults.product.description}</p> {/* maybe add slogan as well eventually */}
+      <h1>{APIResults.product.name}</h1>
+      <p>{APIResults.product.category}</p>
+      <p>${price}</p>
+      <p>{APIResults.product.description}</p> {/* maybe add slogan as well eventually */}
+      <SocialMediaContainer>
+        {/* <FontAwesomeIcon icon="fa-brands fa-twitter" /> */}
+        <FontAwesomeIcon icon={brands('facebook')} onClick={() => window.open('https://www.facebook.com/', '_blank')} />
+        <FontAwesomeIcon icon={brands('twitter')} onClick={() => window.open('https://www.twitter.com/', '_blank')} />
+        <FontAwesomeIcon icon={brands('pinterest')} onClick={() => window.open('https://www.pinterest.com/', '_blank')} />
+      </SocialMediaContainer>
     </div>
   )
 }
