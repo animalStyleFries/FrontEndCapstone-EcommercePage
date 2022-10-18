@@ -7,8 +7,6 @@ var Answers = function (props) {
   const[answerNumber, setAnswerNumber] =useState(2);
   const[displayAnswer, setDisplayAnswer] = useState([])
 
-
-
   const fetch = function () {
     const options = {
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/${props.questionid}/answers?count=100`,
@@ -62,15 +60,16 @@ var Answers = function (props) {
     return (
     <div>
       A: {
-      filter(answerNumber, displayAnswer).map((each) => {
+      filter(answerNumber, displayAnswer).map((each, index) => {
         console.log('ddd', each)
         return(
-        <div>
+        <div id ={index}>
           <br></br>
           {each.body}
           <br></br>
           <div style={{display: 'flex'}}>
             <p>by {each.answerer_name}</p>
+            {/* {each.date.slice(0,10)} */}
             <p>Helpful?</p>
             <button>Yes</button>
             <p>{each.helpfulness}</p>
