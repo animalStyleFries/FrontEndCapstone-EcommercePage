@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import RelatedCard from './RelatedCard.jsx'
 
-const RelatedList = ({ relatedProductsIds }) => {
+const RelatedList = ({ relatedProducts }) => {
+
 
   return (
     <div>
       <h2>Related Cards</h2>
       <div>
-        {(relatedProductsIds) ? relatedProductsIds.map((relatedProductId) =><RelatedCard relatedProductId={relatedProductId}/>)  : <p>nothing</p>}
-        {/* {(relatedProductsIds) ? relatedProductsIds.map((relatedProductId) =><RelatedCard relatedProductId={40345}/>)  : <p>nothing</p>} */}
+        {(relatedProducts) ? relatedProducts.relatedProductIds.map((relatedProductId) => (<RelatedCard relatedProductId={relatedProductId} relatedProducts={relatedProducts}/>))  : <p>nothing</p>}
       </div>
     </div>
   )
