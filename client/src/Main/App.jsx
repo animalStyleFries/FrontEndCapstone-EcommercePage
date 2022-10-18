@@ -50,7 +50,6 @@ const App = () => {
 
   return (
     <AppContainer>
-      <h1>Project Atelier</h1>
       <MainRandy APIResults={APIResults} />
       {APIResults.product.id ? <MainMonica product_id={APIResults.product.id} /> : null}
       <MainEric />
@@ -58,10 +57,8 @@ const App = () => {
   )
 }
 
+// used to be flex, but then I changed it
 const AppContainer = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
 `;
 
 export default App
