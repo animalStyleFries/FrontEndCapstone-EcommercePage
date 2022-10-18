@@ -6,9 +6,9 @@ const QuestionsList = (props) => {
 
   return (
     <div>
-      {(props.questions).map((each) => {
+      {(props.questions).map((each, index) => {
         return (
-          <IndividualQuestion question={each}></IndividualQuestion>
+          <IndividualQuestion key={index} question={each}></IndividualQuestion>
         )
       })}
     </div>
