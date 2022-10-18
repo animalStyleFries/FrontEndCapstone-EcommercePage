@@ -51,7 +51,7 @@ const App = () => {
   return (
     <AppContainer>
       <MainRandy APIResults={APIResults} />
-      <MainMonica product_id={APIResults.product.id} />
+      {APIResults.product.id ? <MainMonica product_id={APIResults.product.id} /> : null}
       <MainEric />
     </AppContainer>
   )

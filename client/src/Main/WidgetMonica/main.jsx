@@ -8,24 +8,28 @@ import MoreAnsweredQuestions from './components/BottomSide/MoreAnsweredQuestions
 import cors from 'cors';
 import gitToken from '../../hidden.js' // dotenv substitute
 
+// console.log(gitToken)
 const MainMonica = ({ product_id }) => {
+  // console.log("product_id", product_id);
   // product_id = "40348"
   // setup the whole status;
   const [questions, setQuestions] = useState([])
   // call api to get some data;
 
   useEffect(() => {
-    const options = {
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}`,
-      headers: {
-        'Authorization': gitToken
-      },
-      method: 'get'
-    };
-    axios(options)
+
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}`, { headers: { "Authorization": gitToken } })
+      // const options = {
+      // url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}`,
+      //   headers: {
+      //     'Authorization': gitToken
+      //   },
+      //   method: 'get'
+      // };
+      // console.log('this is ', options)
       .then((response) => {
-        // console.log('this is the', response);
-        setQuestions(response.data.results)
+        console.log('Injected response', response)
+        setQuestions(response.data.results);
       })
       .catch((err) => {
         console.log(err);
