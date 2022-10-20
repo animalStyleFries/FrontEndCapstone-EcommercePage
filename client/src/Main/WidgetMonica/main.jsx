@@ -19,21 +19,21 @@ const MainMonica = ({ product_id }) => {
   useEffect(() => {
 
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}`, { headers: { "Authorization": gitToken } })
-  // const options = {
-    // url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}`,
-  //   headers: {
-  //     'Authorization': gitToken
-  //   },
-  //   method: 'get'
-  // };
-  // console.log('this is ', options)
-    .then((response) => {
-      console.log('Injected response',response)
-      setQuestions(response.data.results);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+      // const options = {
+      // url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}`,
+      //   headers: {
+      //     'Authorization': gitToken
+      //   },
+      //   method: 'get'
+      // };
+      // console.log('this is ', options)
+      .then((response) => {
+        console.log('Injected response', response)
+        setQuestions(response.data.results);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }, [product_id])
 
 
