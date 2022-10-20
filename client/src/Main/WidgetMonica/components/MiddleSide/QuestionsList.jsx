@@ -4,6 +4,14 @@ import IndividualQuestion from './IndividualQuestion.jsx';
 import ReactList from 'react-list';
 
 const QuestionsList = (props) => {
+  // console.log('questionlist', props.questions)
+  var sortingAll = function () {
+    props.questions.sort(function(a,b){
+      return a.helpfulness > b.helpfulness ? -1 : a.helpfulness < b.helpfulness ? 1 : 0;
+    });
+    return props.questions;
+  }
+  var sortedQ = sortingAll();
   if(!props.questions) {
     return null;
   }
