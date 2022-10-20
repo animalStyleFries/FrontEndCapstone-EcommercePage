@@ -6,6 +6,9 @@ import MainMonica from './WidgetMonica/main.jsx'
 import MainRandy from './WidgetRandy/main.jsx'
 import axios from 'axios'
 import API from '../API.js'
+import Select from "react-select"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 // Shared get requests done at the App level
 
@@ -20,20 +23,32 @@ const App = () => {
 
   // set state of product, this state contains all info of the product
   const [APIResults, setAPIResults] = useState(initialState)
+  const [productSelector, setProductSelector] = useState({ value: 2, label: 2 })
+  const [devMode, setDevMode] = useState(true) // to disable dev mode, just set this to false
+
+  let devOptions = []
+  const productCount = 20 // change this to match total products being chosen
+  for (let i = 0; i < productCount; i++) {
+    devOptions.push({ value: i, label: i })
+  }
+
+  const devChanger = (e) => {
+    setProductSelector(e);
+  }
 
   // use effect to get all get requests needed in the beginning.
   useEffect(() => {
     console.log('App axios get request in progress')
     let holder = {}
-    axios.get(API.server + 'products', { headers: { "Authorization": API.gitToken } })
+    axios.get(API.server + 'products/' + '?count=20', { headers: { "Authorization": API.gitToken } })
       .then(productResult => {
-        holder.product = productResult.data[2]
+        holder.product = productResult.data[productSelector.value]
 
         // get request for reviews
-        const getReview = axios.get(API.server + 'reviews/?product_id=' + productResult.data[2].id, { headers: { "Authorization": API.gitToken } })
+        const getReview = axios.get(API.server + 'reviews/?product_id=' + productResult.data[productSelector.value].id, { headers: { "Authorization": API.gitToken } })
 
         // get request for styles
-        const getStyles = axios.get(API.server + 'products/' + productResult.data[2].id + '/styles', { headers: { "Authorization": API.gitToken } })
+        const getStyles = axios.get(API.server + 'products/' + productResult.data[productSelector.value].id + '/styles', { headers: { "Authorization": API.gitToken } })
 
         // wait for all axios requests
         Promise.all([getReview, getStyles])
@@ -46,13 +61,17 @@ const App = () => {
           .catch(err => console.log(err))
       })
       .catch(err => console.log(err))
-  }, [])
+  }, [productSelector])
 
   return (
     <AppContainer>
-      <MainRandy APIResults={APIResults} />
+      <MainRandy APIResults={APIResults} setProductSelector={setProductSelector} />
       {APIResults.product.id ? <MainMonica product_id={APIResults.product.id} /> : null}
       <MainEric />
+      {devMode && <ContainerDev>
+        <Select value={productSelector} options={devOptions} onChange={devChanger} />
+        <FontAwesomeIcon icon={icon({ name: 'xmark' })} onClick={() => setDevMode(false)} />
+      </ContainerDev>}
     </AppContainer>
   )
 }
@@ -60,5 +79,13 @@ const App = () => {
 // used to be flex, but then I changed it
 const AppContainer = styled.div`
 `;
+
+const ContainerDev = styled.div`
+display: flex;
+position: fixed;
+right: 0;
+top:0;
+z-index: 100
+`
 
 export default App
