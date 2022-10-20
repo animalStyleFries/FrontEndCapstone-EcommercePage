@@ -13,20 +13,27 @@ const ProductInformation = ({ APIResults, style }) => {
   for (let i of APIResults.review.results) {
     total += i.rating
   }
-  const avg = total / APIResults.review.results.length
+  let avg = total / APIResults.review.results.length
 
   // creating array to map stars over
   let starCount = parseInt(avg)
   const starArray = [...Array(starCount).keys()]
-  // check for float, if true conditional render half star
-  let halfStar = false
-  if (avg > starCount) { halfStar = true }
+
+  // check for float, round to nearest 0.25
+  let [remainderStar, leftGradient, rightGradient] = [avg - starCount, 0, 0]
+  if (remainderStar <= 0.125) { rightGradient = 100 }
+  if (remainderStar > 0.125 && remainderStar <= 0.375) { [leftGradient, rightGradient] = [25, 25] }
+  if (remainderStar > 0.375 && remainderStar <= 0.625) { [leftGradient, rightGradient] = [50, 50] }
+  if (remainderStar > 0.625 && remainderStar <= 0.875) { [leftGradient, rightGradient] = [75, 75] }
+
+  // creating 'empty' star array
+  let emptyStarArray = []
+  if (Math.ceil(avg) < 5) {
+    emptyStarArray = [...Array(5 - Math.ceil(avg)).keys()]
+  }
 
   // check for sales price
   let price = APIResults.styles.results[style].sale_price || APIResults.styles.results[style].original_price
-
-  // creating array to hold social media names of interest
-  const socialMediaArray = ['facebook', 'twitter', 'pinterest']
 
   return (
     <div>
@@ -34,9 +41,12 @@ const ProductInformation = ({ APIResults, style }) => {
         {starArray.map(entry => (
           <FontAwesomeIcon icon={icon({ name: 'star' })} />
         ))}
-        {halfStar && <FontAwesomeIcon icon={icon({ name: 'star-half' })} />}
+        {remainderStar > 0 && <TestStar className="fa-solid fa-star" left={leftGradient} right={rightGradient} />}
+        {emptyStarArray.length > 0 && emptyStarArray.map(entry => (
+          <TestStar className="fa-solid fa-star" left={0} right={0} />
+        ))}
       </StarContainer>
-      <h1>{APIResults.product.name}</h1>
+      <h2>{APIResults.product.name}</h2>
       <h3>{APIResults.product.slogan}</h3>
       <p>Category: {APIResults.product.category}</p>
       <p>Price: ${price}</p>
@@ -68,9 +78,15 @@ const Star = styled.span`
   }
 `
 
+const TestStar = styled.i`
+  background: ${props => `linear-gradient(to right, orange ${props.left}%, grey ${props.right}%)`};
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+`
+
 const SocialMediaContainer = styled.div`
-  display: grid;
-  grid-template-columns: 2rem 2rem 2rem ;
-  color: blue;
+display: grid;
+grid-template-columns: 2rem 2rem 2rem;
+color: blue;
 `
 export default ProductInformation

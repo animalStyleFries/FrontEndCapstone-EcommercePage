@@ -7,14 +7,19 @@ const StyleSelectorCard = ({ entry, style, setStyle, index }) => {
   if (index === style) {
     return (
       <SelectedContainer>
-        <StyleDumbNail src={entry.thumbnail_url} onClick={() => setStyle(index)}></StyleDumbNail>
+        <SelectedStyleDumbNail src={entry.thumbnail_url}></SelectedStyleDumbNail>
         <CheckContainer>
           <FontAwesomeIcon icon={icon({ name: 'circle-check' })} />
         </CheckContainer>
       </SelectedContainer>
     )
   } else {
-    return (<StyleDumbNail src={entry.thumbnail_url} onClick={() => setStyle(index)}></StyleDumbNail>)
+    return (
+      <SelectedContainer>
+        <StyleDumbNail src={entry.thumbnail_url} onClick={() => setStyle(index)}></StyleDumbNail>
+        <CheckContainer>
+        </CheckContainer>
+      </SelectedContainer>)
   }
 }
 
@@ -22,7 +27,16 @@ const StyleDumbNail = styled.img`
   border-radius: 50%;
   height: 4rem;
   width: 4rem;
+  cursor: pointer;
+  margin: 0.5rem;
 `
+const SelectedStyleDumbNail = styled.img`
+  border-radius: 50%;
+  height: 4rem;
+  width: 4rem;
+  margin: 0.5rem;
+`
+
 const SelectedContainer = styled.div`
 position:relative;
 `

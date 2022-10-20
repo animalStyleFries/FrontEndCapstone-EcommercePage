@@ -16,6 +16,9 @@ const SocialMedia = () => {
 const SocialMediaContainer = styled.div`
   display: grid;
   grid-template-columns: 2rem 2rem 2rem ;
-  color: blue;
+  color: lightblue;
+  font-size: xx-large;
+  grid-gap: 2rem;
+  margin: 0.25rem 2rem;
 `
 export default SocialMedia

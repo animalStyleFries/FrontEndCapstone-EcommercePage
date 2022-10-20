@@ -32,7 +32,7 @@ const MainRandy = ({ APIResults }) => {
       <CointainerProductInfo>
         <ProductInformation APIResults={APIResults} style={style} />
         <StyleSelector styleArray={styleArray} style={style} setStyle={setStyle} />
-        <AddtoCart styleArray={styleArray} style={style} />
+        <AddtoCart styleArray={styleArray} style={style} productName={APIResults.product.name} />
         <SocialMedia />
       </CointainerProductInfo>
     </ContainerGrid>}
@@ -63,7 +63,7 @@ const Slogan = styled.p`
 `
 
 const EmptySpace = styled.div`
-  height: 4.1rem;
+  height: 3.6rem;
 `
 
 const ContainerGrid = styled.div`
