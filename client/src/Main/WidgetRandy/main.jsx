@@ -9,16 +9,18 @@ import StyleSelector from './Components/StyleSelector.jsx'
 import AddtoCart from './Components/AddtoCart.jsx'
 import ExpandImage from './Components/SmallerComponents/ExpandImage.jsx'
 import SocialMedia from './Components/SmallerComponents/SocialMedia.jsx'
+import Select from "react-select"
 
-const MainRandy = ({ APIResults }) => {
+const MainRandy = ({ APIResults, setProductSelector }) => {
   // set initial style
   const [style, setStyle] = useState(0)
   const [expand, setExpand] = useState(false)
   const styleArray = APIResults.styles.results || []
   let expandURL = useRef()
 
+
   return (<div>
-    <NavBar onClick={() => console.log(test)}>
+    <NavBar>
       <LogoContainer>
         <Header>R.E.M</Header>
         <Slogan>Remember Every Moment</Slogan>

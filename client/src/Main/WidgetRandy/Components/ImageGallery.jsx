@@ -7,20 +7,48 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 const ImageGallery = ({ styleArray, style, expandURL, setExpand }) => {
-
+  // ---------------------- Set Up ----------------------
   // setting up index count
   let count = 0
 
-  // by default, use first image
+  // by default, use first image and first array of thumbnails
   const [currentImage, setCurrentImage] = useState(0)
+  const [dumbNailArrayIndex, setDumbNailArrayIndex] = useState(0)
 
+  // create thumbnail arrays
+  let photosArray = styleArray[style].photos;
+  let dumbNailArray = [];
+  for (let i = 0; i <= photosArray.length; i += 7) {
+    dumbNailArray.push(photosArray.slice(i, i + 7))
+  }
+
+  // ---------------------- Functions ----------------------
   // expand function
   const expandClicker = () => {
     expandURL.current = styleArray[style].photos[currentImage].url;
     setExpand(true)
   }
 
-  // 7 dumbnails per column
+  // Arrows
+  const upArrowClick = () => {
+    if (dumbNailArrayIndex > 0) setDumbNailArrayIndex(dumbNailArrayIndex - 1)
+  }
+
+  const downArrowClick = () => {
+    if (dumbNailArrayIndex < dumbNailArray.length - 1) setDumbNailArrayIndex(dumbNailArrayIndex + 1)
+  }
+
+  const leftArrowClick = () => {
+    if (currentImage === 0) { return }
+    setCurrentImage(currentImage - 1)
+    if ((currentImage) % 7 === 0) { setDumbNailArrayIndex(dumbNailArrayIndex - 1) }
+  }
+
+  const rightArrowClick = () => {
+    if (currentImage < styleArray[style].photos.length - 1) { setCurrentImage(currentImage + 1) }
+    if ((currentImage + 1) % 7 === 0) { setDumbNailArrayIndex(dumbNailArrayIndex + 1) }
+  }
+  // ---------------------- HTML ----------------------
   return (<ContainerImage>
 
     {/* main picture */}
@@ -28,16 +56,32 @@ const ImageGallery = ({ styleArray, style, expandURL, setExpand }) => {
 
     {/* map over remainder of entries to smaller images */}
     <DumbNails>
-      {styleArray[style].photos.map(entry => (
-        <SmallerImage entry={entry} index={count++} setCurrentImage={setCurrentImage} currentImage={currentImage} key={count} />
+      <ContainerUp end={dumbNailArrayIndex} onClick={upArrowClick}>
+        <FontAwesomeIcon icon={icon({ name: 'angle-up' })} />
+      </ContainerUp>
+      {dumbNailArray[dumbNailArrayIndex].map(entry => (
+        <SmallerImage entry={entry} index={count++} setCurrentImage={setCurrentImage} currentImage={currentImage} dumbNailArrayIndex={dumbNailArrayIndex} key={count} />
       ))}
+      <ContainerDown end={dumbNailArrayIndex} length={dumbNailArray.length} onClick={downArrowClick}>
+        <FontAwesomeIcon icon={icon({ name: 'angle-down' })} />
+      </ContainerDown>
     </DumbNails>
+
+    <ContainerLeftArrow onClick={leftArrowClick}>
+      <FontAwesomeIcon icon={icon({ name: 'circle-arrow-left' })} />
+    </ContainerLeftArrow>
+
+    <ContainerRightArrow onClick={rightArrowClick}>
+      <FontAwesomeIcon icon={icon({ name: 'circle-arrow-right' })} />
+    </ContainerRightArrow>
+
     <ContainerExpand onClick={expandClicker}>
       <FontAwesomeIcon icon={icon({ name: 'expand' })} />
     </ContainerExpand>
   </ContainerImage>)
 }
 
+// ---------------------- Style ----------------------
 const DumbNails = styled.div`
   display: flex;
   flex-direction: column;
@@ -66,5 +110,38 @@ position: absolute;
 color: grey;
 font-size: x-large;
 cursor: pointer;
+`
+
+const ContainerUp = styled.div`
+  color: grey;
+  text-align: center;
+  font-size: large;
+  cursor: ${props => props.end === 0 ? `no-drop` : `pointer`}
+`
+
+const ContainerDown = styled.div`
+color: grey;
+text-align: center;
+font-size: large;
+position: absolute;
+bottom: 0;
+margin: 0 0 1rem 2rem;
+cursor: ${props => props.end === props.length - 1 ? `no-drop` : `pointer`}
+`
+
+const ContainerLeftArrow = styled.div`
+position: absolute;
+top: 45%;
+left: 6rem;
+color: grey;
+font-size: x-large;
+`
+
+const ContainerRightArrow = styled.div`
+position: absolute;
+top: 45%;
+right: 5rem;
+color: grey;
+font-size: x-large;
 `
 export default ImageGallery

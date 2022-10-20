@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const SmallerImage = ({ entry, index, currentImage, setCurrentImage }) => {
+const SmallerImage = ({ entry, index, dumbNailArrayIndex, currentImage, setCurrentImage }) => {
   const clicker = () => {
-    setCurrentImage(index)
+    setCurrentImage(index + 7 * dumbNailArrayIndex)
   }
 
-  if (index === currentImage) {
+  if (index + 7 * dumbNailArrayIndex === currentImage) {
     return <SelectedDumbNail src={entry.thumbnail_url}></SelectedDumbNail>
   } else {
     return (<DumbNail src={entry.thumbnail_url} onClick={clicker}></DumbNail>)
