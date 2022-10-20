@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-const MoreAnsweredQuestions = () => {
+const MoreAnsweredQuestions = (props) => {
+  // if(props.questionNumber <=)
+
+
   return(
-    <div> this is MoreAnsweredQuestions</div>
+    <button><b> More Answered Questions</b></button>
   )
 }
 
-  export default MoreAnsweredQuestions;
+export default MoreAnsweredQuestions;

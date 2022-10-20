@@ -3,12 +3,20 @@ import axios from 'axios';
 import IndividualQuestion from './IndividualQuestion.jsx';
 
 const QuestionsList = (props) => {
+  // console.log('questionlist', props.questions)
+  var sortingAll = function () {
+    props.questions.sort(function(a,b){
+      return a.helpfulness > b.helpfulness ? -1 : a.helpfulness < b.helpfulness ? 1 : 0;
+    });
+    return props.questions;
+  }
+  var sortedQ = sortingAll();
 
   return (
     <div>
-      {(props.questions).map((each, index) => {
+      {(sortedQ).map((each, index) => {
         return (
-          <IndividualQuestion key={index} question={each}></IndividualQuestion>
+          <IndividualQuestion key={index} question={each} productid={props.productid}></IndividualQuestion>
         )
       })}
     </div>
