@@ -32,8 +32,12 @@ const ProductInformation = ({ APIResults, style }) => {
     emptyStarArray = [...Array(5 - Math.ceil(avg)).keys()]
   }
 
+  // idk if this is best practice, but insert text
+  const readReviews = 'Read all reviews'
+
   // check for sales price
-  let price = APIResults.styles.results[style].sale_price || APIResults.styles.results[style].original_price
+  let salePrice = APIResults.styles.results[style].sale_price
+  let price = APIResults.styles.results[style].original_price
 
   return (
     <div>
@@ -41,10 +45,11 @@ const ProductInformation = ({ APIResults, style }) => {
         {starArray.map(entry => (
           <FontAwesomeIcon icon={icon({ name: 'star' })} />
         ))}
-        {remainderStar > 0 && <TestStar className="fa-solid fa-star" left={leftGradient} right={rightGradient} />}
+        {remainderStar > 0 && <Star className="fa-solid fa-star" left={leftGradient} right={rightGradient} />}
         {emptyStarArray.length > 0 && emptyStarArray.map(entry => (
-          <TestStar className="fa-solid fa-star" left={0} right={0} />
+          <Star className="fa-solid fa-star" left={0} right={0} />
         ))}
+        <ReadReviewText>Read all reviews</ReadReviewText>
       </StarContainer>
       <h1>{APIResults.product.name}</h1>
       <p>{APIResults.product.category}</p>
@@ -63,35 +68,46 @@ const ProductInformation = ({ APIResults, style }) => {
 const StarContainer = styled.div`
   display: flex;
   color: orange;
-  width: 6rem;
+  margin: 0.25rem;
 `
 
-const Star = styled.span`
-  display: inline-block;
-  position: relative;
-  font-size: 100px;
-  color: #ddd;
-  &:after{
-    font-family: FontAwesome;
-    content: "\f005";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 60%;
-    overflow: hidden;
-    color: #f80;
-  }
-`
-
-const TestStar = styled.i`
+const Star = styled.i`
   background: ${props => `linear-gradient(to right, orange ${props.left}%, grey ${props.right}%)`};
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 `
 
-const SocialMediaContainer = styled.div`
-display: grid;
-grid-template-columns: 2rem 2rem 2rem;
-color: blue;
+const ReadReviewText = styled.p`
+text-decoration: underline;
+font-size: small;
+color: brown;
+margin: 0.25rem;
+`
+
+const StyledProductName = styled.h2`
+margin: 0.25rem
+`
+
+const StyledSlogan = styled.h3`
+margin: 0.25rem
+`
+
+const StyledCategory = styled.p`
+margin: 0.25rem;
+`
+
+const ContainerSale = styled.div`
+display: flex;
+`
+
+const SaleText = styled.p`
+font-size: x-large;
+color:red;
+margin: 0 2rem 0 0;
+`
+
+const PriceText = styled.p`
+text-decoration: line-through;
+margin: 0.25rem
 `
 export default ProductInformation
