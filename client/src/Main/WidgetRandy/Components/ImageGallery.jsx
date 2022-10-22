@@ -26,11 +26,17 @@ const ImageGallery = ({ styleArray, style, setExpand, currentImage, setCurrentIm
 
   // Arrows
   const upArrowClick = () => {
-    if (dumbNailArrayIndex > 0) setDumbNailArrayIndex(dumbNailArrayIndex - 1)
+    if (dumbNailArrayIndex > 0) {
+      setDumbNailArrayIndex(dumbNailArrayIndex - 1)
+      setCurrentImage((dumbNailArrayIndex - 1) * 7)
+    }
   }
 
   const downArrowClick = () => {
-    if (dumbNailArrayIndex < dumbNailArray.length - 1) setDumbNailArrayIndex(dumbNailArrayIndex + 1)
+    if (dumbNailArrayIndex < dumbNailArray.length - 1) {
+      setDumbNailArrayIndex(dumbNailArrayIndex + 1)
+      setCurrentImage((dumbNailArrayIndex + 1) * 7)
+    }
   }
 
   const leftArrowClick = () => {

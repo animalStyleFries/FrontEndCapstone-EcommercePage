@@ -29,11 +29,17 @@ const ExpandImage = ({ setExpand, styleArray, style, currentImage, setCurrentIma
   }
 
   const upArrowClick = () => {
-    if (dumbNailArrayIndex > 0) setDumbNailArrayIndex(dumbNailArrayIndex - 1)
+    if (dumbNailArrayIndex > 0) {
+      setDumbNailArrayIndex(dumbNailArrayIndex - 1)
+      setCurrentImage((dumbNailArrayIndex - 1) * 7)
+    }
   }
 
   const downArrowClick = () => {
-    if (dumbNailArrayIndex < circleArray.length - 1) setDumbNailArrayIndex(dumbNailArrayIndex + 1)
+    if (dumbNailArrayIndex < circleArray.length - 1) {
+      setDumbNailArrayIndex(dumbNailArrayIndex + 1)
+      setCurrentImage((dumbNailArrayIndex + 1) * 7)
+    }
   }
 
   const leftArrowClick = () => {
