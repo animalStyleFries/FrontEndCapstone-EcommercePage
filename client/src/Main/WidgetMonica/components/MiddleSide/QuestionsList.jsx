@@ -4,7 +4,9 @@ import IndividualQuestion from './IndividualQuestion.jsx';
 import ReactList from 'react-list';
 
 const QuestionsList = (props) => {
-  // console.log('questionlist', props.questions)
+  if(!props.questions) {
+    return null;
+  }
   var sortingAll = function () {
     props.questions.sort(function(a,b){
       return a.helpfulness > b.helpfulness ? -1 : a.helpfulness < b.helpfulness ? 1 : 0;
@@ -22,6 +24,11 @@ const QuestionsList = (props) => {
     return props.questions;
   }
   var sortedQ = sortingAll();
+
+
+  const itemRenderer = (index, key) => (
+    <IndividualQuestion key={key} question={sortedQ[index]} productid={props.productid}></IndividualQuestion>
+  );
 
 
   const itemRenderer = (index, key) => (
