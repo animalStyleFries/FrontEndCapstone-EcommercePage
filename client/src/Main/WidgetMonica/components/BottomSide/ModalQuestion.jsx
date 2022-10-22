@@ -24,7 +24,6 @@ const OVERLAY_STYLES = {
 }
 
 function Modal(props) {
-  console.log('top props', props)
   if(props.open === false) {
     return null;
   }

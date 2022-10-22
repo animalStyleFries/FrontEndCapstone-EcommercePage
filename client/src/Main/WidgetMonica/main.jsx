@@ -9,16 +9,18 @@ import cors from 'cors';
 import gitToken from '../../hidden.js' // dotenv substitute
 
 // console.log(gitToken)
+
 const MainMonica = ({ product_id }) => {
+  // product_id=41197
   const [questions, setQuestions] = useState([])
   const [questionNumber, setQuestionNumber] = useState(2)
   // call api to get some data;
 
   useEffect(() => {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}`,
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}&count=100`,
      { headers: { "Authorization": gitToken } })
     .then((response) => {
-      console.log('Injected response',response)
+      console.log('Injected response of product',product_id, response)
       setQuestions(response.data.results);
     })
     .catch((err) => {
@@ -31,7 +33,6 @@ const MainMonica = ({ product_id }) => {
     for (var i = 0; i < Math.min(number,all.length); i++) {
       res.push(all[i]);
     }
-    console.log(res)
     return res;
   }
 
@@ -42,11 +43,11 @@ const MainMonica = ({ product_id }) => {
     </div>
     <br></br>
     <div>
-      <QuestionsList questions={filter(questionNumber,questions)} productid={product_id}></QuestionsList>
+      <QuestionsList questions={filter(questionNumber,questions)} productid={product_id} ></QuestionsList>
     </div>
     <br></br>
     <div>
-      <MoreAnsweredQuestions questionNumber={questionNumber} setQuestionNumber={setQuestionNumber}></MoreAnsweredQuestions>
+      <MoreAnsweredQuestions questionNumber={questionNumber} setQuestionNumber={setQuestionNumber} questions={questions}></MoreAnsweredQuestions>
       <AddQuestion productid={product_id}></AddQuestion>
     </div>
     <br></br>

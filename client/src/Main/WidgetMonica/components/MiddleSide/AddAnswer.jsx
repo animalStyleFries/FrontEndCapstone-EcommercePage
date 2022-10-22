@@ -26,6 +26,10 @@ const AddAnswer = (props) => {
         questionbody={props.questionbody}
         questionid={props.questionid}
         open={isOpen}
+        displayAnswer={props.displayAnswer}
+        setDisplayAnswer={props.setDisplayAnswer}
+        answerHelpfulness={props.answerHelpfulness}
+        setAnswerHelpfulness={props.setAnswerHelpfulness}
         onClose={() => setIsOpen(false)}
       ></Modal>
     </div>

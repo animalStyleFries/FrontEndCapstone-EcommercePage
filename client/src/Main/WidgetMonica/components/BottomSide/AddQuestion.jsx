@@ -4,7 +4,6 @@ import Modal from './ModalQuestion.jsx';
 import gitToken from '../../../../hidden.js';
 
 const AddQuestion = (props) => {
-  console.log('this is the add question part', props.productid)
   const [isOpen,setIsOpen] = useState(false)
   const [productname, setProductname] = useState('')
 
@@ -12,7 +11,6 @@ const AddQuestion = (props) => {
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${props.productid}`,
     { headers: { "Authorization": gitToken } })
     .then((response) => {
-      console.log('here is question', response.data)
       setProductname(response.data.name)
     })
     .catch((err) => {
