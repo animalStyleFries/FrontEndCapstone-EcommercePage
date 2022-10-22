@@ -30,11 +30,6 @@ const QuestionsList = (props) => {
     <IndividualQuestion key={key} question={sortedQ[index]} productid={props.productid}></IndividualQuestion>
   );
 
-
-  const itemRenderer = (index, key) => (
-    <IndividualQuestion key={key} question={sortedQ[index]} productid={props.productid}></IndividualQuestion>
-  );
-
   return (
     <div>
           <div style={{overflow: 'auto', maxHeight: 800}}>
