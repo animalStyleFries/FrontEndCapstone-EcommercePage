@@ -9,33 +9,32 @@ import cors from 'cors';
 import gitToken from '../../hidden.js' // dotenv substitute
 
 // console.log(gitToken)
+
 const MainMonica = ({ product_id }) => {
-  // console.log("product_id", product_id);
-  // product_id = "40348"
-  // setup the whole status;
+  // product_id=41197
   const [questions, setQuestions] = useState([])
+  const [questionNumber, setQuestionNumber] = useState(2)
   // call api to get some data;
 
   useEffect(() => {
-
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}`, { headers: { "Authorization": gitToken } })
-      // const options = {
-      // url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}`,
-      //   headers: {
-      //     'Authorization': gitToken
-      //   },
-      //   method: 'get'
-      // };
-      // console.log('this is ', options)
-      .then((response) => {
-        console.log('Injected response', response)
-        setQuestions(response.data.results);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}&count=100`,
+     { headers: { "Authorization": gitToken } })
+    .then((response) => {
+      console.log('Injected response of product',product_id, response)
+      setQuestions(response.data.results);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }, [product_id])
 
+  var filter = function (number, all) {
+    var res = [];
+    for (var i = 0; i < Math.min(number,all.length); i++) {
+      res.push(all[i]);
+    }
+    return res;
+  }
 
   return (<div>
     <h1> Questions & Answers</h1>
@@ -44,12 +43,12 @@ const MainMonica = ({ product_id }) => {
     </div>
     <br></br>
     <div>
-      <QuestionsList questions={questions}></QuestionsList>
+      <QuestionsList questions={filter(questionNumber,questions)} productid={product_id} ></QuestionsList>
     </div>
     <br></br>
     <div>
-      <MoreAnsweredQuestions></MoreAnsweredQuestions>
-      <AddQuestion></AddQuestion>
+      <MoreAnsweredQuestions questionNumber={questionNumber} setQuestionNumber={setQuestionNumber} questions={questions}></MoreAnsweredQuestions>
+      <AddQuestion productid={product_id}></AddQuestion>
     </div>
     <br></br>
   </div>)
