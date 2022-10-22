@@ -21,6 +21,7 @@ const StyleSelector = ({ styleArray, style, setStyle }) => {
   }
 
   return (<div>
+    Style: {styleArray[style].name}
     {RowsOf4.map(RowEntry => (
       <RowContainer>
         {RowEntry.map(entry => (

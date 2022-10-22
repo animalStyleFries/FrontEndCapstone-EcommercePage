@@ -6,14 +6,10 @@ import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
-const ImageGallery = ({ styleArray, style, expandURL, setExpand }) => {
+const ImageGallery = ({ styleArray, style, setExpand, currentImage, setCurrentImage, dumbNailArrayIndex, setDumbNailArrayIndex }) => {
   // ---------------------- Set Up ----------------------
   // setting up index count
   let count = 0
-
-  // by default, use first image and first array of thumbnails
-  const [currentImage, setCurrentImage] = useState(0)
-  const [dumbNailArrayIndex, setDumbNailArrayIndex] = useState(0)
 
   // create thumbnail arrays
   let photosArray = styleArray[style].photos;
@@ -25,17 +21,22 @@ const ImageGallery = ({ styleArray, style, expandURL, setExpand }) => {
   // ---------------------- Functions ----------------------
   // expand function
   const expandClicker = () => {
-    expandURL.current = styleArray[style].photos[currentImage].url;
     setExpand(true)
   }
 
   // Arrows
   const upArrowClick = () => {
-    if (dumbNailArrayIndex > 0) setDumbNailArrayIndex(dumbNailArrayIndex - 1)
+    if (dumbNailArrayIndex > 0) {
+      setDumbNailArrayIndex(dumbNailArrayIndex - 1)
+      setCurrentImage((dumbNailArrayIndex - 1) * 7)
+    }
   }
 
   const downArrowClick = () => {
-    if (dumbNailArrayIndex < dumbNailArray.length - 1) setDumbNailArrayIndex(dumbNailArrayIndex + 1)
+    if (dumbNailArrayIndex < dumbNailArray.length - 1) {
+      setDumbNailArrayIndex(dumbNailArrayIndex + 1)
+      setCurrentImage((dumbNailArrayIndex + 1) * 7)
+    }
   }
 
   const leftArrowClick = () => {
@@ -135,6 +136,7 @@ top: 45%;
 left: 6rem;
 color: grey;
 font-size: x-large;
+cursor: pointer;
 `
 
 const ContainerRightArrow = styled.div`
@@ -143,5 +145,6 @@ top: 45%;
 right: 5rem;
 color: grey;
 font-size: x-large;
+cursor: pointer;
 `
 export default ImageGallery
