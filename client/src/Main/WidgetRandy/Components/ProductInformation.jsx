@@ -51,16 +51,15 @@ const ProductInformation = ({ APIResults, style }) => {
         ))}
         <ReadReviewText>Read all reviews</ReadReviewText>
       </StarContainer>
-      <h1>{APIResults.product.name}</h1>
-      <p>{APIResults.product.category}</p>
-      <p>${price}</p>
-      <p>{APIResults.product.description}</p> {/* maybe add slogan as well eventually */}
-      <SocialMediaContainer>
-        {/* <FontAwesomeIcon icon="fa-brands fa-twitter" /> */}
-        <FontAwesomeIcon icon={brands('facebook')} onClick={() => window.open('https://www.facebook.com/', '_blank')} />
-        <FontAwesomeIcon icon={brands('twitter')} onClick={() => window.open('https://www.twitter.com/', '_blank')} />
-        <FontAwesomeIcon icon={brands('pinterest')} onClick={() => window.open('https://www.pinterest.com/', '_blank')} />
-      </SocialMediaContainer>
+      <StyledProductName>{APIResults.product.name}</StyledProductName>
+      <StyledSlogan>{APIResults.product.slogan}</StyledSlogan>
+      <StyledCategory>Category: {APIResults.product.category}</StyledCategory>
+      {salePrice && <ContainerSale>
+        <SaleText>Sale! ${salePrice}</SaleText>
+        <PriceText>${price}</PriceText>
+      </ContainerSale>}
+      {!salePrice && <p>Price: ${price}</p>}
+      <p>Description: <br></br>{APIResults.product.description}</p>
     </div>
   )
 }
