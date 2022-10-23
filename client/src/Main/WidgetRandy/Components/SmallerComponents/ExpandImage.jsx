@@ -6,7 +6,7 @@ import PrismaZoom from 'react-prismazoom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
-const ExpandImage = ({ setExpand, styleArray, style, currentImage, setCurrentImage, dumbNailArrayIndex, setDumbNailArrayIndex }) => {
+const ExpandImage = ({ setExpand, styleArray, style, currentImage, setCurrentImage, dumbNailArrayIndex, setDumbNailArrayIndex, ClicksRef }) => {
 
   const [zoom, setZoom] = useState(false)
 
@@ -21,10 +21,12 @@ const ExpandImage = ({ setExpand, styleArray, style, currentImage, setCurrentIma
   // ---------------- Functions ----------------
 
   const zoomInDblClick = (e) => {
+    ClicksRef.current.addClicks('overview', 'imageGallery')
     if (e.detail === 2) setZoom(true)
   }
 
   const zoomOutDblClick = (e) => {
+    ClicksRef.current.addClicks('overview', 'imageGallery')
     if (e.detail === 2) setZoom(false)
   }
 
