@@ -8,7 +8,7 @@ import API from '../../../API.js'
 import Select from "react-select"
 import toast, { Toaster } from 'react-hot-toast';
 
-const AddtoCart = ({ styleArray, style, productName }) => {
+const AddtoCart = ({ styleArray, style, productName, ClicksRef }) => {
 
   // ----------------------- Set Up -----------------------
   // set a size state and quantity state
@@ -76,7 +76,7 @@ const AddtoCart = ({ styleArray, style, productName }) => {
   // if quantity = 0, then grey out select size
   // set up an indexCounter for entries
   let indexCounter = 0;
-  return (<ContainerAddToCart>
+  return (<ContainerAddToCart onClick={() => ClicksRef.current.addClicks('overview', 'addToCart')}>
 
     {/* SELECT SIZE */}
     {validSize && <SmallWords>Size:</SmallWords>}
