@@ -6,9 +6,8 @@ const RelatedCard = ({ relatedProductId, relatedProducts, originalProductFeature
   const [sortedProduct,  setSortedProduct] = useState();
   const [comparisonToggle,  setComparisonToggle] = useState(false);
 
-
-  if (relatedProducts.productArrays && relatedProducts.styleArrays && relatedProducts.reviewArrays) {
-    useEffect(() => {
+  useEffect(() => {
+    if (relatedProducts.productArrays && relatedProducts.styleArrays && relatedProducts.reviewArrays) {
       let index = relatedProducts.relatedProductIds.indexOf(relatedProductId)
       let container = {
         productArray: relatedProducts.productArrays[index],
@@ -17,9 +16,8 @@ const RelatedCard = ({ relatedProductId, relatedProducts, originalProductFeature
         id: relatedProducts.relatedProductIds[index]
       };
       setSortedProduct(container);
-    }, [])
-  }
-
+    }
+  }, [])
 
    const getRating = (sortedProduct) => {
     let sum = 0
