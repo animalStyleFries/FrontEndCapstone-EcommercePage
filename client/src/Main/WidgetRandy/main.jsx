@@ -11,15 +11,22 @@ import ExpandImage from './Components/SmallerComponents/ExpandImage.jsx'
 import SocialMedia from './Components/SmallerComponents/SocialMedia.jsx'
 import Select from "react-select"
 
-const MainRandy = ({ APIResults, setProductSelector }) => {
+const MainRandy = ({ APIResults, setProductSelector, ClicksRef }) => {
   // set initial style
-  const [style, setStyle] = useState(0)
-  const [expand, setExpand] = useState(false)
-  const styleArray = APIResults.styles.results || []
-  let expandURL = useRef()
+  const styleArray = APIResults.styles.results || [];
+  let defaultStyle = 0;
+  for (let i = 0; i < styleArray.length; i++) {
+    if (styleArray['default?']) { defaultStyle = i }
+  }
 
+  const [style, setStyle] = useState(defaultStyle)
+  const [expand, setExpand] = useState(false)
+  const [currentImage, setCurrentImage] = useState(0)
+  const [dumbNailArrayIndex, setDumbNailArrayIndex] = useState(0)
 
   return (<div>
+
+    {/* Navigation Header */}
     <NavBar>
       <LogoContainer>
         <Header>R.E.M</Header>
@@ -27,14 +34,22 @@ const MainRandy = ({ APIResults, setProductSelector }) => {
       </LogoContainer>
     </NavBar>
     <EmptySpace></EmptySpace>
+
+    {/* Creates loading text while api is being called  */}
     {APIResults.product.id === undefined && <div>Loading...</div>}
-    {APIResults.product.id !== undefined && expand && <ExpandImage setExpand={setExpand} expandURL={expandURL} />}
+
+    {/* If image is expanded, conditionally render expanded image  */}
+    {APIResults.product.id !== undefined && expand && <ExpandImage setExpand={setExpand} styleArray={styleArray} style={style} currentImage={currentImage} setCurrentImage={setCurrentImage} dumbNailArrayIndex={dumbNailArrayIndex} setDumbNailArrayIndex={setDumbNailArrayIndex} ClicksRef={ClicksRef} />}
+
+    {/* Otherwise, render the image gallery  */}
     {APIResults.product.id !== undefined && !expand && <ContainerGrid>
-      <ImageGallery styleArray={styleArray} style={style} setExpand={setExpand} expandURL={expandURL} />
+      <ImageGallery styleArray={styleArray} style={style} setExpand={setExpand} currentImage={currentImage} setCurrentImage={setCurrentImage} dumbNailArrayIndex={dumbNailArrayIndex} setDumbNailArrayIndex={setDumbNailArrayIndex} ClicksRef={ClicksRef} />
+
+      {/* And the product info  */}
       <CointainerProductInfo>
-        <ProductInformation APIResults={APIResults} style={style} />
-        <StyleSelector styleArray={styleArray} style={style} setStyle={setStyle} />
-        <AddtoCart styleArray={styleArray} style={style} productName={APIResults.product.name} />
+        <ProductInformation APIResults={APIResults} style={style} ClicksRef={ClicksRef} />
+        <StyleSelector styleArray={styleArray} style={style} setStyle={setStyle} ClicksRef={ClicksRef} />
+        <AddtoCart styleArray={styleArray} style={style} productName={APIResults.product.name} ClicksRef={ClicksRef} />
         <SocialMedia />
       </CointainerProductInfo>
     </ContainerGrid>}

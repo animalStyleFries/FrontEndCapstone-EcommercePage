@@ -2,7 +2,7 @@ import React from 'react'
 import StyleSelectorCard from './SmallerComponents/StyleSelectorCard.jsx'
 import styled from 'styled-components'
 
-const StyleSelector = ({ styleArray, style, setStyle }) => {
+const StyleSelector = ({ styleArray, style, setStyle, ClicksRef }) => {
   // create index for each entry
   let count = 0
 
@@ -20,7 +20,8 @@ const StyleSelector = ({ styleArray, style, setStyle }) => {
     setStyle(e.target.value)
   }
 
-  return (<div>
+  return (<div onClick={() => ClicksRef.current.addClicks('overview', 'styleSelect')}>
+    Style: {styleArray[style].name}
     {RowsOf4.map(RowEntry => (
       <RowContainer>
         {RowEntry.map(entry => (
