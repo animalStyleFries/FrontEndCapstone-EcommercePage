@@ -7,7 +7,6 @@ const OutfitCard = ({ outfit }) => {
   const [savedProduct,  setSavedProduct] = useState();
 
   if (outfit) {
-    console.log('hi')
     useEffect(() => {
       const getProductInfo = (axios.get(`${API.server}products/${outfit}`, { headers: {'Authorization': API.gitToken}}))
 
@@ -22,7 +21,6 @@ const OutfitCard = ({ outfit }) => {
         })
     }, [])
   }
-
 
   if (savedProduct) {
     return (

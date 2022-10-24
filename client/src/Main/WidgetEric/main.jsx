@@ -1,11 +1,11 @@
 import React from 'react'
 import RelatedItemsAndOutfit from './Components/RelatedItemsAndOutfit.jsx'
 
-const MainEric = () => {
+const MainEric = ({ APIResults }) => {
 
   return (
   <div>
-    <RelatedItemsAndOutfit />
+    {(APIResults.product.id) ? <RelatedItemsAndOutfit APIResults={APIResults} /> : null}
   </div>
   )
 }

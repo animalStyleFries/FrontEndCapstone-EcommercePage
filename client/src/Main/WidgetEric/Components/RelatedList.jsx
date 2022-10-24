@@ -3,7 +3,6 @@ import RelatedCard from './RelatedCard.jsx'
 
 const RelatedList = ({ relatedProducts, originalProductFeatures }) => {
 
-
   return (
     <div>
       <h2>Related Cards</h2>
