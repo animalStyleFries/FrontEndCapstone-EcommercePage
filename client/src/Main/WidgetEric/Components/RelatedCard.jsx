@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import API from '../API.js';
-import axios from 'axios';
+import ProductComparison from './ProductComparison.jsx'
 
-const RelatedCard = ({ relatedProductId, relatedProducts }) => {
+const RelatedCard = ({ relatedProductId, relatedProducts, originalProductFeatures }) => {
 
   const [sortedProduct,  setSortedProduct] = useState();
+  const [comparisonToggle,  setComparisonToggle] = useState(false);
 
-  if (relatedProducts) {
+
+  if (relatedProducts.productArrays && relatedProducts.styleArrays && relatedProducts.reviewArrays) {
     useEffect(() => {
       let index = relatedProducts.relatedProductIds.indexOf(relatedProductId)
       let container = {
@@ -34,7 +35,10 @@ const RelatedCard = ({ relatedProductId, relatedProducts }) => {
     return (
       <div>
         <h3>Product</h3>
-        <button onClick={() => console.log('clickStar')}>Star</button>
+        <button onClick={() => setComparisonToggle(!comparisonToggle)}>Star</button>
+        <div>
+          {comparisonToggle ? <ProductComparison sortedProduct={sortedProduct}  originalProductFeatures={originalProductFeatures} rating={getRating(sortedProduct)}/> : null}
+        </div>
         <img src={sortedProduct.styleArray.results[0].photos[0].thumbnail_url} alt='missing image'></img>
         <div>{sortedProduct.productArray.name}</div>
         <div>{(sortedProduct.reviewArray.results.length > 0) ? getRating(sortedProduct) : <p>no reviews</p>}</div>
