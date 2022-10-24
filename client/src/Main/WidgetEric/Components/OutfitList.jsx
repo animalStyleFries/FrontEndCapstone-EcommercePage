@@ -19,6 +19,11 @@ const OutfitList = ({ originalProductID }) => {
      return setOutfitList(idContainer.splice(0, localStorage.length))
   }
 
+  const removeKeys = (deleteKey) => {
+    localStorage.removeItem(deleteKey);
+    getKeys(localStorage)
+  }
+
   return (
     <div>
       <h2>Outfit List</h2>
@@ -29,7 +34,7 @@ const OutfitList = ({ originalProductID }) => {
         <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTg0P2958dd3C0jaLaCJl1MuNrIFV2qiFwm15uRHpDG0w&s'></img>
       </div>
       <div>
-        {(outfitList) ? outfitList.map((outfit) => <OutfitCard outfit={outfit}/>) : <p>Add Some Outfits</p>}
+        {(outfitList) ? outfitList.map((outfit) => <OutfitCard outfit={outfit} removeKeys={removeKeys}/>) : <p>Add Some Outfits</p>}
       </div>
     </div>
   )
