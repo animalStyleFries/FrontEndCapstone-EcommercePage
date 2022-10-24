@@ -93,7 +93,7 @@ const App = () => {
     <AppContainer>
       <MainRandy APIResults={APIResults} setProductSelector={setProductSelector} ClicksRef={ClicksRef} />
       {APIResults.product.id ? <MainMonica product_id={APIResults.product.id} /> : null}
-      <MainEric />
+      {APIResults ? <MainEric APIResults={APIResults} /> : null}
       {devMode && <ContainerDev>
         <Select value={productSelector} options={devOptions} onChange={devChanger} />
         <button onClick={clickLogger}>log clicks</button>
