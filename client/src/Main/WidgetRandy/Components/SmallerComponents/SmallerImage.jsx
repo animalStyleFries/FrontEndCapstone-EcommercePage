@@ -15,7 +15,7 @@ const SmallerImage = ({ entry, index, dumbNailArrayIndex, currentImage, setCurre
 
 const DumbNail = styled.img`
   height: 4rem;
-  width: 4rem;
+  width: 3rem;
   object-fit: cover;
   margin: 0.5rem;
   box-shadow: 0.4rem 0.4rem black;
@@ -24,7 +24,7 @@ const DumbNail = styled.img`
 
 const SelectedDumbNail = styled.img`
   height: 4rem;
-  width: 4rem;
+  width: 3rem;
   object-fit: cover;
   border-color: green;
   border-style: groove;

@@ -95,8 +95,9 @@ const DumbNails = styled.div`
 
 const MainDisplay = styled.img`
 height: 40rem;
-width: 50rem;
-object-fit: cover;
+width: 40rem;
+object-fit: contain;
+margin-left: 7rem
 `
 
 const ContainerImage = styled.div`
