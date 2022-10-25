@@ -1,29 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import API from '../API.js';
-import axios from 'axios';
+import ProductComparison from './ProductComparison.jsx'
 
-const RelatedCard = ({ relatedProductId }) => {
+const RelatedCard = ({ relatedProductId, relatedProducts, originalProductFeatures }) => {
 
-  const [allProductInfo, setAllProductInfo] = useState()
+  const [sortedProduct,  setSortedProduct] = useState();
+  const [comparisonToggle,  setComparisonToggle] = useState(false);
 
   useEffect(() => {
-    const getRelatedProducts = axios.get(`${API.server}products/${relatedProductId}`, { headers: { 'Authorization': API.gitToken } })
-    const getRelatedStyles = axios.get(`${API.server}products/${relatedProductId}/styles`, { headers: { 'Authorization': API.gitToken } })
-    const getRelatedReview = axios.get(`${API.server}reviews/?product_id=${relatedProductId}`, { headers: { 'Authorization': API.gitToken } })
-
-    Promise.all([getRelatedProducts, getRelatedStyles, getRelatedReview])
-      .then((results) => {
-        let container = {}
-        container.productArrays = results[0].data
-        container.styleArrays = results[1].data
-        container.reviewArrays = results[2].data
-        setAllProductInfo(container)
-      })
+    if (relatedProducts.productArrays && relatedProducts.styleArrays && relatedProducts.reviewArrays) {
+      let index = relatedProducts.relatedProductIds.indexOf(relatedProductId)
+      let container = {
+        productArray: relatedProducts.productArrays[index],
+        styleArray: relatedProducts.styleArrays[index],
+        reviewArray: relatedProducts.reviewArrays[index],
+        id: relatedProducts.relatedProductIds[index]
+      };
+      setSortedProduct(container);
+    }
   }, [])
 
-  const getRating = (allProductInfo) => {
+   const getRating = (sortedProduct) => {
     let sum = 0
-    let reviews = allProductInfo.reviewArrays.results
+    let reviews = sortedProduct.reviewArray.results
     for (var i = 0; i < reviews.length; i++) {
       sum += reviews[i].rating
     }
@@ -31,18 +29,19 @@ const RelatedCard = ({ relatedProductId }) => {
   }
 
 
-  // console.log(allProductInfo)
-
-  if (allProductInfo) {
+  if (sortedProduct) {
     return (
       <div>
         <h3>Product</h3>
-        <button onClick={() => console.log('clickStar')}>Star</button>
-        <img src={allProductInfo.styleArrays.results[0].photos[0].thumbnail_url} alt='missing image'></img>
-        <div>{allProductInfo.productArrays.name}</div>
-        <div>{(allProductInfo.reviewArrays.results.length > 0) ? getRating(allProductInfo) : <p>no reviews</p>}</div>
-        <div>{(allProductInfo.styleArrays.results[0].sale_price) ? (allProductInfo.styleArrays.results[0].sale_price, allProductInfo.styleArrays.results[0].original_price) : allProductInfo.styleArrays.results[0].original_price}</div>
-        <small>{allProductInfo.productArrays.category}</small>
+        <button onClick={() => setComparisonToggle(!comparisonToggle)}>Star</button>
+        <div>
+          {comparisonToggle ? <ProductComparison sortedProduct={sortedProduct}  originalProductFeatures={originalProductFeatures} rating={getRating(sortedProduct)}/> : null}
+        </div>
+        <img src={sortedProduct.styleArray.results[0].photos[0].thumbnail_url} alt='missing image'></img>
+        <div>{sortedProduct.productArray.name}</div>
+        <div>{(sortedProduct.reviewArray.results.length > 0) ? getRating(sortedProduct) : <p>no reviews</p>}</div>
+        <div>{(sortedProduct.styleArray.results[0].sale_price) ? (sortedProduct.styleArray.results[0].sale_price, sortedProduct.styleArray.results[0].original_price) : sortedProduct.styleArray.results[0].original_price}</div>
+        <small>{sortedProduct.productArray.category}</small>
       </div>
     )
   }

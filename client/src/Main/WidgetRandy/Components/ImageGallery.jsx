@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
-const ImageGallery = ({ styleArray, style, setExpand, currentImage, setCurrentImage, dumbNailArrayIndex, setDumbNailArrayIndex }) => {
+const ImageGallery = ({ styleArray, style, setExpand, currentImage, setCurrentImage, dumbNailArrayIndex, setDumbNailArrayIndex, ClicksRef }) => {
   // ---------------------- Set Up ----------------------
   // setting up index count
   let count = 0
@@ -50,7 +50,7 @@ const ImageGallery = ({ styleArray, style, setExpand, currentImage, setCurrentIm
     if ((currentImage + 1) % 7 === 0) { setDumbNailArrayIndex(dumbNailArrayIndex + 1) }
   }
   // ---------------------- HTML ----------------------
-  return (<ContainerImage>
+  return (<ContainerImage onClick={() => ClicksRef.current.addClicks('overview', 'imageGallery')}>
 
     {/* main picture */}
     <MainDisplay src={styleArray[style].photos[currentImage].url}></MainDisplay>
@@ -95,8 +95,9 @@ const DumbNails = styled.div`
 
 const MainDisplay = styled.img`
 height: 40rem;
-width: 50rem;
-object-fit: cover;
+width: 40rem;
+object-fit: contain;
+margin-left: 7rem
 `
 
 const ContainerImage = styled.div`

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import MainEric from './WidgetEric/main.jsx'
 import MainMonica from './WidgetMonica/main.jsx'
@@ -14,6 +14,27 @@ import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 const App = () => {
 
+  // set up initial ref
+  const initialClicks = {
+    history: [],
+    module: {
+      overview: {
+        imageGallery: 0,
+        productInformation: 0,
+        styleSelect: 0,
+        addToCart: 0,
+        Total: 0
+      }
+    },
+    addClicks: (mod, ele) => {
+      ClicksRef.current.history.push({ time: new Date, module: mod, element: ele })
+      ClicksRef.current.module[mod][ele] += 1;
+      ClicksRef.current.module[mod].Total += 1;
+    }
+  }
+
+  const ClicksRef = useRef(initialClicks)
+
   // set up initial state
   const initialState = {
     product: {},
@@ -21,7 +42,7 @@ const App = () => {
     styles: {},
   };
 
-  // set state of product, this state contains all info of the product
+  // set state of product, this state contains all info of the product, create context
   const [APIResults, setAPIResults] = useState(initialState)
   const [productSelector, setProductSelector] = useState({ value: 2, label: 2 })
   const [devMode, setDevMode] = useState(true) // to disable dev mode, just set this to false
@@ -34,6 +55,11 @@ const App = () => {
 
   const devChanger = (e) => {
     setProductSelector(e);
+  }
+
+  const clickLogger = () => {
+    console.log('Click History:', [...ClicksRef.current.history].reverse())
+    console.log('Click Data Breakdown:', ClicksRef.current.module)
   }
 
   // use effect to get all get requests needed in the beginning.
@@ -65,11 +91,12 @@ const App = () => {
 
   return (
     <AppContainer>
-      <MainRandy APIResults={APIResults} setProductSelector={setProductSelector} />
+      <MainRandy APIResults={APIResults} setProductSelector={setProductSelector} ClicksRef={ClicksRef} />
       {APIResults.product.id ? <MainMonica product_id={APIResults.product.id} /> : null}
-      <MainEric />
+      {APIResults ? <MainEric APIResults={APIResults} /> : null}
       {devMode && <ContainerDev>
         <Select value={productSelector} options={devOptions} onChange={devChanger} />
+        <button onClick={clickLogger}>log clicks</button>
         <FontAwesomeIcon icon={icon({ name: 'xmark' })} onClick={() => setDevMode(false)} />
       </ContainerDev>}
     </AppContainer>

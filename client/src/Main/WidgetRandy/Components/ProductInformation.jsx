@@ -7,7 +7,7 @@ import { brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 
 
-const ProductInformation = ({ APIResults, style }) => {
+const ProductInformation = ({ APIResults, style, ClicksRef }) => {
   // calculating average stars
   let total = 0;
   for (let i of APIResults.review.results) {
@@ -40,7 +40,7 @@ const ProductInformation = ({ APIResults, style }) => {
   let price = APIResults.styles.results[style].original_price
 
   return (
-    <div>
+    <div onClick={() => ClicksRef.current.addClicks('overview', 'productInformation')}>
       <StarContainer>
         {starArray.map(entry => (
           <FontAwesomeIcon icon={icon({ name: 'star' })} />
@@ -55,7 +55,7 @@ const ProductInformation = ({ APIResults, style }) => {
       <StyledSlogan>{APIResults.product.slogan}</StyledSlogan>
       <StyledCategory>Category: {APIResults.product.category}</StyledCategory>
       {salePrice && <ContainerSale>
-        <SaleText>Sale! ${salePrice}</SaleText>
+        <SaleText>Sale ${salePrice}</SaleText>
         <PriceText>${price}</PriceText>
       </ContainerSale>}
       {!salePrice && <p>Price: ${price}</p>}

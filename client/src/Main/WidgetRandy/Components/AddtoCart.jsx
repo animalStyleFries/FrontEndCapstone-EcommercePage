@@ -8,7 +8,7 @@ import API from '../../../API.js'
 import Select from "react-select"
 import toast, { Toaster } from 'react-hot-toast';
 
-const AddtoCart = ({ styleArray, style, productName }) => {
+const AddtoCart = ({ styleArray, style, productName, ClicksRef }) => {
 
   // ----------------------- Set Up -----------------------
   // set a size state and quantity state
@@ -38,6 +38,14 @@ const AddtoCart = ({ styleArray, style, productName }) => {
   }
   if (quantityOptions.length > 15) { quantityOptions = quantityOptions.slice(0, 15) }
 
+  // check total stock
+  let stock = 0;
+  for (let i = 1; i < cartInfo.length; i++) {
+    stock += cartInfo[i].quantity
+  }
+
+  let disable = ''
+  if (!stock) { disable = 'disabled' }
   // set up sku id to use in post request
   const sku_id = cartInfo[size.value].sku_id
 
@@ -73,15 +81,17 @@ const AddtoCart = ({ styleArray, style, productName }) => {
 
   // ----------------------- Return Div -----------------------
 
-  // if quantity = 0, then grey out select size
+  // if out of stock, say out of stock
   // set up an indexCounter for entries
   let indexCounter = 0;
-  return (<ContainerAddToCart>
+  return (<ContainerAddToCart onClick={() => ClicksRef.current.addClicks('overview', 'addToCart')}>
 
     {/* SELECT SIZE */}
     {validSize && <SmallWords>Size:</SmallWords>}
     {!validSize && <InvalidSize>Please select a size:</InvalidSize>}
-    <SizeSelect onChange={sizeOnChange} openMenuOnFocus={true} ref={sizeSelectRef} options={sizeOptions} value={size} />
+
+    {!stock && <SizeSelect value={{ value: 0, label: 'OUT OF STOCK' }} isDisabled={true} />}
+    {stock && <SizeSelect onChange={sizeOnChange} openMenuOnFocus={true} ref={sizeSelectRef} options={sizeOptions} value={size} />}
 
     {/* SELECT QUANTITY */}
     <SmallWords>Quantity:</SmallWords>
@@ -89,7 +99,7 @@ const AddtoCart = ({ styleArray, style, productName }) => {
     {size.value !== 0 && <QuantitySelect value={quantity} onChange={quantityOnChange} options={quantityOptions} />}
 
     {/* ADD TO CART */}
-    <AddToCartButton onClick={addToCart}>
+    <AddToCartButton onClick={addToCart} disabled={disable}>
       <ContainerCart>
         <FontAwesomeIcon icon={icon({ name: 'cart-plus' })} />
       </ContainerCart>
