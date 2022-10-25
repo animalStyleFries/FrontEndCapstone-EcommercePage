@@ -32,7 +32,7 @@ it("should fetch correct product questions and answers", async () => {
     switch (url) {
       case `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}`:
           {
-            console.log("resolve 1",Question1)
+            // console.log("resolve 1",Question1)
             return Promise.resolve({ data: Question1})
           }
       default:

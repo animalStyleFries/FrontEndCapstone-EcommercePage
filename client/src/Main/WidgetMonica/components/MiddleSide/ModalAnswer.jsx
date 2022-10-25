@@ -44,7 +44,7 @@ function Modal(props) {
 
   var sortingAnswer = function (displayAnswer) {
     var res = displayAnswer.slice();
-    console.log('res is ', res)
+    // console.log('res is ', res)
     var resOthers = []
     var resSeller = [];
     for (var j = 0; j <res.length; j++) {
@@ -68,15 +68,15 @@ function Modal(props) {
 
   var handlesubmit = function() {
     event.preventDefault();
-    console.log('1111')
+    // console.log('1111')
     var uploadImagePromise = uploadImage();
     var photoArr= []
     uploadImagePromise.then((response) => {
-      console.log('test for promise',response)
+      // console.log('test for promise',response)
       response.forEach((each) => {
         photoArr.push(each.data.url)
       })
-      console.log('photoArr', photoArr);
+      // console.log('photoArr', photoArr);
       axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/${props.questionid}/answers`, {
       body: body,
       name: name,
@@ -113,7 +113,7 @@ function Modal(props) {
     }).catch((err) => {
       console.log('test for promise err', err)
     })
-    console.log('2222')
+    // console.log('2222')
   }
 
   const uploadImage = function () {

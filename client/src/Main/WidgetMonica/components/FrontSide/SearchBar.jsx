@@ -13,11 +13,11 @@ const SearchBar = (props) => {
 
 var handleEntry = function (e) {
   props.setEntry(e.target.value);
-  console.log('take a look',e.target.value )
+  // console.log('take a look',e.target.value )
   if(e.target.value.length < 3) {
     props.setQuestionNumber(2)
   }
-  console.log('take a look again', props.questionNumber )
+  // console.log('take a look again', props.questionNumber )
 }
   return (
        <form>

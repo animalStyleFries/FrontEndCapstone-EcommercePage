@@ -42,7 +42,7 @@ var Answers = function (props) {
     }).catch((err) => {
       console.log('there is an error in your update answer helpful', err);
     })
-    console.log('event', e)
+    // console.log('event', e)
     e.target.disabled = true
   }
 
@@ -51,7 +51,7 @@ var Answers = function (props) {
     e.preventDefault()
     axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/answers/${id}/report`, null , { headers: { "Authorization": gitToken } })
     .then ((response) => {
-      console.log('report succeed')
+      // console.log('report succeed')
       var newState =JSON.parse(JSON.stringify(props.isReport));
       newState[id] = true;
       props.setIsReport(newState);
@@ -161,19 +161,12 @@ const HelpfulAnsVote = styled.div`
   font-size: 1em;
 
 `
-//margin-right: 12%;
-
-
-
-//  margin-left: 20%;
-// margin-right: 20%;
 const AnswerInfo = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
 
 `
-
 const MoreAnswerLink = styled.a`
   display: flex;
   color: lightblue;

@@ -11,7 +11,7 @@ const AddAnswer = (props) => {
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${props.productid}`,
     { headers: { "Authorization": gitToken } })
     .then((response) => {
-      console.log('here is addAnswered', response.data)
+      // console.log('here is addAnswered', response.data)
       setProductname(response.data.name)
     })
     .catch((err) => {

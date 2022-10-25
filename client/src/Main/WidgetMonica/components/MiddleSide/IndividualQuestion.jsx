@@ -74,7 +74,7 @@ const IndividualQuestion = (props) => {
     setQuestionHelpfulness(currentState);
     axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/${id}/helpful`, null , { headers: { "Authorization": gitToken } })
     .then ((response) => {
-      console.log('update question helpful succeed')
+      // console.log('update question helpful succeed')
     }).catch((err) => {
       console.log('there is an error in your update question helpful', err);
     })
