@@ -3,6 +3,7 @@ import axios from 'axios';
 import {useState} from 'react';
 import {Image} from 'cloudinary-react';
 import gitToken from '../../../../hidden.js';
+import styled from 'styled-components';
 
 const PIC_STYLE = {
   border: '1px solid #ddd', /* Gray border */

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import gitToken from '../../../../hidden.js'
 import Modal from './ModalAnswer.jsx';
+import styled from 'styled-components';
 
 const AddAnswer = (props) => {
   const [isOpen,setIsOpen] = useState(false)
@@ -20,7 +21,7 @@ const AddAnswer = (props) => {
 
   return (
     <div>
-      <a href="" onClick={(e) => {e.preventDefault();setIsOpen(true)}}>add answer</a>
+      <AddAnswerLink href="" onClick={(e) => {e.preventDefault();setIsOpen(true)}}>add answer</AddAnswerLink>
       <Modal
         productname={productname}
         questionbody={props.questionbody}
@@ -33,9 +34,15 @@ const AddAnswer = (props) => {
         onClose={() => setIsOpen(false)}
       ></Modal>
     </div>
-
   )
 
 }
+
+const AddAnswerLink = styled.a`
+  color: lightblue;
+  :hover {
+  color:  black;
+  cursor: pointer;
+`
 
 export default AddAnswer;

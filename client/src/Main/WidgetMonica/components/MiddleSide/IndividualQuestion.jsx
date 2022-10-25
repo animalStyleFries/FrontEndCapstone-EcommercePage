@@ -3,6 +3,7 @@ import AddAnswer from './AddAnswer.jsx';
 import Answers from './Answers.jsx';
 import axios from 'axios'
 import gitToken from '../../../../hidden.js'
+import styled from 'styled-components';
 
 const IndividualQuestion = (props) => {
   if(!props.question) {
@@ -82,25 +83,29 @@ const IndividualQuestion = (props) => {
 
   return (
 
-    <span>
-      <div style={{display: 'flex'}}>
-        <p>Q: {props.question.question_body}</p>
-        <p>Helpful?</p>
-        <a href="" onClick={(e) => {handleHelpful(e, props.question.question_id)}}>Yes</a>
-        <p>{questionHelpfulness}</p>
-        <AddAnswer
-          productid={props.productid}
-          questionbody={props.question.question_body}
-          questionid={props.question.question_id}
-          displayAnswer={displayAnswer}
-          setDisplayAnswer={setDisplayAnswer}
-          answerHelpfulness={answerHelpfulness}
-          setAnswerHelpfulness={setAnswerHelpfulness}
-          isReport={isReport}
-          setIsReport={setIsReport}
-          >
-        </AddAnswer>
-      </div>
+    <div>
+      <QuestionContainer>
+        <QuestionBody>
+          <QuestionContent>Q: {props.question.question_body}</QuestionContent>
+        </QuestionBody>
+        <HelpfulQuesVote>
+          <div>Helpful?&nbsp;</div>
+          <Vote href="" onClick={(e) => {handleHelpful(e, props.question.question_id)}}> Yes&nbsp;</Vote>
+          <div>{questionHelpfulness}&nbsp;&nbsp;|&nbsp;&nbsp;</div>
+          <AddAnswer
+            productid={props.productid}
+            questionbody={props.question.question_body}
+            questionid={props.question.question_id}
+            displayAnswer={displayAnswer}
+            setDisplayAnswer={setDisplayAnswer}
+            answerHelpfulness={answerHelpfulness}
+            setAnswerHelpfulness={setAnswerHelpfulness}
+            isReport={isReport}
+            setIsReport={setIsReport}
+            >
+          </AddAnswer>
+        </HelpfulQuesVote>
+      </QuestionContainer>
       <br></br>
       <Answers
         questionid={props.question.question_id}
@@ -111,10 +116,45 @@ const IndividualQuestion = (props) => {
         isReport={isReport}
         setIsReport={setIsReport}
       ></Answers>
-    </span>
+    </div>
 
   )
 
 }
 
+const QuestionBody = styled.div`
+
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  width: 50%;
+  margin-left: 10%;
+`
+const HelpfulQuesVote = styled.div`
+
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  width:50%;
+
+  font-size: 1.17em;
+`// margin-right: 12%;
+
+const QuestionContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`
+const QuestionContent = styled.div`
+  display: flex;
+  font-size: 1.17em;
+  font-weight: bold;
+`
+const Vote = styled.a`
+  color: lightblue;
+  :hover {
+  color:  black;
+  cursor: pointer;
+};
+`
 export default IndividualQuestion;

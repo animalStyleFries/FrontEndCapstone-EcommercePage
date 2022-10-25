@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Modal from './ModalQuestion.jsx';
 import gitToken from '../../../../hidden.js';
+import styled from 'styled-components';
 
 const AddQuestion = (props) => {
   const [isOpen,setIsOpen] = useState(false)
@@ -20,7 +21,7 @@ const AddQuestion = (props) => {
 
   return(
     <div>
-        <button onClick={(e) => {e.preventDefault();setIsOpen(true)}}><b>Add a question +</b></button>
+        <AddQContainer onClick={(e) => {e.preventDefault();setIsOpen(true)}}>Add a question +</AddQContainer>
         <Modal
         productid={props.productid}
         productname={productname}
@@ -32,5 +33,13 @@ const AddQuestion = (props) => {
 
   )
 }
+const AddQContainer = styled.button`
+  display: flex;
+  width: 200px;
+  margin: center;
+  text-indent: 40px;
+  background-color: orange;
+  padding: .5rem 0;
+`
 
 export default AddQuestion;

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import gitToken from '../../../../hidden.js'
+import styled from 'styled-components';
 
 var Answers = function (props) {
 
@@ -17,8 +18,13 @@ var Answers = function (props) {
   }
 
   var handleloadmore = function () {
+    // console.log(answerNumber.length,props.displayAnswer.length);
+    event.preventDefault()
     var current = answerNumber;
     setAnswerNumber(current+5)
+    if(answerNumber >= props.displayAnswer.length) {
+      setAnswerNumber(2)
+    }
   }
 
   var handleHelpful = function (e, id) {
@@ -41,6 +47,7 @@ var Answers = function (props) {
   }
 
   var handleReport = function (e, id) {
+
     e.preventDefault()
     axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/answers/${id}/report`, null , { headers: { "Authorization": gitToken } })
     .then ((response) => {
@@ -52,49 +59,145 @@ var Answers = function (props) {
       console.log('there is an error in report answer', err);
     })
 
-
   }
-  var render = function () {
+
     return (
     <div key={props.questionid}>
-      A: {
+      {
       filter(answerNumber, props.displayAnswer).map((each, index) => {
         return(
-        <div key={index}>
-          <br></br>
-          {each.body}
-          <br></br>
-          <div>
-            <div>
-            {
-              each.photos&&(each.photos).map((eachPhoto) => (
-                <img src={eachPhoto.url} style={{width:400, height:300}}></img>
-              ))
-            }
-            </div>
-            <div style={{display: 'flex'}}>
-              <p>by {each.answerer_name}&nbsp;&nbsp;&nbsp;</p>
-              <p>{new Date(each.date.slice(0,10)).toUTCString().substring(0, 16)}&nbsp;&nbsp;&nbsp;</p>
-              <p>Helpful?&nbsp;</p>
-              <p><a href="" onClick={(e) => {handleHelpful(e, each.answer_id)}}>Yes&nbsp;&nbsp;</a></p>
-              <p>{props.answerHelpfulness[each.answer_id]}</p>
-              <p>
-              {props.isReport && !props.isReport[each.answer_id] && <a href="" onClick={(e) => {handleReport(e, each.answer_id)}}>Report</a>}
-              {props.isReport && props.isReport[each.answer_id] &&  <p>Reported</p>}
-              </p>
-            </div>
-          </div>
-        </div>
+        <MainContainer>
+          <AnswerContainer key={index}>
+            <AnswerInfo>
+              <br></br>
+              <AnswerBody>
+                <AnswerContent>
+                A:&nbsp;
+                </AnswerContent>
+                {each.body}
+
+              </AnswerBody>
+
+              <br></br>
+              <HelpfulAnsVote>
+                  <div>by {each.answerer_name.toLowerCase() === 'seller' ? <b>{each.answerer_name}</b> : each.answerer_name}&nbsp;&nbsp;&nbsp;</div>
+                  <div>{new Date(each.date.slice(0,10)).toUTCString().substring(0, 16)}&nbsp;&nbsp;&nbsp;</div>
+                  <div>Helpful?&nbsp;</div>
+                  <Vote href="" onClick={(e) => {handleHelpful(e, each.answer_id)}}>Yes&nbsp;</Vote>
+                  <div>{props.answerHelpfulness[each.answer_id]}&nbsp;&nbsp;|&nbsp;&nbsp;</div>
+                  <div>
+                  {props.isReport && !props.isReport[each.answer_id] && <ReportTarget href="" onClick={(e) => {handleReport(e, each.answer_id)}}>Report</ReportTarget>}
+                  {props.isReport && props.isReport[each.answer_id] &&  <div>Reported</div>}
+                  </div>
+              </HelpfulAnsVote>
+            </AnswerInfo>
+
+            <Answerpic>
+                {
+                  each.photos&&(each.photos).map((eachPhoto) => (
+                    <Picture src={eachPhoto.url} ></Picture> // style={{width:400, height:300}}
+                  ))
+                }
+            </Answerpic>
+
+
+          </AnswerContainer>
+
+
+        </MainContainer>
         )
       })}
+      <MoreAnswerLink href="" onClick={handleloadmore}> { answerNumber >= props.displayAnswer.length ? 'COLLAPSE ANSWERS' : 'LOAD MORE ANSWER'}</MoreAnswerLink>
 
-      <button onClick={handleloadmore}> LOAD MORE ANSWER</button>
     </div>
     )
 
-  }
-  return render();
+
 
 }
+const MainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 
+const Answerpic = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+`
+const Picture = styled.img`
+  display: inline-block;
+  margin:10px 0 0 10px;
+  flex-grow: 1;
+  height: calc(100% * (1/4) - 10px - 1px) / 4 * 3;
+  width: calc(100% * (1/4) - 10px - 1px)
+`
+
+
+const AnswerContent = styled.div`
+  font-weight: bold;
+`
+
+const AnswerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+const AnswerBody = styled.p`
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  width: 50%;
+  margin-left: 10%;
+  margin-top: auto;
+  font-size: 1.17em;
+`
+const HelpfulAnsVote = styled.div`
+
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  width:50%;
+  font-size: 1em;
+
+`
+//margin-right: 12%;
+
+
+
+//  margin-left: 20%;
+// margin-right: 20%;
+const AnswerInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+`
+
+const MoreAnswerLink = styled.a`
+  display: flex;
+  color: lightblue;
+  padding: .5rem 0;
+  width: 200px;
+  margin-left: 10%;
+  text-indent: 25px;
+  :hover {
+    color:  black;
+    cursor: pointer;
+  };
+`
+const Vote = styled.a`
+  color: lightblue;
+  :hover {
+  color:  black;
+  cursor: pointer;
+};
+`
+const ReportTarget = styled.a`
+  color: lightblue;
+    :hover {
+    color:  black;
+    cursor: pointer;
+  };
+`
 export default Answers;
