@@ -47,7 +47,7 @@ const MainMonica = ({ product_id }) => {
         res.push(questions[i]);
       }
     }
-    console.log('searched content', res)
+    // console.log('searched content', res)
     return res;
   }
 
