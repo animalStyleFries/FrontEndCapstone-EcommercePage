@@ -48,7 +48,7 @@ const App = () => {
   const [devMode, setDevMode] = useState(true) // to disable dev mode, just set this to false
 
   let devOptions = []
-  const productCount = 20 // change this to match total products being chosen
+  const productCount = 10 // change this to match total products being chosen
   for (let i = 0; i < productCount; i++) {
     devOptions.push({ value: i, label: i })
   }
@@ -66,7 +66,7 @@ const App = () => {
   useEffect(() => {
     console.log('App axios get request in progress')
     let holder = {}
-    axios.get(API.server + 'products/' + '?count=20', { headers: { "Authorization": API.gitToken } })
+    axios.get(API.server + 'products/' + '?count=10', { headers: { "Authorization": API.gitToken } })
       .then(productResult => {
         holder.product = productResult.data[productSelector.value]
 
