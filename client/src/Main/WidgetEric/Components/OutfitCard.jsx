@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import API from '../API.js';
+import styled from 'styled-components'
 
 const OutfitCard = ({ outfit, removeKeys }) => {
 
@@ -25,14 +26,24 @@ const OutfitCard = ({ outfit, removeKeys }) => {
   if (savedProduct) {
     return (
       <div>
-        <h4>Outfit Card</h4>
         <button onClick={() => (removeKeys(outfit))}>Delete Outfit</button>
         <div>{savedProduct.productInfo.name}</div>
-        <img src={savedProduct.productStyles.results[0].photos[0].thumbnail_url} alt='missing image'></img>
+        <OutfitProductImage src={savedProduct.productStyles.results[0].photos[0].thumbnail_url} alt='missing image'></OutfitProductImage>
       </div>
     )
   }
 
 }
+
+const OutfitProductImage = styled.img`
+  display: block;
+  margin:10px 0 0 10px;
+  flex-grow: 1;
+  float: left;
+  height: 300px;
+  width: 240px;
+  margin: 20px;
+`
+
 
 export default OutfitCard
