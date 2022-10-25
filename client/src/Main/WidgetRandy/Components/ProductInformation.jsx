@@ -55,7 +55,7 @@ const ProductInformation = ({ APIResults, style, ClicksRef }) => {
       <StyledSlogan>{APIResults.product.slogan}</StyledSlogan>
       <StyledCategory>Category: {APIResults.product.category}</StyledCategory>
       {salePrice && <ContainerSale>
-        <SaleText>Sale! ${salePrice}</SaleText>
+        <SaleText>Sale ${salePrice}</SaleText>
         <PriceText>${price}</PriceText>
       </ContainerSale>}
       {!salePrice && <p>Price: ${price}</p>}
