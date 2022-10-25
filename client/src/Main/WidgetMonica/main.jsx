@@ -19,7 +19,7 @@ const MainMonica = ({ product_id }) => {
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}&count=100`,
      { headers: { "Authorization": gitToken } })
     .then((response) => {
-      console.log('Injected response of product',product_id, response)
+      // console.log('Injected response of product',product_id, response)
       setQuestions(response.data.results);
     })
     .catch((err) => {
@@ -47,7 +47,7 @@ const MainMonica = ({ product_id }) => {
         res.push(questions[i]);
       }
     }
-    console.log('searched content', res)
+    // console.log('searched content', res)
     return res;
   }
 
