@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">4.54% </span>
+                <span class="strong">5.55% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/22</span>
+                <span class='fraction'>1/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>0/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">4.76% </span>
+                <span class="strong">5.88% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/21</span>
+                <span class='fraction'>1/17</span>
             </div>
         
             
@@ -116,23 +116,14 @@
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -140,6 +131,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -147,8 +144,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -157,6 +152,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -172,31 +170,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect, useState } from 'react';
-import API from '../API.js';
-import axios from 'axios';
+import ProductComparison from './ProductComparison.jsx'
 &nbsp;
-const RelatedCard = <span class="fstat-no" title="function not covered" >({</span> relatedProductId }) =&gt; {
+const RelatedCard = <span class="fstat-no" title="function not covered" >({</span> relatedProductId, relatedProducts, originalProductFeatures }) =&gt; {
 &nbsp;
-  const [allProductInfo, setAllProductInfo] = <span class="cstat-no" title="statement not covered" >useState()</span>
+  const [sortedProduct,  setSortedProduct] = <span class="cstat-no" title="statement not covered" >useState();</span>
+  const [comparisonToggle,  setComparisonToggle] = <span class="cstat-no" title="statement not covered" >useState(false);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-    const getRelatedProducts = <span class="cstat-no" title="statement not covered" >axios.get(`${API.server}products/${relatedProductId}`, { headers: { 'Authorization': API.gitToken } })</span>
-    const getRelatedStyles = <span class="cstat-no" title="statement not covered" >axios.get(`${API.server}products/${relatedProductId}/styles`, { headers: { 'Authorization': API.gitToken } })</span>
-    const getRelatedReview = <span class="cstat-no" title="statement not covered" >axios.get(`${API.server}reviews/?product_id=${relatedProductId}`, { headers: { 'Authorization': API.gitToken } })</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    Promise.all([getRelatedProducts, getRelatedStyles, getRelatedReview])</span>
-      .then(<span class="fstat-no" title="function not covered" >(r</span>esults) =&gt; {
-        let container = <span class="cstat-no" title="statement not covered" >{}</span>
-<span class="cstat-no" title="statement not covered" >        container.productArrays = results[0].data</span>
-<span class="cstat-no" title="statement not covered" >        container.styleArrays = results[1].data</span>
-<span class="cstat-no" title="statement not covered" >        container.reviewArrays = results[2].data</span>
-<span class="cstat-no" title="statement not covered" >        setAllProductInfo(container)</span>
-      })
+<span class="cstat-no" title="statement not covered" >    if (relatedProducts.productArrays &amp;&amp; relatedProducts.styleArrays &amp;&amp; relatedProducts.reviewArrays) {</span>
+      let index = <span class="cstat-no" title="statement not covered" >relatedProducts.relatedProductIds.indexOf(relatedProductId)</span>
+      let container = <span class="cstat-no" title="statement not covered" >{</span>
+        productArray: relatedProducts.productArrays[index],
+        styleArray: relatedProducts.styleArrays[index],
+        reviewArray: relatedProducts.reviewArrays[index],
+        id: relatedProducts.relatedProductIds[index]
+      };
+<span class="cstat-no" title="statement not covered" >      setSortedProduct(container);</span>
+    }
   }, [])
 &nbsp;
-  const getRating = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(a</span>llProductInfo) =&gt; {</span>
+   const getRating = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(s</span>ortedProduct) =&gt; {</span>
     let sum = <span class="cstat-no" title="statement not covered" >0</span>
-    let reviews = <span class="cstat-no" title="statement not covered" >allProductInfo.reviewArrays.results</span>
+    let reviews = <span class="cstat-no" title="statement not covered" >sortedProduct.reviewArray.results</span>
 <span class="cstat-no" title="statement not covered" >    for (var i = <span class="cstat-no" title="statement not covered" >0;</span> i &lt; reviews.length; i++) {</span>
 <span class="cstat-no" title="statement not covered" >      sum += reviews[i].rating</span>
     }
@@ -204,18 +200,19 @@ const RelatedCard = <span class="fstat-no" title="function not covered" >({</spa
   }
 &nbsp;
 &nbsp;
-  // console.log(allProductInfo)
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  if (allProductInfo) {</span>
+<span class="cstat-no" title="statement not covered" >  if (sortedProduct) {</span>
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;div&gt;
         &lt;h3&gt;Product&lt;/h3&gt;
-        &lt;button onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >console.log('clickStar')}</span>&gt;Star&lt;/button&gt;
-        &lt;img src={allProductInfo.styleArrays.results[0].photos[0].thumbnail_url} alt='missing image'&gt;&lt;/img&gt;
-        &lt;div&gt;{allProductInfo.productArrays.name}&lt;/div&gt;
-        &lt;div&gt;{(allProductInfo.reviewArrays.results.length &gt; 0) ? getRating(allProductInfo) : &lt;p&gt;no reviews&lt;/p&gt;}&lt;/div&gt;
-        &lt;div&gt;{(allProductInfo.styleArrays.results[0].sale_price) ? (allProductInfo.styleArrays.results[0].sale_price, allProductInfo.styleArrays.results[0].original_price) : allProductInfo.styleArrays.results[0].original_price}&lt;/div&gt;
-        &lt;small&gt;{allProductInfo.productArrays.category}&lt;/small&gt;
+        &lt;button onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setComparisonToggle(!comparisonToggle)}</span>&gt;Star&lt;/button&gt;
+        &lt;div&gt;
+          {comparisonToggle ? &lt;ProductComparison sortedProduct={sortedProduct}  originalProductFeatures={originalProductFeatures} rating={getRating(sortedProduct)}/&gt; : null}
+        &lt;/div&gt;
+        &lt;img src={sortedProduct.styleArray.results[0].photos[0].thumbnail_url} alt='missing image'&gt;&lt;/img&gt;
+        &lt;div&gt;{sortedProduct.productArray.name}&lt;/div&gt;
+        &lt;div&gt;{(sortedProduct.reviewArray.results.length &gt; 0) ? getRating(sortedProduct) : &lt;p&gt;no reviews&lt;/p&gt;}&lt;/div&gt;
+        &lt;div&gt;{(sortedProduct.styleArray.results[0].sale_price) ? (sortedProduct.styleArray.results[0].sale_price, sortedProduct.styleArray.results[0].original_price) : sortedProduct.styleArray.results[0].original_price}&lt;/div&gt;
+        &lt;small&gt;{sortedProduct.productArray.category}&lt;/small&gt;
       &lt;/div&gt;
     )
   }
@@ -232,7 +229,7 @@ export default RelatedCard
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-24T23:53:39.518Z
+                at 2022-10-25T20:18:23.155Z
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>

@@ -42,7 +42,8 @@ it("should fetch correct product questions and answers", async () => {
   var product_id = '40346';
   axios.get.mockImplementation((url) => {
     switch (url) {
-      case `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}`:
+      case `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}&count=100`:
+
         {
           console.log("resolve 1", Question1)
           return Promise.resolve({ data: Question1 })

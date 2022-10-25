@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/5</span>
+                <span class='fraction'>4/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/5</span>
+                <span class='fraction'>4/7</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -82,18 +82,38 @@
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -104,21 +124,31 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import cors from 'cors';
+import styled from 'styled-components';
+&nbsp;
+&nbsp;
+const FORM_STYLES = {
+  height: '35.5px',
+  width: '800px'
+}
+&nbsp;
 const SearchBar = (props) =&gt; {
 &nbsp;
-const [entry, setEntry] = useState ('')
-&nbsp;
 var handleEntry = <span class="fstat-no" title="function not covered" >fu</span>nction (e) {
-<span class="cstat-no" title="statement not covered" >  setEntry(e.target.value);</span>
+<span class="cstat-no" title="statement not covered" >  props.setEntry(e.target.value);</span>
+  // console.log('take a look',e.target.value )
+<span class="cstat-no" title="statement not covered" >  if(e.target.value.length &lt; 3) {</span>
+<span class="cstat-no" title="statement not covered" >    props.setQuestionNumber(2)</span>
+  }
+  // console.log('take a look again', props.questionNumber )
 }
   return (
-    &lt;form&gt;
-      &lt;input value={entry} onChange={handleEntry} placeholder='Have a question? Search for answers…' size="50"&gt;&lt;/input&gt;
-    &lt;/form&gt;
+       &lt;form&gt;
+        &lt;input style={FORM_STYLES} value={props.entry} onChange={handleEntry} placeholder='Have a question? Search for answers…' size="50"&gt;&lt;/input&gt;
+       &lt;/form&gt;
   )
 &nbsp;
 }
-&nbsp;
 &nbsp;
 export default SearchBar;</pre></td></tr></table></pre>
 
@@ -127,7 +157,7 @@ export default SearchBar;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-24T23:53:39.518Z
+                at 2022-10-25T20:18:23.155Z
             </div>
         <script src="../../../../../../prettify.js"></script>
         <script>
