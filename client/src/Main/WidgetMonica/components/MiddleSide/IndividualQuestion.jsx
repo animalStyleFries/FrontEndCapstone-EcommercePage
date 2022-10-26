@@ -9,13 +9,13 @@ const IndividualQuestion = (props) => {
   if(!props.question) {
     return null;
   }
-  //number
-  const [questionHelpfulness, setQuestionHelpfulness] = useState(props.question.question_helpfulness)
-  //object{answerid: helpfulness}
-  const [answerHelpfulness, setAnswerHelpfulness] = useState()
+
+  const [questionHelpfulness, setQuestionHelpfulness] = useState(props.question.question_helpfulness)//it's a number
+  const [answerHelpfulness, setAnswerHelpfulness] = useState()//object{answerid: helpfulness}
   const [isReport, setIsReport] = useState()
   const [displayAnswer, setDisplayAnswer] = useState([])
 
+  //sorting answer by seller name
   var sortingAnswer = function (displayAnswer) {
     var res = displayAnswer.slice();
     var resOthers = []
@@ -27,6 +27,7 @@ const IndividualQuestion = (props) => {
         resOthers.push(res[j])
       }
     }
+    // sorting answer by helpfulness
     var sortingAll = function (res) {
       res.sort(function(a,b){
         return a.helpfulness > b.helpfulness ? -1 : a.helpfulness < b.helpfulness ? 1 : 0;
@@ -63,7 +64,7 @@ const IndividualQuestion = (props) => {
       .catch((err) => {
         console.log(err);
       })
-   },[])
+   },[props.question.question_id])
 
   var handleHelpful = function (e, id) {
     e.preventDefault();
@@ -135,7 +136,7 @@ const HelpfulQuesVote = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: right;
-  width:50%;
+  width: 50%;
 
   font-size: 1.17em;
 `// margin-right: 12%;

@@ -86,9 +86,4 @@ function Modal(props) {
     </>
   )
 }
-
-// const YellowButton = styled.button`
-//   background-color: orange;
-//   display: flex;
-// `
 export default Modal;
