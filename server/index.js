@@ -3,6 +3,14 @@ const express = require('express')
 const app = express()
 const path = require("path");
 
+app.use(express.json());
+app.get("/", () => console.log('does this work?'))
+
 app.use(express.static(path.join(__dirname, "../client/dist")))
+
+
+
+
+
 app.listen(process.env.PORT || 3000);
 console.log(`Listening at http://localhost:${process.env.PORT || 3000}`);
