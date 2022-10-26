@@ -8,6 +8,7 @@ const AddQuestion = (props) => {
   const [isOpen,setIsOpen] = useState(false)
   const [productname, setProductname] = useState('')
 
+
   useEffect(() => {
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${props.productid}`,
     { headers: { "Authorization": gitToken } })
@@ -17,7 +18,7 @@ const AddQuestion = (props) => {
     .catch((err) => {
       console.log(err);
     })
-  },[])
+  },[props.productid])
 
   return(
     <div>
@@ -28,7 +29,6 @@ const AddQuestion = (props) => {
         open={isOpen}
         onClose={() => setIsOpen(false)}
         ></Modal>
-
     </div>
 
   )

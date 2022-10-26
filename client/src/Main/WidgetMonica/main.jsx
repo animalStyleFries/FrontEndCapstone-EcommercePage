@@ -10,9 +10,9 @@ import gitToken from '../../hidden.js' ;// dotenv substitute
 
 
 const MainMonica = ({ product_id }) => {
+  // console.log('QA part', product_id)
   const [questions, setQuestions] = useState([])
   const [questionNumber, setQuestionNumber] = useState(2)
-  // call api to get some data;
   const [entry, setEntry] = useState('');
 
   useEffect(() => {
@@ -27,6 +27,7 @@ const MainMonica = ({ product_id }) => {
     })
   }, [product_id])
 
+  // do the filter for how many questions we want to get
   var filterByNumber = function (number, all) {
     var res = [];
     for (var i = 0; i < Math.min(number,all.length); i++) {
@@ -35,6 +36,7 @@ const MainMonica = ({ product_id }) => {
     return res;
   }
 
+  // do the filter for search bar part
   var filterByContent = function (content, questions) {
     // console.log(' for search content', questions)
     if (content.length < 3) {
@@ -60,6 +62,7 @@ const MainMonica = ({ product_id }) => {
     </CointainerQuestionsInfo>
     <br></br>
     <ContainerQuestionList>
+      {/*filter the content at first, then filter by number */}
       <QuestionsList questions={filterByNumber(questionNumber,filterByContent(entry, questions))} productid={product_id} ></QuestionsList>
     </ContainerQuestionList>
     <br></br>
@@ -84,14 +87,14 @@ const CointainerQuestionsInfo = styled.div`
 `
 
 const ContainerQuestionList = styled.div`
-display: flex;
-flex-direction: column;
-align-items: left;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
 `
 const BottomPart = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: center;
-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
 `
 export default MainMonica

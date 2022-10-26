@@ -13,7 +13,6 @@ const MoreAnsweredQuestions = (props) => {
     props.setQuestionNumber(current+2)
   }
 
-
   return(
     <MoreAnsweredButton onClick={handleLoadMore}>More Answered Questions</MoreAnsweredButton>
   )

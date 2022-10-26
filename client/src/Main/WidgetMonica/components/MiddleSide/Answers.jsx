@@ -6,8 +6,6 @@ import styled from 'styled-components';
 var Answers = function (props) {
 
   const[answerNumber, setAnswerNumber] =useState(2);
-  // const[displayAnswer, setDisplayAnswer] = useState([])
-  // const[helpfulness,setHelpfulness] = useState()
 
   var filter = function (number, all) {
     var res = [];
@@ -36,6 +34,7 @@ var Answers = function (props) {
     var newState =JSON.parse(JSON.stringify(props.answerHelpfulness));
     newState[id] = newState[id]+1;
     props.setAnswerHelpfulness(newState);
+    //update database helpfulness of this answer
     axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/answers/${id}/helpful`, null , { headers: { "Authorization": gitToken } })
     .then ((response) => {
       console.log('update answer helpful succeed')
@@ -47,23 +46,24 @@ var Answers = function (props) {
   }
 
   var handleReport = function (e, id) {
-
     e.preventDefault()
+    //pay attention to the second param in put request vs post request
     axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/answers/${id}/report`, null , { headers: { "Authorization": gitToken } })
     .then ((response) => {
       // console.log('report succeed')
+      //copy isreport object
       var newState =JSON.parse(JSON.stringify(props.isReport));
       newState[id] = true;
       props.setIsReport(newState);
     }).catch((err) => {
       console.log('there is an error in report answer', err);
     })
-
   }
 
     return (
     <div key={props.questionid}>
       {
+      // use filter to control the total showing answer number
       filter(answerNumber, props.displayAnswer).map((each, index) => {
         return(
         <MainContainer>
@@ -71,27 +71,22 @@ var Answers = function (props) {
             <AnswerInfo>
               <br></br>
               <AnswerBody>
-                <AnswerContent>
-                A:&nbsp;
-                </AnswerContent>
+                <AnswerContent>A:&nbsp;</AnswerContent>
                 {each.body}
-
               </AnswerBody>
-
               <br></br>
               <HelpfulAnsVote>
-                  <div>by {each.answerer_name.toLowerCase() === 'seller' ? <b>{each.answerer_name}</b> : each.answerer_name}&nbsp;&nbsp;&nbsp;</div>
-                  <div>{new Date(each.date.slice(0,10)).toUTCString().substring(0, 16)}&nbsp;&nbsp;&nbsp;</div>
-                  <div>Helpful?&nbsp;</div>
-                  <Vote href="" onClick={(e) => {handleHelpful(e, each.answer_id)}}>Yes&nbsp;</Vote>
-                  <div>{props.answerHelpfulness[each.answer_id]}&nbsp;&nbsp;|&nbsp;&nbsp;</div>
-                  <div>
+                <div>by {each.answerer_name.toLowerCase() === 'seller' ? <b>{each.answerer_name}</b> : each.answerer_name}&nbsp;&nbsp;&nbsp;</div>
+                <div>{new Date(each.date.slice(0,10)).toUTCString().substring(0, 16)}&nbsp;&nbsp;&nbsp;</div>
+                <div>Helpful?&nbsp;</div>
+                <Vote href="" onClick={(e) => {handleHelpful(e, each.answer_id)}}>Yes&nbsp;</Vote>
+                <div>{props.answerHelpfulness[each.answer_id]}&nbsp;&nbsp;|&nbsp;&nbsp;</div>
+                <div>
                   {props.isReport && !props.isReport[each.answer_id] && <ReportTarget href="" onClick={(e) => {handleReport(e, each.answer_id)}}>Report</ReportTarget>}
-                  {props.isReport && props.isReport[each.answer_id] &&  <div>Reported</div>}
-                  </div>
+                  {props.isReport && props.isReport[each.answer_id] && <div>Reported</div>}
+                </div>
               </HelpfulAnsVote>
             </AnswerInfo>
-
             <Answerpic>
                 {
                   each.photos&&(each.photos).map((eachPhoto) => (
@@ -99,21 +94,13 @@ var Answers = function (props) {
                   ))
                 }
             </Answerpic>
-
-
           </AnswerContainer>
-
-
         </MainContainer>
         )
       })}
-      <MoreAnswerLink href="" onClick={handleloadmore}> { answerNumber >= props.displayAnswer.length ? 'COLLAPSE ANSWERS' : 'LOAD MORE ANSWER'}</MoreAnswerLink>
-
+      <MoreAnswerLink href="" onClick={handleloadmore}> {answerNumber >= props.displayAnswer.length ? 'COLLAPSE ANSWERS' : 'LOAD MORE ANSWER'}</MoreAnswerLink>
     </div>
     )
-
-
-
 }
 const MainContainer = styled.div`
   display: flex;
