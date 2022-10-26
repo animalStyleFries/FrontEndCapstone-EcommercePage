@@ -14,10 +14,20 @@ module.exports = {
   },
   plugins: [
     new CompressionPlugin({
-      filename: "[path].gz[query]",
-      test: /.js$|.css$/,
-      algorithm: "gzip"
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8
     }),
+    new webpack.DefinePlugin({ // <-- key to reducing React's size
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.DedupePlugin(), //dedupe similar code
+    new webpack.optimize.UglifyJsPlugin(), //minify everything
+    new webpack.optimize.AggressiveMergingPlugin(),//Merge chunks
     new NodePolyfillPlugin()
   ],
   module: {

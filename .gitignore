@@ -4,3 +4,5 @@ hidden.js
 bundle.js
 .DS_Store
 package-lock.json
+.gz
+.LICENSE
