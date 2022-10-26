@@ -78,7 +78,7 @@ const QAsection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 95%;
+  width: 90%;
 `
 const CointainerQuestionsInfo = styled.div`
   display: flex;
