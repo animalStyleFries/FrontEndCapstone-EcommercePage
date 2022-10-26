@@ -10,7 +10,7 @@ import gitToken from '../../hidden.js' ;// dotenv substitute
 
 
 const MainMonica = ({ product_id }) => {
-  console.log('QA part', product_id)
+  // console.log('QA part', product_id)
   const [questions, setQuestions] = useState([])
   const [questionNumber, setQuestionNumber] = useState(2)
   const [entry, setEntry] = useState('');
