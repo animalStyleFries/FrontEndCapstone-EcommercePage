@@ -81,6 +81,7 @@ const App = () => {
           .then((resultArray) => {
             holder.review = resultArray[0].data
             holder.styles = resultArray[1].data
+            console.log('aaaaaa',holder)
             setAPIResults(holder)
             console.log('App axios get request completed!')
           })

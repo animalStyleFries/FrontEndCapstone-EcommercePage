@@ -15,10 +15,9 @@ const QuestionsList = (props) => {
     return props.questions;
   }
   var sortedQ = sortingAll();
-  if(!props.questions) {
-    return null;
-  }
 
+  // sort by helpfulness
+  //https://github.com/caseywebdev/react-list(use reactlist to map and render each question)
   const itemRenderer = (index, key) => (
     <IndividualQuestion key={key} question={sortedQ[index]} productid={props.productid}></IndividualQuestion>
   );

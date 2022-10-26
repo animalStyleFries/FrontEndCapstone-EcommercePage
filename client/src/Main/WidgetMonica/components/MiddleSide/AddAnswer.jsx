@@ -17,7 +17,7 @@ const AddAnswer = (props) => {
     .catch((err) => {
       console.log(err);
     })
-  },[])
+  },[props.productid])
 
   return (
     <div>
@@ -35,7 +35,6 @@ const AddAnswer = (props) => {
       ></Modal>
     </div>
   )
-
 }
 
 const AddAnswerLink = styled.a`
