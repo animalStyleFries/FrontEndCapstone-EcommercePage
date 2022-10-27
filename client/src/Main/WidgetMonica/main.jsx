@@ -38,7 +38,7 @@ const MainMonica = ({ product_id, ClicksRef}) => {
 
   // do the filter for search bar part
   var filterByContent = function (content, questions) {
-    console.log(' for search content', questions)
+    // console.log(' for search content', questions)
     if (content.length < 3) {
       return questions;
     }
@@ -49,7 +49,7 @@ const MainMonica = ({ product_id, ClicksRef}) => {
         res.push(questions[i]);
       }
     }
-    console.log('searched content', res)
+    // console.log('searched content', res)
     return res;
   }
 

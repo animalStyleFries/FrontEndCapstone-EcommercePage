@@ -7,8 +7,8 @@ import styled from 'styled-components';
 
 
 const IndividualQuestion = (props) => {
-  console.log('individual q', props)
-  console.log('props.question', props.question)
+  // console.log('individual q', props)
+  // console.log('props.question', props.question)
   if(!props.question) {
     return null;
   }
@@ -70,7 +70,7 @@ const IndividualQuestion = (props) => {
    },[props.question.question_id])
 
   var handleHelpful = function (e, id) {
-    console.log('CALLED')
+    // console.log('CALLED')
     e.preventDefault();
     if(e.target.disabled === true) {
       return;
