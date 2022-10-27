@@ -18,11 +18,12 @@ var Answers = function (props) {
   var handleloadmore = function () {
     // console.log(answerNumber.length,props.displayAnswer.length);
     event.preventDefault()
-    var current = answerNumber;
-    setAnswerNumber(current+5)
+
     if(answerNumber >= props.displayAnswer.length) {
       setAnswerNumber(2)
     }
+    var current = answerNumber;
+    setAnswerNumber(current+5)
   }
 
   var handleHelpful = function (e, id) {

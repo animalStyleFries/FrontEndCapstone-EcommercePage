@@ -4,13 +4,13 @@ import styled from 'styled-components';
 
 const MoreAnsweredQuestions = (props) => {
   // console.log('the whole current questions we got', props)
-  if(props.questions.length <= 2 || props.questionNumber >= Math.min(props.questions.length,200)) {
+  if(props.questions.length <= 2 || props.questionNumber >= Math.min(props.questions.length,20)) {
     return null;
   }
 
   var handleLoadMore = function () {
     var current = props.questionNumber;
-    props.setQuestionNumber(current+100)
+    props.setQuestionNumber(current+5)
   }
 
   return(
