@@ -68,13 +68,13 @@ const ImageGallery = ({ styleArray, style, setExpand, currentImage, setCurrentIm
       </ContainerDown>
     </DumbNails>
 
-    <ContainerLeftArrow onClick={leftArrowClick}>
+    {currentImage !== 0 && <ContainerLeftArrow onClick={leftArrowClick}>
       <FontAwesomeIcon icon={icon({ name: 'circle-arrow-left' })} />
-    </ContainerLeftArrow>
+    </ContainerLeftArrow>}
 
-    <ContainerRightArrow onClick={rightArrowClick}>
+    {currentImage !== photosArray.length - 1 && <ContainerRightArrow onClick={rightArrowClick}>
       <FontAwesomeIcon icon={icon({ name: 'circle-arrow-right' })} />
-    </ContainerRightArrow>
+    </ContainerRightArrow>}
 
     <ContainerExpand onClick={expandClicker}>
       <FontAwesomeIcon icon={icon({ name: 'expand' })} />
