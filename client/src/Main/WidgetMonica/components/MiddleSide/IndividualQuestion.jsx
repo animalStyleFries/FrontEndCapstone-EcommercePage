@@ -70,7 +70,6 @@ const IndividualQuestion = (props) => {
    },[props.question.question_id])
 
   var handleHelpful = function (e, id) {
-    // console.log('CALLED')
     e.preventDefault();
     if(e.target.disabled === true) {
       return;
