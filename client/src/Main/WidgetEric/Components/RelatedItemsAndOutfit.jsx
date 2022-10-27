@@ -53,7 +53,7 @@ const RelatedItemsAndOutfit = ({ APIResults }) => {
   return (
     <div>
       <Related>
-        <RelatedList relatedProducts={relatedProducts} originalProductFeatures={APIResults.styles}/>
+        <RelatedList relatedProducts={relatedProducts} originalProductFeatures={APIResults.styles} originalName={APIResults.product.name}/>
       </Related>
       <Outfit>
         <OutfitList originalProductID={product_id}/>

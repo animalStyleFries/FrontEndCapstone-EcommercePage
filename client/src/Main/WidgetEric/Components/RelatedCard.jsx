@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import ProductComparison from './ProductComparison.jsx'
+import Rating from './Rating.jsx'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
-const RelatedCard = ({ relatedProductId, relatedProducts, originalProductFeatures }) => {
+const RelatedCard = ({ relatedProductId, relatedProducts, originalProductFeatures, originalName }) => {
 
   const [comparisonToggle,  setComparisonToggle] = useState(false);
 
@@ -25,53 +26,109 @@ const RelatedCard = ({ relatedProductId, relatedProducts, originalProductFeature
     return sum / reviews.length
   }
 
+  const closeComparison = () => {
+    setComparisonToggle(false)
+  }
+
   return (
-    <div>
-      <TitleContainer>
-        <h4>{sortedProduct.productArray.name}</h4>
-        <Star onClick={() => setComparisonToggle(!comparisonToggle)}>
-          <FontAwesomeIcon icon={icon({ name: 'star' })} />
-        </Star>
-      </TitleContainer>
+    <RelatedCardContainer>
 
-      <div>
-        {comparisonToggle ? <ProductComparison sortedProduct={sortedProduct}  originalProductFeatures={originalProductFeatures} rating={getRating(sortedProduct)}/> : null}
-      </div>
-      <RelatedProductImage src={sortedProduct.styleArray.results[0].photos[0].thumbnail_url} alt='missing image'></RelatedProductImage>
-      <div>Rating {(sortedProduct.reviewArray.results.length > 0) ? getRating(sortedProduct) : <p>no reviews</p>}</div>
-      <div>Price {(sortedProduct.styleArray.results[0].sale_price) ? (sortedProduct.styleArray.results[0].sale_price, sortedProduct.styleArray.results[0].original_price) : sortedProduct.styleArray.results[0].original_price}</div>
-      <small>Category {sortedProduct.productArray.category}</small>
-    </div>
+        <div>
+          {comparisonToggle ? <ProductComparison sortedProduct={sortedProduct}  originalProductFeatures={originalProductFeatures} rating={getRating(sortedProduct)} close={closeComparison} originalName={originalName}/> : null}
+        </div>
 
+        <RelatedProductImage src={sortedProduct.styleArray.results[0].photos[0].thumbnail_url} alt='missing image'>
+
+        </RelatedProductImage>
+
+        <StarContainer>
+
+          <Star onClick={() => setComparisonToggle(true)}>
+            <FontAwesomeIcon icon={icon({ name: 'star' })} />
+          </Star>
+
+        </StarContainer>
+
+        <NameContainer>
+          <div>{sortedProduct.productArray.name}</div>
+        </NameContainer>
+
+        <CategoryContainer>
+          {sortedProduct.productArray.category}
+        </CategoryContainer>
+
+        <div>
+          {(sortedProduct.reviewArray.results.length > 0) ? <Rating rating={getRating(sortedProduct)}/> : <span>no reviews</span>}
+        </div>
+
+        <div>
+          {(sortedProduct.styleArray.results[0].sale_price) ? (<><SaleNewPriceContainer>Sale ${sortedProduct.styleArray.results[0].sale_price}</SaleNewPriceContainer> <SaleOldPriceContainer>${sortedProduct.styleArray.results[0].original_price}</SaleOldPriceContainer></>) : <NoSaleContainer>${sortedProduct.styleArray.results[0].original_price}</NoSaleContainer>}
+        </div>
+
+    </RelatedCardContainer>
   )
 }
 
 const RelatedProductImage = styled.img`
   display: block;
-  margin:10px 0 0 10px;
   flex-grow: 1;
   float: left;
   height: 300px;
   width: 240px;
-  margin: 20px;
+`
+
+const StarContainer = styled.div`
+  position: relative;
+  width: 25px;
+  height: 25px;
+  top: 3%;
+  color: black;
+  left: 88%;
+  color: Black;
 `
 
 const Star = styled.div`
-  color: blue;
+  position: relative;
+  width: 20px;
+  color: black;
+  bottom: 18.5em;
+  color: Black;
 `
 
-// const nameContainer = styled.div`
-//   font-weight: bold;
-// `
-
-const TitleContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+const RelatedCardContainer = styled.div`
+  border-style: solid;
+  border-width: thin;
+  margin-right: 20px;
+  margin-left: 20px;
 `
 
+const NameContainer = styled.div`
+  font-weight: bold;
+  font-size: 110%;
+`
+
+const CategoryContainer = styled.div`
+  opacity: 0.5;
+  font-size: 80%;
+`
+
+const NoSaleContainer = styled.div`
+  font-weight: 555;
+`
+
+const SaleNewPriceContainer = styled.div`
+  font-weight: 555;
+  color: red;
+`
+
+const SaleOldPriceContainer = styled.div`
+  font-weight: 555;
+  text-decoration: line-through;
+`
 
 export default RelatedCard
+
+
 
 
 
