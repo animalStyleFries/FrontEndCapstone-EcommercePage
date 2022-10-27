@@ -2,6 +2,7 @@ node_modules/
 .env
 hidden.js
 bundle.js
+bundle.js.gz
 .DS_Store
 package-lock.json
 .gz

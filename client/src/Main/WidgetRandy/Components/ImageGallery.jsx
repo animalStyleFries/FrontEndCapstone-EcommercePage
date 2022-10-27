@@ -51,10 +51,6 @@ const ImageGallery = ({ styleArray, style, setExpand, currentImage, setCurrentIm
   }
   // ---------------------- HTML ----------------------
   return (<ContainerImage onClick={() => ClicksRef.current.addClicks('overview', 'imageGallery')}>
-
-    {/* main picture */}
-    <MainDisplay src={styleArray[style].photos[currentImage].url}></MainDisplay>
-
     {/* map over remainder of entries to smaller images */}
     <DumbNails>
       <ContainerUp end={dumbNailArrayIndex} onClick={upArrowClick}>
@@ -68,17 +64,23 @@ const ImageGallery = ({ styleArray, style, setExpand, currentImage, setCurrentIm
       </ContainerDown>
     </DumbNails>
 
-    <ContainerLeftArrow onClick={leftArrowClick}>
-      <FontAwesomeIcon icon={icon({ name: 'circle-arrow-left' })} />
-    </ContainerLeftArrow>
+    {/* main picture */}
+    <MainDisplay>
+      {currentImage === 0 && <EmptyDiv />}
+      {currentImage !== 0 && <ContainerLeftArrow onClick={leftArrowClick}>
+        <FontAwesomeIcon icon={icon({ name: 'circle-arrow-left' })} />
+      </ContainerLeftArrow>}
 
-    <ContainerRightArrow onClick={rightArrowClick}>
-      <FontAwesomeIcon icon={icon({ name: 'circle-arrow-right' })} />
-    </ContainerRightArrow>
+      <MainImage src={styleArray[style].photos[currentImage].url}></MainImage>
 
-    <ContainerExpand onClick={expandClicker}>
-      <FontAwesomeIcon icon={icon({ name: 'expand' })} />
-    </ContainerExpand>
+      {currentImage !== photosArray.length - 1 && <ContainerRightArrow onClick={rightArrowClick}>
+        <FontAwesomeIcon icon={icon({ name: 'circle-arrow-right' })} />
+      </ContainerRightArrow>}
+
+      <ContainerExpand onClick={expandClicker}>
+        <FontAwesomeIcon icon={icon({ name: 'expand' })} />
+      </ContainerExpand>
+    </MainDisplay>
   </ContainerImage>)
 }
 
@@ -87,21 +89,23 @@ const DumbNails = styled.div`
   display: flex;
   flex-direction: column;
   height: 40rem;
-  position: absolute;
-  left: 0;
-  top: 0;
   z-index: 1;
 `;
 
-const MainDisplay = styled.img`
+const MainDisplay = styled.div`
+display: flex;
+align-items: center;
+`
+const MainImage = styled.img`
 height: 40rem;
 width: 40rem;
 object-fit: contain;
-margin-left: 7rem
 `
 
 const ContainerImage = styled.div`
-position:relative
+  display: grid;
+  grid-template-columns: 1fr 10fr
+
 `
 
 const ContainerExpand = styled.div`
@@ -132,20 +136,20 @@ cursor: ${props => props.end === props.length - 1 ? `no-drop` : `pointer`}
 `
 
 const ContainerLeftArrow = styled.div`
-position: absolute;
-top: 45%;
-left: 6rem;
+float: left;
 color: grey;
 font-size: x-large;
 cursor: pointer;
 `
 
 const ContainerRightArrow = styled.div`
-position: absolute;
-top: 45%;
-right: 5rem;
+float: right;
 color: grey;
 font-size: x-large;
 cursor: pointer;
+`
+
+const EmptyDiv = styled.div`
+width: 3.5%
 `
 export default ImageGallery
