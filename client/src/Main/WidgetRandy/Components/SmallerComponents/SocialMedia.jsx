@@ -19,6 +19,7 @@ const SocialMediaContainer = styled.div`
   color: lightblue;
   font-size: xx-large;
   grid-gap: 2rem;
+  cursor: pointer;
   margin: 0.25rem 2rem;
 `
 export default SocialMedia
