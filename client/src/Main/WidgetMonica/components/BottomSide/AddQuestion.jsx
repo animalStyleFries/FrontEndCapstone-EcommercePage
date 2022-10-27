@@ -7,8 +7,7 @@ import styled from 'styled-components';
 const AddQuestion = (props) => {
   const [isOpen,setIsOpen] = useState(false)
   const [productname, setProductname] = useState('')
-
-
+  // console.log('Add question props', props)
   useEffect(() => {
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${props.productid}`,
     { headers: { "Authorization": gitToken } })
@@ -21,12 +20,14 @@ const AddQuestion = (props) => {
   },[props.productid])
 
   return(
-    <div>
+    <div  onClick={() => props.ClicksRef.current.addClicks('QASession', 'addQuestion')}>
         <AddQContainer onClick={(e) => {e.preventDefault();setIsOpen(true)}}>Add a question +</AddQContainer>
         <Modal
         productid={props.productid}
         productname={productname}
         open={isOpen}
+        questions={props.questions}
+        setQuestions={props.setQuestions}
         onClose={() => setIsOpen(false)}
         ></Modal>
     </div>

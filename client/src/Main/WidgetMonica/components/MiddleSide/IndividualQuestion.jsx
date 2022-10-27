@@ -5,7 +5,10 @@ import axios from 'axios'
 import gitToken from '../../../../hidden.js'
 import styled from 'styled-components';
 
+
 const IndividualQuestion = (props) => {
+  console.log('individual q', props)
+  console.log('props.question', props.question)
   if(!props.question) {
     return null;
   }
@@ -67,11 +70,12 @@ const IndividualQuestion = (props) => {
    },[props.question.question_id])
 
   var handleHelpful = function (e, id) {
+    console.log('CALLED')
     e.preventDefault();
     if(e.target.disabled === true) {
       return;
     }
-    var currentState = props.question.question_helpfulness +1;
+    var currentState = questionHelpfulness +1;
     setQuestionHelpfulness(currentState);
     axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/${id}/helpful`, null , { headers: { "Authorization": gitToken } })
     .then ((response) => {
