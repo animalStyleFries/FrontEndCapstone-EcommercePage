@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import styled from 'styled-components'
 import MainEric from './WidgetEric/main.jsx'
 import MainMonica from './WidgetMonica/main.jsx'
@@ -14,6 +14,10 @@ import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 const App = () => {
 
+  // set up react lazy
+  const MainMonica = React.lazy(() => import('./WidgetMonica/main.jsx'))
+  const MainEric = React.lazy(() => import('./WidgetEric/main.jsx'))
+
   // set up initial ref
   const initialClicks = {
     history: [],
@@ -23,6 +27,10 @@ const App = () => {
         productInformation: 0,
         styleSelect: 0,
         addToCart: 0,
+        Total: 0
+      },
+      QASession: {
+        addQuestion: 0,
         Total: 0
       }
     },
@@ -48,7 +56,7 @@ const App = () => {
   const [devMode, setDevMode] = useState(true) // to disable dev mode, just set this to false
 
   let devOptions = []
-  const productCount = 20 // change this to match total products being chosen
+  const productCount = 10 // change this to match total products being chosen
   for (let i = 0; i < productCount; i++) {
     devOptions.push({ value: i, label: i })
   }
@@ -66,7 +74,7 @@ const App = () => {
   useEffect(() => {
     console.log('App axios get request in progress')
     let holder = {}
-    axios.get(API.server + 'products/' + '?count=20', { headers: { "Authorization": API.gitToken } })
+    axios.get(API.server + 'products/' + '?count=10', { headers: { "Authorization": API.gitToken } })
       .then(productResult => {
         holder.product = productResult.data[productSelector.value]
 
@@ -92,8 +100,12 @@ const App = () => {
   return (
     <AppContainer>
       <MainRandy APIResults={APIResults} setProductSelector={setProductSelector} ClicksRef={ClicksRef} />
-      {APIResults.product.id ? <MainMonica product_id={APIResults.product.id} /> : null}
-      {APIResults ? <MainEric APIResults={APIResults} /> : null}
+      <Suspense fallback={<div>Loading...</div>}>
+        {APIResults.product.id ? <MainMonica product_id={APIResults.product.id} ClicksRef={ClicksRef}/> : null}
+      </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
+        {APIResults ? <MainEric APIResults={APIResults} /> : null}
+      </Suspense>
       {devMode && <ContainerDev>
         <Select value={productSelector} options={devOptions} onChange={devChanger} />
         <button onClick={clickLogger}>log clicks</button>

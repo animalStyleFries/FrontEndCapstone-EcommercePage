@@ -5,32 +5,7 @@ import {Image} from 'cloudinary-react';
 import gitToken from '../../../../hidden.js';
 import styled from 'styled-components';
 
-const PIC_STYLE = {
-  border: '1px solid #ddd', /* Gray border */
-  'border-radius': '4px', /* Rounded border */
-  padding: '5px',/* Some padding */
-  width: '150px'
-}
 
-const MODAL_STYLE = {
-  position: 'fixed',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  backgroundColor: '#FFF',
-  padding: '50px',
-  zIndex: 1000
-}
-
-const OVERLAY_STYLES = {
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  backgroundColor: 'rgba(0,0,0, .7)',
-  zIndex: 1000
-}
 function Modal(props) {
   if(props.open === false) {
     return null;
@@ -40,7 +15,6 @@ function Modal(props) {
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
   const [fileUrl, setFileUrl] = useState();
-  // const [imageSelected, setImageSelected] = useState([])
 
   var sortingAnswer = function (displayAnswer) {
     var res = displayAnswer.slice();
@@ -68,15 +42,16 @@ function Modal(props) {
 
   var handlesubmit = function() {
     event.preventDefault();
-    // console.log('1111')
     var uploadImagePromise = uploadImage();
     var photoArr= []
+    // step 4: get each data public url
     uploadImagePromise.then((response) => {
       // console.log('test for promise',response)
       response.forEach((each) => {
         photoArr.push(each.data.url)
       })
       // console.log('photoArr', photoArr);
+      // step 5: send a post request at first to update dbs
       axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/${props.questionid}/answers`, {
       body: body,
       name: name,
@@ -85,6 +60,7 @@ function Modal(props) {
     }, { headers: { "Authorization": gitToken } })
     .then(function (response) {
       console.log('your AddAnswer succeed');
+      //step 6: use get request to get new updated dbs( why need this one, only use this one can get answer_id then can render helpfulness)
       axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/${props.questionid}/answers?count=100`,
       { headers: { "Authorization": gitToken } })
       .then((res) => {
@@ -101,8 +77,7 @@ function Modal(props) {
         setBody('');
         setEmail('');
         props.onClose();
-        }
-      )
+      })
       .catch((error) => {
         console.log(error);
       })
@@ -113,48 +88,35 @@ function Modal(props) {
     }).catch((err) => {
       console.log('test for promise err', err)
     })
-    // console.log('2222')
   }
 
   const uploadImage = function () {
     // open chrome disk full authority at first
+     // step 3:  use Cloudynary to create each photo public url, since there are post request, use promise
     var res = []
     photos.forEach((each) => {
-      // var promise = new Promise(
-      //   (resolve, reject) => {
-          const formData = new FormData();
-          formData.append("file", each)
-          formData.append("upload_preset", "FEC_QandA")
-          formData.append("cloud_name", "dqlxf5j8e")
-          var promise = axios.post("http://api.cloudinary.com/v1_1/dqlxf5j8e/image/upload", formData)
-        // .then(axiosResolve).catch(axiosreject)
-        // })
-        // .then((response) => {
-        //   resolve(response)
-        //   ///func1 function
-        // }).catch((err) => {
-        //   reject(err);
-        // })
-        // promise.then(func1).catch(reject1);
+       const formData = new FormData();
+        formData.append("file", each);
+        formData.append("upload_preset", "FEC_QandA");
+        formData.append("cloud_name", "dqlxf5j8e");
+        var promise = axios.post("http://api.cloudinary.com/v1_1/dqlxf5j8e/image/upload", formData);
         res.push(promise);
-        }
-      )
-      return Promise.all(res)
+      }
+    )
+    return Promise.all(res)
   }
-
+  // step2: sort and get all photos and get a local url for each photo
   const handleImageAdd = function (e) {
     var store = e.target.files
     var res = photos.slice();
     for (var i = store.length-1; i >= 0; i--) {
       res = res.concat(store[i]);
     }
-
     if (res.length > 5) {
       res = res.slice(0,5)
     }
      setPhotos(res);
-     console.log('res', res)
-    //  setImageSelected(res);
+    //  console.log('res', res)
      const url = [];
      if(res.length === 5) {
       e.target.hidden = true;
@@ -167,7 +129,6 @@ function Modal(props) {
 
   return(
     <>
-
     <div style={OVERLAY_STYLES}/>
     <div className ="modelBackGround" style={MODAL_STYLE}>
       <div className="modalContainer">
@@ -193,7 +154,7 @@ function Modal(props) {
               <p><i>“For authentication reasons, you will not be emailed”</i></p>
               <br></br>
               <div>
-                {/* <button id='uploadButton' onClick={uploadImage}>Upload your photos</button> */}
+                {/* step1: create a upload file button that can upload img */}
                 <input id='fileInput' type="file" multiple accept="image/*" onChange={(e) => handleImageAdd(e)}></input>
                 { fileUrl && fileUrl.map((each) => {
                   return (
@@ -214,5 +175,30 @@ function Modal(props) {
   )
 }
 
+const PIC_STYLE = {
+  border: '1px solid #ddd', /* Gray border */
+  'border-radius': '4px', /* Rounded border */
+  padding: '5px',/* Some padding */
+  width: '150px'
+}
 
+const MODAL_STYLE = {
+  position: 'fixed',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  backgroundColor: '#FFF',
+  padding: '50px',
+  zIndex: 1000
+}
+
+const OVERLAY_STYLES = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  backgroundColor: 'rgba(0,0,0, .7)',
+  zIndex: 1000
+}
 export default Modal;

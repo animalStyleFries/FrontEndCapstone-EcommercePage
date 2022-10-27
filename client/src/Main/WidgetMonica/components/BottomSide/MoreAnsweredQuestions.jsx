@@ -4,15 +4,14 @@ import styled from 'styled-components';
 
 const MoreAnsweredQuestions = (props) => {
   // console.log('the whole current questions we got', props)
-  if(props.questions.length <= 2 || props.questionNumber >= Math.min(props.questions.length,20)) {
+  if(props.questions.length <= 2 || props.questionNumber >= Math.min(props.questions.length,200)) {
     return null;
   }
 
   var handleLoadMore = function () {
     var current = props.questionNumber;
-    props.setQuestionNumber(current+2)
+    props.setQuestionNumber(current+100)
   }
-
 
   return(
     <MoreAnsweredButton onClick={handleLoadMore}>More Answered Questions</MoreAnsweredButton>

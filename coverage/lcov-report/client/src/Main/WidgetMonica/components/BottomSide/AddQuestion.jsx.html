@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.63% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/11</span>
+                <span class='fraction'>8/12</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70% </span>
+                <span class="strong">72.72% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/10</span>
+                <span class='fraction'>8/11</span>
             </div>
         
             
@@ -98,16 +98,26 @@
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -118,14 +128,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -137,6 +155,7 @@
 import axios from 'axios';
 import Modal from './ModalQuestion.jsx';
 import gitToken from '../../../../hidden.js';
+import styled from 'styled-components';
 &nbsp;
 const AddQuestion = (props) =&gt; {
   const [isOpen,setIsOpen] = useState(false)
@@ -155,7 +174,7 @@ const AddQuestion = (props) =&gt; {
 &nbsp;
   return(
     &lt;div&gt;
-        &lt;button onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {<span class="cstat-no" title="statement not covered" >e.preventDefault();<span class="cstat-no" title="statement not covered" >s</span>etIsOpen(true)}</span>}&gt;&lt;b&gt;Add a question +&lt;/b&gt;&lt;/button&gt;
+        &lt;AddQContainer onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {<span class="cstat-no" title="statement not covered" >e.preventDefault();<span class="cstat-no" title="statement not covered" >s</span>etIsOpen(true)}</span>}&gt;Add a question +&lt;/AddQContainer&gt;
         &lt;Modal
         productid={props.productid}
         productname={productname}
@@ -167,6 +186,14 @@ const AddQuestion = (props) =&gt; {
 &nbsp;
   )
 }
+const AddQContainer = styled.button`
+  display: flex;
+  width: 200px;
+  margin: center;
+  text-indent: 40px;
+  background-color: orange;
+  padding: .5rem 0;
+`
 &nbsp;
 export default AddQuestion;</pre></td></tr></table></pre>
 
@@ -175,7 +202,7 @@ export default AddQuestion;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-24T23:53:39.518Z
+                at 2022-10-25T20:18:23.155Z
             </div>
         <script src="../../../../../../prettify.js"></script>
         <script>
