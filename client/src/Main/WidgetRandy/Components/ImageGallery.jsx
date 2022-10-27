@@ -19,10 +19,6 @@ const ImageGallery = ({ styleArray, style, setExpand, currentImage, setCurrentIm
   }
 
   // ---------------------- Functions ----------------------
-  // expand function
-  const expandClicker = () => {
-    setExpand(true)
-  }
 
   // Arrows
   const upArrowClick = () => {
@@ -77,7 +73,7 @@ const ImageGallery = ({ styleArray, style, setExpand, currentImage, setCurrentIm
         <FontAwesomeIcon icon={icon({ name: 'circle-arrow-right' })} />
       </ContainerRightArrow>}
 
-      <ContainerExpand onClick={expandClicker}>
+      <ContainerExpand onClick={() => setExpand(true)}>
         <FontAwesomeIcon icon={icon({ name: 'expand' })} />
       </ContainerExpand>
     </MainDisplay>
