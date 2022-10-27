@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import OutfitCard from './OutfitCard.jsx'
+import styled from 'styled-components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
+
 
 const OutfitList = ({ originalProductID }) => {
 
@@ -26,18 +30,69 @@ const OutfitList = ({ originalProductID }) => {
 
   return (
     <div>
-      <h2>Outfit List</h2>
-      <div>
-        <button onClick={() => (localStorage.setItem(originalProductID, originalProductID), setListUpdater(!listUpdater))}>Add Outfit</button>
-        {/* <button onClick={() => (getKeys(localStorage), console.log('see storage', getKeys(localStorage)))}>Real Click to Add</button> */}
-        <h2>Add Outfit Card</h2>
-        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTg0P2958dd3C0jaLaCJl1MuNrIFV2qiFwm15uRHpDG0w&s'></img>
-      </div>
-      <div>
+      <Header><h2>Outfit List</h2></Header>
+
+      <OutfitCardsContainer>
+        <AddOutfitContainer onClick={() => (localStorage.setItem(originalProductID, originalProductID), setListUpdater(!listUpdater))}>
+          <AddOutfitText>
+            <h2>Add To Outfit</h2>
+          </AddOutfitText>
+
+          <AddOutfit>
+            <FontAwesomeIcon icon={icon({ name: 'plus' })}/>
+          </AddOutfit>
+        </AddOutfitContainer>
+
+        <OutfitListContainer>
         {(outfitList) ? outfitList.map((outfit) => <OutfitCard outfit={outfit} removeKeys={removeKeys}/>) : <p>Add Some Outfits</p>}
-      </div>
+        </OutfitListContainer>
+
+      </OutfitCardsContainer>
+
     </div>
   )
 }
+
+const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+
+const OutfitCardsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
+const AddOutfit = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 300%;
+`
+const AddOutfitContainer = styled.div`
+  border-style: dotted;
+  display: block;
+  margin: 20px;
+  height: 373.66px;
+  width: 242px;
+`
+
+const OutfitListContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+`
+
+const AddOutfitText = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 100%;
+  align: center;
+`
+
+
 
 export default OutfitList

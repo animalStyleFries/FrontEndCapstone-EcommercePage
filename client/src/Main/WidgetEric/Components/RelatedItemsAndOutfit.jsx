@@ -4,6 +4,7 @@ import RelatedList from './RelatedList.jsx';
 import RelatedCard from './RelatedCard.jsx'
 import OutfitList from './OutfitList.jsx';
 import axios from 'axios';
+import styled from 'styled-components'
 
 
 const RelatedItemsAndOutfit = ({ APIResults }) => {
@@ -51,10 +52,27 @@ const RelatedItemsAndOutfit = ({ APIResults }) => {
 
   return (
     <div>
-      <RelatedList relatedProducts={relatedProducts} originalProductFeatures={APIResults.styles}/>
-      <OutfitList originalProductID={product_id}/>
+      <Related>
+        <RelatedList relatedProducts={relatedProducts} originalProductFeatures={APIResults.styles} originalName={APIResults.product.name}/>
+      </Related>
+      <Outfit>
+        <OutfitList originalProductID={product_id}/>
+      </Outfit>
     </div>
   )
 }
+
+const Related = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const Outfit = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
 
 export default RelatedItemsAndOutfit
