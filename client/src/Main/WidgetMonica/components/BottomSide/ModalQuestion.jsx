@@ -24,6 +24,13 @@ const OVERLAY_STYLES = {
   zIndex: 1000
 }
 
+var sortingAll = function (resArr) {
+  resArr.sort(function(a,b){
+    return a.helpfulness > b.helpfulness ? -1 : a.helpfulness < b.helpfulness ? 1 : 0;
+  });
+  return resArr;
+}
+
 function Modal(props) {
   if(props.open === false) {
     return null;
@@ -32,8 +39,7 @@ function Modal(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
-  var handlesubmit = function() {
-    // console.log('props', props)
+  var handlesubmit = function(props) {
     event.preventDefault()
     var data = {
       body: body,
@@ -45,10 +51,19 @@ function Modal(props) {
     axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions', data, { headers: { "Authorization": gitToken } })
     .then(function (response) {
       console.log('your add question request has been succeed');
-      setName('');
-      setBody('');
-      setEmail('');
-      props.onClose();
+      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${props.productid}&count=100`,
+      { headers: { "Authorization": gitToken } })
+      .then((response) => {
+        sortingAll(response.data.results);
+        console.log('refector',sortingAll(response.data.results))
+        props.setQuestions(sortingAll(response.data.results))
+        setName('');
+        setBody('');
+        setEmail('');
+        props.onClose();
+      }).catch((err) => {
+        console.log(err);
+      })
     })
     .catch(function (error) {
       console.log(error);
@@ -77,7 +92,7 @@ function Modal(props) {
               <input type="text" maxLength="60" placeholder="Why did you like the product or not?" value={email} onChange={(e) => {setEmail(e.target.value)}} required></input>
               <p><i>“For authentication reasons, you will not be emailed”</i></p>
               <br></br>
-              <button onClick={handlesubmit}>Submit Question</button>
+              <button onClick={() => {handlesubmit(props)}}>Submit Question</button>
               <button onClick={props.onClose}>cancel</button>
           </form>
         </div>

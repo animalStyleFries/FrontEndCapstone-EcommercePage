@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useState } from 'react';
+import { useState, useRef} from 'react';
 import axios from 'axios';
 import QuestionsList from './components/MiddleSide/QuestionsList.jsx';
 import SearchBar from './components/FrontSide/SearchBar.jsx';
@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import gitToken from '../../hidden.js' ;// dotenv substitute
 
 
-const MainMonica = ({ product_id }) => {
+const MainMonica = ({ product_id, ClicksRef}) => {
   // console.log('QA part', product_id)
   const [questions, setQuestions] = useState([])
   const [questionNumber, setQuestionNumber] = useState(2)
@@ -68,7 +68,7 @@ const MainMonica = ({ product_id }) => {
     <br></br>
     <BottomPart>
       <MoreAnsweredQuestions questionNumber={questionNumber} setQuestionNumber={setQuestionNumber} questions={filterByContent(entry, questions)}></MoreAnsweredQuestions>
-      <AddQuestion productid={product_id}></AddQuestion>
+      <AddQuestion productid={product_id} questions={questions} setQuestions={setQuestions} ClicksRef={ClicksRef}></AddQuestion>
     </BottomPart>
     <br></br>
   </QAsection>)
