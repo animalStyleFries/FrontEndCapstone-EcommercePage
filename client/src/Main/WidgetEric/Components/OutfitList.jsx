@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 
-const OutfitList = ({ originalProductID }) => {
+const OutfitList = ({ originalProductID, ClicksRef}) => {
 
   const [outfitList,  setOutfitList] = useState();
   const [listUpdater, setListUpdater] = useState(true);
@@ -29,7 +29,7 @@ const OutfitList = ({ originalProductID }) => {
   }
 
   return (
-    <div>
+    <div onClick={() => ClicksRef.current.addClicks('RelatedCards', 'yourOutfitList')}>
       <Header><h2>Outfit List</h2></Header>
 
       <OutfitCardsContainer>
