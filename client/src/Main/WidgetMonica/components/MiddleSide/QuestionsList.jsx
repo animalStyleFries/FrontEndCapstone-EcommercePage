@@ -20,12 +20,12 @@ const QuestionsList = (props) => {
   //https://github.com/caseywebdev/react-list(use reactlist to map and render each question)
   const itemRenderer = (index, key) => {
     // console.log('sorted q index ',index ,'key',key)
-    return <IndividualQuestion key={sortedQ[index].question_id} question={sortedQ[index]} productid={props.productid}></IndividualQuestion>
+    return <IndividualQuestion key={sortedQ[index].question_id} question={sortedQ[index]} productid={props.productid} ClicksRef={props.ClicksRef}></IndividualQuestion>
   };
 
   return (
     <div>
-          <div style={{overflow: 'auto', maxHeight: 800}}>
+          <div style={{overflow: 'auto', maxHeight: 600}}>
           <ReactList
             itemRenderer={itemRenderer}
             length={sortedQ.length}
