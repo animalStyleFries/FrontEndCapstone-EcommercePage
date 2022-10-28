@@ -121,7 +121,7 @@ const App = () => {
         {APIResults.product.id ? <QuestionsAndAnswers product_id={APIResults.product.id} ClicksRef={ClicksRef} /> : null}
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
-        {APIResults ? <MainEric APIResults={APIResults} ClicksRef={ClicksRef}/> : null}
+        {APIResults ? <RelatedItemsWidget APIResults={APIResults} ClicksRef={ClicksRef}ClicksRef={ClicksRef}/> : null}
       </Suspense>
       {devMode && <ContainerDev>
         Dev Tool:
