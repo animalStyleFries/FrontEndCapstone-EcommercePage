@@ -42,6 +42,13 @@ const App = () => {
         relatedProductList: 0,
         yourOutfitList: 0,
         Total: 0
+      },
+      RelatedCards: {
+        relatedProductCards: 0,
+        listBehavior: 0,
+        relatedProductList: 0,
+        yourOutfitList: 0,
+        Total: 0
       }
     },
     addClicks: (mod, ele) => {
