@@ -7,7 +7,7 @@ import axios from 'axios';
 import styled from 'styled-components'
 
 
-const RelatedItemsAndOutfit = ({ APIResults }) => {
+const RelatedItemsAndOutfit = ({ APIResults, ClicksRef }) => {
 
   const product_id = APIResults.product.id
 
@@ -53,10 +53,10 @@ const RelatedItemsAndOutfit = ({ APIResults }) => {
   return (
     <div>
       <Related>
-        <RelatedList relatedProducts={relatedProducts} originalProductFeatures={APIResults.styles} originalName={APIResults.product.name}/>
+        <RelatedList relatedProducts={relatedProducts} originalReviews={APIResults.review} originalProductFeatures={APIResults.styles} originalName={APIResults.product.name} ClicksRef={ClicksRef}/>
       </Related>
       <Outfit>
-        <OutfitList originalProductID={product_id}/>
+        <OutfitList originalProductID={product_id} ClicksRef={ClicksRef}/>
       </Outfit>
     </div>
   )

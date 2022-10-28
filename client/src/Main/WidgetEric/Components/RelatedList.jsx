@@ -4,14 +4,13 @@ import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
-const RelatedList = ({ relatedProducts, originalProductFeatures, originalName }) => {
+const RelatedList = ({ relatedProducts, originalProductFeatures, originalName, ClicksRef, originalReviews }) => {
 
   const [index,  setIndex] = useState(0);
   const [isOpen,setIsOpen] = useState(false)
 
-  if (relatedProducts) {
     return (
-      <div>
+      <div onClick={() => ClicksRef.current.addClicks('RelatedCards', 'relatedProductCards')}>
         <RelatedContainer>
           <Header><div>Related Items</div></Header>
 
@@ -20,14 +19,14 @@ const RelatedList = ({ relatedProducts, originalProductFeatures, originalName })
               <FontAwesomeIcon icon={icon({ name: 'circle-arrow-left' })}/>
             </ContainerLeftArrow>}
 
-            {((index + 4 ) === relatedProducts.relatedProductIds.length) ? null :
+            {((index + 4 ) === relatedProducts?.relatedProductIds.length) ? null :
             <ContainerRightArrow onClick={() => (setIndex(index + 1))}>
               <FontAwesomeIcon icon={icon({ name: 'circle-arrow-right' })}/>
             </ContainerRightArrow>}
 
             <div>
               <RelatedCardsContainer>
-                {(relatedProducts) ? (relatedProducts.relatedProductIds).slice(index, index + 4).map((relatedProductId) => (<RelatedCard relatedProductId={relatedProductId} relatedProducts={relatedProducts}  originalProductFeatures={originalProductFeatures} originalName={originalName}/>))  : <span>no related</span>}
+                {(relatedProducts) ? (relatedProducts?.relatedProductIds).slice(index, index + 4).map((relatedProductId) => (<RelatedCard relatedProductId={relatedProductId} relatedProducts={relatedProducts}  originalProductFeatures={originalProductFeatures} originalName={originalName} originalReviews={originalReviews} ClicksRef={ClicksRef}/>))  : <span>no related</span>}
               </RelatedCardsContainer>
             </div>
         </RelatedContainer>
@@ -35,7 +34,7 @@ const RelatedList = ({ relatedProducts, originalProductFeatures, originalName })
       </div>
     )
   }
-}
+
 
 
 const RelatedContainer = styled.div`
