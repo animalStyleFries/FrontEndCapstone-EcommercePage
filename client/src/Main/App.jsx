@@ -31,6 +31,9 @@ const App = () => {
       },
       QASession: {
         addQuestion: 0,
+        viewQuestions: 0,
+        searchQuestion: 0,
+        answerQuestion: 0,
         Total: 0
       },
       RelatedCards: {
@@ -108,7 +111,7 @@ const App = () => {
     <AppContainer>
       <MainRandy APIResults={APIResults} setProductSelector={setProductSelector} ClicksRef={ClicksRef} />
       <Suspense fallback={<div>Loading...</div>}>
-        {APIResults.product.id ? <MainMonica product_id={APIResults.product.id} ClicksRef={ClicksRef}/> : null}
+        {APIResults.product.id ? <MainMonica product_id={APIResults.product.id} ClicksRef={ClicksRef} /> : null}
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
         {APIResults ? <MainEric APIResults={APIResults} ClicksRef={ClicksRef}/> : null}

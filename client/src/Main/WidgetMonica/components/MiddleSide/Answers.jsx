@@ -7,6 +7,7 @@ var Answers = function (props) {
 
   const[answerNumber, setAnswerNumber] =useState(2);
 
+  // use filter to set up a final showing answer list, use answernumber to controller showing answer's number
   var filter = function (number, all) {
     var res = [];
     for (var i = 0; i < Math.min(number,all.length); i++) {
@@ -16,8 +17,8 @@ var Answers = function (props) {
   }
 
   var handleloadmore = function () {
-    // console.log(answerNumber.length,props.displayAnswer.length);
     event.preventDefault()
+    // console.log('take a look', answerNumber, 'and', props.displayAnswer.length)
     var current = answerNumber;
     setAnswerNumber(current+5)
     if(answerNumber >= props.displayAnswer.length) {
@@ -63,7 +64,7 @@ var Answers = function (props) {
     return (
     <div key={props.questionid}>
       {
-      // use filter to control the total showing answer number
+      // use filter to control the total showing answer number, display answer is the whole total sorted answers get from API, set max to 100
       filter(answerNumber, props.displayAnswer).map((each, index) => {
         return(
         <MainContainer>

@@ -19,10 +19,6 @@ const ImageGallery = ({ styleArray, style, setExpand, currentImage, setCurrentIm
   }
 
   // ---------------------- Functions ----------------------
-  // expand function
-  const expandClicker = () => {
-    setExpand(true)
-  }
 
   // Arrows
   const upArrowClick = () => {
@@ -77,7 +73,7 @@ const ImageGallery = ({ styleArray, style, setExpand, currentImage, setCurrentIm
         <FontAwesomeIcon icon={icon({ name: 'circle-arrow-right' })} />
       </ContainerRightArrow>}
 
-      <ContainerExpand onClick={expandClicker}>
+      <ContainerExpand onClick={() => setExpand(true)}>
         <FontAwesomeIcon icon={icon({ name: 'expand' })} />
       </ContainerExpand>
     </MainDisplay>
@@ -88,6 +84,7 @@ const ImageGallery = ({ styleArray, style, setExpand, currentImage, setCurrentIm
 const DumbNails = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   height: 40rem;
   z-index: 1;
 `;
@@ -95,6 +92,7 @@ const DumbNails = styled.div`
 const MainDisplay = styled.div`
 display: flex;
 align-items: center;
+position: relative
 `
 const MainImage = styled.img`
 height: 40rem;
@@ -105,16 +103,16 @@ object-fit: contain;
 const ContainerImage = styled.div`
   display: grid;
   grid-template-columns: 1fr 10fr
-
 `
 
 const ContainerExpand = styled.div`
-left: 48rem;
-top: 1rem;
-z-index: 1;
 position: absolute;
+top: 0;
+right: 0;
+z-index: 1;
 color: grey;
 font-size: x-large;
+margin-right: 2rem;
 cursor: pointer;
 `
 
@@ -122,6 +120,7 @@ const ContainerUp = styled.div`
   color: grey;
   text-align: center;
   font-size: large;
+  margin: 0.5rem;
   cursor: ${props => props.end === 0 ? `no-drop` : `pointer`}
 `
 
@@ -129,9 +128,7 @@ const ContainerDown = styled.div`
 color: grey;
 text-align: center;
 font-size: large;
-position: absolute;
-bottom: 0;
-margin: 0 0 1rem 2rem;
+margin: 0.9rem;
 cursor: ${props => props.end === props.length - 1 ? `no-drop` : `pointer`}
 `
 
