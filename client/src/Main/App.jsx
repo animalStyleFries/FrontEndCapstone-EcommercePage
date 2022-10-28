@@ -35,8 +35,7 @@ const App = () => {
         searchQuestion: 0,
         answerQuestion: 0,
         Total: 0
-      },
-,
+      }
     },
     addClicks: (mod, ele) => {
       ClicksRef.current.history.push({ time: new Date, module: mod, element: ele })
