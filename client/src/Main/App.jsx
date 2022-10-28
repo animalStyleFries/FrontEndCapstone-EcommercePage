@@ -117,6 +117,7 @@ const App = () => {
         {APIResults ? <MainEric APIResults={APIResults} ClicksRef={ClicksRef}/> : null}
       </Suspense>
       {devMode && <ContainerDev>
+        Dev Tool:
         <Select value={productSelector} options={devOptions} onChange={devChanger} />
         <button onClick={clickLogger}>log clicks</button>
         <FontAwesomeIcon icon={icon({ name: 'xmark' })} onClick={() => setDevMode(false)} />
