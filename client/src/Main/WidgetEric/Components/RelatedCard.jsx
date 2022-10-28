@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
-const RelatedCard = ({ relatedProductId, relatedProducts, originalProductFeatures, originalName }) => {
+const RelatedCard = ({ relatedProductId, relatedProducts, originalProductFeatures, originalName, ClicksRef, originalReviews }) => {
 
   const [comparisonToggle,  setComparisonToggle] = useState(false);
 
@@ -31,10 +31,10 @@ const RelatedCard = ({ relatedProductId, relatedProducts, originalProductFeature
   }
 
   return (
-    <RelatedCardContainer>
+    <RelatedCardContainer onClick={() => ClicksRef.current.addClicks('RelatedCards', 'listBehavior')}>
 
         <div>
-          {comparisonToggle ? <ProductComparison sortedProduct={sortedProduct}  originalProductFeatures={originalProductFeatures} rating={getRating(sortedProduct)} close={closeComparison} originalName={originalName}/> : null}
+          {comparisonToggle ? <ProductComparison sortedProduct={sortedProduct}  originalProductFeatures={originalProductFeatures} rating={getRating(sortedProduct)} close={closeComparison} originalName={originalName} originalReviews={originalReviews}/> : null}
         </div>
 
         <RelatedProductImage src={sortedProduct.styleArray.results[0].photos[0].thumbnail_url} alt='missing image'>

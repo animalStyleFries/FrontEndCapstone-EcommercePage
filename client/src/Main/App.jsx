@@ -32,6 +32,13 @@ const App = () => {
       QASession: {
         addQuestion: 0,
         Total: 0
+      },
+      RelatedCards: {
+        relatedProductCards: 0,
+        listBehavior: 0,
+        relatedProductList: 0,
+        yourOutfitList: 0,
+        Total: 0
       }
     },
     addClicks: (mod, ele) => {
@@ -104,7 +111,7 @@ const App = () => {
         {APIResults.product.id ? <MainMonica product_id={APIResults.product.id} ClicksRef={ClicksRef}/> : null}
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
-        {APIResults ? <MainEric APIResults={APIResults} /> : null}
+        {APIResults ? <MainEric APIResults={APIResults} ClicksRef={ClicksRef}/> : null}
       </Suspense>
       {devMode && <ContainerDev>
         <Select value={productSelector} options={devOptions} onChange={devChanger} />
