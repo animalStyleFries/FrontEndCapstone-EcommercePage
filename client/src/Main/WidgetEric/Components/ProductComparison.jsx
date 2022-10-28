@@ -1,7 +1,30 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 
-const ProductComparison = ({ sortedProduct, originalProductFeatures, rating }) => {
+const MODAL_STYLE = {
+  position: 'fixed',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  backgroundColor: '#FFF',
+  padding: '50px',
+  zIndex: 1000
+}
+
+const OVERLAY_STYLES = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  backgroundColor: 'rgba(0,0,0, .7)',
+  zIndex: 1000
+}
+
+const ProductComparison = ({ sortedProduct, originalProductFeatures, rating, close, originalName }) => {
 
   const findFeaturevalue = () => {
     sortedProduct.styleArray
@@ -16,46 +39,73 @@ const ProductComparison = ({ sortedProduct, originalProductFeatures, rating }) =
     return sizeContainer
   }
 
+  const checkmark = (<FontAwesomeIcon icon={icon({ name: 'check' })}/>)
   return (
-    <div>
-      <h4>Product Comparison</h4>
-      {console.log('productcomparison', sortedProduct, originalProductFeatures)}
-      <table>
-      <tbody>
-        <tr>
-          <th>Product Name</th>
-          <th>Characteristic</th>
-          <th>Compared Product Name</th>
-        </tr>
-        <tr>
-          <td>Value</td>
-          <td>Char</td>
-          <td>Value</td>
-        </tr>
-        <tr>
-          <td>{originalProductFeatures.results[0].sale_price ? <p>true</p> : <p>false</p>}</td>
-          <td>On Sale?</td>
-          <td>{sortedProduct.styleArray.results[0].sale_price ? <p>true</p> : <p>false</p>}</td>
-        </tr>
-        <tr>
-          <td>{(getSizes(originalProductFeatures).length) > 0 ? <p> true</p> : <p>false</p>}</td>
-          <td>Multiple Sizes Available?</td>
-          <td>{(getSizes(sortedProduct.styleArray).length) > 0 ? <p> true</p> : <p>false</p>}</td>
-        </tr>
-        <tr>
-          <td>{(originalProductFeatures.results.length > 0) ? <p>true</p> : <p>false</p>}</td>
-          <td>Multiple Styles?</td>
-          <td>{(sortedProduct.styleArray.results.length > 0) ? <p>true</p> : <p>false</p>}</td>
-        </tr>
-        <tr>
-          <td>4.3</td>
-          <td>Rating</td>
-          <td>{rating}</td>
-        </tr>
-      </tbody>
-    </table>
+    <>
+    <div style={OVERLAY_STYLES}/>
+    <div className ="modelBackGround" style={MODAL_STYLE}>
+      <div>
+        <DeleteButtonContainer onClick={() => close()}>
+          <FontAwesomeIcon icon={icon({ name: 'x' })}/>
+        </DeleteButtonContainer>
+        <table>
+        <tbody>
+          <tr>
+            <th>
+              <Header>{originalName}</Header>
+            </th>
+            <th>
+              <Header>Characteristic</Header>
+            </th>
+            <th>
+              <Header>{sortedProduct.productArray.name}</Header>
+            </th>
+          </tr>
+          <tr>
+            <td>{originalProductFeatures.results[0].sale_price ? <span><Answer>{checkmark}</Answer></span> : <span><Answer>{null}</Answer></span>}</td>
+            <td><Answer>On Sale?</Answer></td>
+            <td>{sortedProduct.styleArray.results[0].sale_price ? <span><Answer>{checkmark}</Answer></span> : <span><Answer>{null}</Answer></span>}</td>
+          </tr>
+          <tr>
+            <td>{(getSizes(originalProductFeatures).length) > 0 ? <span><Answer>{checkmark}</Answer></span> : <span><Answer>{null}</Answer></span>}</td>
+            <td><Answer>Multiple Sizes Available?</Answer></td>
+            <td>{(getSizes(sortedProduct.styleArray).length) > 0 ? <span><Answer>{checkmark}</Answer></span> : <span><Answer>{null}</Answer></span>}</td>
+          </tr>
+          <tr>
+            <td>{(originalProductFeatures.results.length > 0) ? <span><Answer>{checkmark}</Answer></span> : <span><Answer>{null}</Answer></span>}</td>
+            <td><Answer>Multiple Styles?</Answer></td>
+            <td>{(sortedProduct.styleArray.results.length > 0) ? <span><Answer>{checkmark}</Answer></span> : <span><Answer>{null}</Answer></span>}</td>
+          </tr>
+          <tr>
+            <td><Answer>4.3</Answer></td>
+            <td><Answer>Rating</Answer></td>
+            <td><Answer>{rating}</Answer></td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
     </div>
+    </>
   )
 }
+
+const Overview = styled.div`
+`
+
+const Header = styled.div`
+  text-decoration: underline;
+`
+
+const Answer = styled.div`
+  text-align: center;
+`
+
+
+const DeleteButtonContainer = styled.div`
+  position: relative;
+  bottom: 1.7em;
+  left: 1em;
+  float: right;
+`
 
 export default ProductComparison

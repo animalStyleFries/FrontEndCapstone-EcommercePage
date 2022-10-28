@@ -132,6 +132,7 @@ const QuantitySelect = styled(Select)`
 const AddToCartButton = styled.button`
   background-color: orange;
   padding: .5rem 0;
+  cursor: ${props => props.disabled === '' ? `pointer` : `not-allowed`}
 `
 
 const ContainerCart = styled.div`
