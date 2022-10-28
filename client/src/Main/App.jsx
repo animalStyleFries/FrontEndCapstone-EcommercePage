@@ -32,7 +32,7 @@ const App = () => {
       QASession: {
         addQuestion: 0,
         Total: 0
-      }
+      },
     },
     addClicks: (mod, ele) => {
       ClicksRef.current.history.push({ time: new Date, module: mod, element: ele })
@@ -101,7 +101,7 @@ const App = () => {
     <AppContainer>
       <MainRandy APIResults={APIResults} setProductSelector={setProductSelector} ClicksRef={ClicksRef} />
       <Suspense fallback={<div>Loading...</div>}>
-        {APIResults.product.id ? <MainMonica product_id={APIResults.product.id} ClicksRef={ClicksRef}/> : null}
+        {APIResults.product.id ? <MainMonica product_id={APIResults.product.id} ClicksRef={ClicksRef} /> : null}
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
         {APIResults ? <MainEric APIResults={APIResults} /> : null}

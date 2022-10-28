@@ -20,20 +20,13 @@ const ProductInformation = ({ APIResults, style, ClicksRef }) => {
   const starArray = [...Array(starCount).keys()]
 
   // check for float, round to nearest 0.25
-  let [remainderStar, leftGradient, rightGradient] = [avg - starCount, 0, 0]
-  if (remainderStar <= 0.125) { rightGradient = 100 }
-  if (remainderStar > 0.125 && remainderStar <= 0.375) { [leftGradient, rightGradient] = [25, 25] }
-  if (remainderStar > 0.375 && remainderStar <= 0.625) { [leftGradient, rightGradient] = [50, 50] }
-  if (remainderStar > 0.625 && remainderStar <= 0.875) { [leftGradient, rightGradient] = [75, 75] }
+  const gradient = (Math.round((avg - starCount) * 4) / 4) * 100
 
   // creating 'empty' star array
   let emptyStarArray = []
   if (Math.ceil(avg) < 5) {
     emptyStarArray = [...Array(5 - Math.ceil(avg)).keys()]
   }
-
-  // idk if this is best practice, but insert text
-  const readReviews = 'Read all reviews'
 
   // check for sales price
   let salePrice = APIResults.styles.results[style].sale_price
@@ -45,9 +38,9 @@ const ProductInformation = ({ APIResults, style, ClicksRef }) => {
         {starArray.map(entry => (
           <FontAwesomeIcon icon={icon({ name: 'star' })} />
         ))}
-        {remainderStar > 0 && <Star className="fa-solid fa-star" left={leftGradient} right={rightGradient} />}
+        {gradient > 0 && <Star className="fa-solid fa-star" gradient={gradient} />}
         {emptyStarArray.length > 0 && emptyStarArray.map(entry => (
-          <Star className="fa-solid fa-star" left={0} right={0} />
+          <Star className="fa-solid fa-star" gradient={0} />
         ))}
         <ReadReviewText>Read all reviews</ReadReviewText>
       </StarContainer>
@@ -71,7 +64,7 @@ const StarContainer = styled.div`
 `
 
 const Star = styled.i`
-  background: ${props => `linear-gradient(to right, orange ${props.left}%, grey ${props.right}%)`};
+  background: ${props => `linear-gradient(to right, orange ${props.gradient}%, grey ${props.gradient}%)`};
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 `
