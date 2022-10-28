@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -10,11 +10,13 @@ const MoreAnsweredQuestions = (props) => {
 
   var handleLoadMore = function () {
     var current = props.questionNumber;
-    props.setQuestionNumber(current+5)
+    props.setQuestionNumber(current+2)
   }
 
   return(
-    <MoreAnsweredButton onClick={handleLoadMore}>More Answered Questions</MoreAnsweredButton>
+    <div onClick={() => props.ClicksRef.current.addClicks('QASession', 'viewQuestions')}>
+      <MoreAnsweredButton onClick={handleLoadMore}>More Answered Questions</MoreAnsweredButton>
+    </div>
   )
 }
 const MoreAnsweredButton = styled.button`

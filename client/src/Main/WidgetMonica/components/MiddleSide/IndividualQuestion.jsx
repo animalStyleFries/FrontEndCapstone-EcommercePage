@@ -14,8 +14,8 @@ const IndividualQuestion = (props) => {
   }
 
   const [questionHelpfulness, setQuestionHelpfulness] = useState(props.question.question_helpfulness)//it's a number
-  const [answerHelpfulness, setAnswerHelpfulness] = useState()//object{answerid: helpfulness}
-  const [isReport, setIsReport] = useState()
+  const [answerHelpfulness, setAnswerHelpfulness] = useState({})//object{answerid: helpfulness}
+  const [isReport, setIsReport] = useState({})
   const [displayAnswer, setDisplayAnswer] = useState([])
 
   //sorting answer by seller name
@@ -106,6 +106,7 @@ const IndividualQuestion = (props) => {
             setAnswerHelpfulness={setAnswerHelpfulness}
             isReport={isReport}
             setIsReport={setIsReport}
+            ClicksRef={props.ClicksRef}
             >
           </AddAnswer>
         </HelpfulQuesVote>

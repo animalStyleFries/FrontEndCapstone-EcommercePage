@@ -57,17 +57,17 @@ const MainMonica = ({ product_id, ClicksRef}) => {
     <CointainerQuestionsInfo>
       <h1> Questions & Answers</h1>
       <div>
-        <SearchBar entry={entry} setEntry={setEntry} setQuestionNumber={setQuestionNumber} questionNumber={questionNumber}></SearchBar>
+        <SearchBar entry={entry} setEntry={setEntry} setQuestionNumber={setQuestionNumber} questionNumber={questionNumber} ClicksRef={ClicksRef}></SearchBar>
       </div>
     </CointainerQuestionsInfo>
     <br></br>
     <ContainerQuestionList>
       {/*filter the content at first, then filter by number */}
-      <QuestionsList questions={filterByNumber(questionNumber,filterByContent(entry, questions))} productid={product_id} ></QuestionsList>
+      <QuestionsList questions={filterByNumber(questionNumber,filterByContent(entry, questions))} productid={product_id} ClicksRef={ClicksRef}></QuestionsList>
     </ContainerQuestionList>
     <br></br>
     <BottomPart>
-      <MoreAnsweredQuestions questionNumber={questionNumber} setQuestionNumber={setQuestionNumber} questions={filterByContent(entry, questions)}></MoreAnsweredQuestions>
+      <MoreAnsweredQuestions questionNumber={questionNumber} setQuestionNumber={setQuestionNumber} questions={filterByContent(entry, questions)} ClicksRef={ClicksRef}></MoreAnsweredQuestions>
       <AddQuestion productid={product_id} questions={questions} setQuestions={setQuestions} ClicksRef={ClicksRef}></AddQuestion>
     </BottomPart>
     <br></br>
@@ -79,6 +79,7 @@ const QAsection = styled.div`
   flex-direction: column;
   align-items: center;
   width: 90%;
+
 `
 const CointainerQuestionsInfo = styled.div`
   display: flex;

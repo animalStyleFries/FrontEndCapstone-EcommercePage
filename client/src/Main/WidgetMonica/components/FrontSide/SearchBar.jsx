@@ -21,7 +21,7 @@ var handleEntry = function (e) {
 }
   return (
        <form>
-        <input style={FORM_STYLES} value={props.entry} onChange={handleEntry} placeholder='Have a question? Search for answers…' size="50"></input>
+        <input style={FORM_STYLES} value={props.entry} onChange={handleEntry} placeholder='Have a question? Search for answers…' size="50" onClick={() => props.ClicksRef.current.addClicks('QASession', 'searchQuestion')}></input>
        </form>
   )
 
