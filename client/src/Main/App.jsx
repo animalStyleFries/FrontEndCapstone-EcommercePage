@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect, useRef, Suspense } from 'react'
 import styled from 'styled-components'
-import MainEric from './WidgetEric/main.jsx'
+import RelatedItemsWidget from './RelatedItemsWidget/main.jsx'
 import QuestionsAndAnswers from './QuestionsAndAnswers/main.jsx'
 import MainRandy from './WidgetRandy/main.jsx'
 import axios from 'axios'
@@ -16,7 +16,7 @@ const App = () => {
 
   // set up react lazy
   const QuestionsAndAnswers = React.lazy(() => import('./QuestionsAndAnswers/main.jsx'))
-  const MainEric = React.lazy(() => import('./WidgetEric/main.jsx'))
+  const RelatedItemsWidget = React.lazy(() => import('./RelatedItemsWidget/main.jsx'))
 
   // set up initial ref
   const initialClicks = {

@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import gitToken from '../../hidden.js' ;// dotenv substitute
 
 
-const QuestionsAndAnswers = ({ product_id, ClicksRef}) => {
+const QuestionsAndAnswers = ({ product_id, ClicksRef }) => {
   // console.log('QA part', product_id)
   const [questions, setQuestions] = useState([])
   const [questionNumber, setQuestionNumber] = useState(2)
