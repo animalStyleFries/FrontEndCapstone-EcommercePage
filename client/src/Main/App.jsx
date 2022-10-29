@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect, useRef, Suspense } from 'react'
 import styled from 'styled-components'
 import RelatedItemsWidget from './RelatedItemsWidget/main.jsx'
-import MainMonica from './WidgetMonica/main.jsx'
+import QuestionsAndAnswers from './QuestionsAndAnswers/main.jsx'
 import MainRandy from './WidgetRandy/main.jsx'
 import axios from 'axios'
 import API from '../API.js'
@@ -15,7 +15,7 @@ import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 const App = () => {
 
   // set up react lazy
-  const MainMonica = React.lazy(() => import('./WidgetMonica/main.jsx'))
+  const QuestionsAndAnswers = React.lazy(() => import('./QuestionsAndAnswers/main.jsx'))
   const RelatedItemsWidget = React.lazy(() => import('./RelatedItemsWidget/main.jsx'))
 
   // set up initial ref
@@ -111,7 +111,7 @@ const App = () => {
     <AppContainer>
       <MainRandy APIResults={APIResults} setProductSelector={setProductSelector} ClicksRef={ClicksRef} />
       <Suspense fallback={<div>Loading...</div>}>
-        {APIResults.product.id ? <MainMonica product_id={APIResults.product.id} ClicksRef={ClicksRef} /> : null}
+        {APIResults.product.id ? <QuestionsAndAnswers product_id={APIResults.product.id} ClicksRef={ClicksRef} /> : null}
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
         {APIResults ? <RelatedItemsWidget APIResults={APIResults} ClicksRef={ClicksRef}/> : null}

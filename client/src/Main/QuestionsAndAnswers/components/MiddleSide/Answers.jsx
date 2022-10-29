@@ -56,6 +56,10 @@ var Answers = function (props) {
       var newState =JSON.parse(JSON.stringify(props.isReport));
       newState[id] = true;
       props.setIsReport(newState);
+      // console.log('its called',answerNumber)
+      var newAnswerNum = answerNumber-1;
+      setAnswerNumber(newAnswerNum)
+      // console.log('its called again',answerNumber)
     }).catch((err) => {
       console.log('there is an error in report answer', err);
     })

@@ -83,3 +83,44 @@ Each customer will have one outfit list. This list will be the same regardless o
 The list should persist for each customer even if they exit the website and return at a later time.
 
 The action button on cards within the Related Products list will appear as an ‘X’ icon. The button will remove the product from the Outfit list.
+## Questions and Answers
+
+  The Questions and Answers module is for user's searching related product's questions and their answers. The elements of this module includes:
+
+  1. SearchBar
+  2. Question and answer list
+  3. Load more questions
+  4. Add questions and answers
+
+### SearchBar
+
+Feature: this part is used for searching questions, questions include searching keywords will be displayed. All questions will appear in order of **'helpfulness'**. After typing 3 or more characters into the search bar the results will begin to filter to only those containing matching text.
+If less than 3 characters, the results will go back to the original state.
+
+### Question and answer list
+
+Feature: this part will display each products' questions and each question's related answers. At default, it will display 2 questions and 2 answers. Answer will appear in order of **'helpfulness'** except **'Seller's** answer which will appear in the very first disregard the helpfulness. User can add his/her own answer to the question and can report the answer he/she dislikes. User can also click **'yes'** once to make some answers be more helpful.
+
+### Load more questions
+
+Feature: each clicking **'More Answered Questions'** button will show 2 more questions. When all questions have been displayed this button will disappear.
+
+### Add questions and answers
+
+  1. Add questions
+  2. Add answers
+
+Feature: The Add questions modal will be popped up after clicking 'Add a question +' button. It will require users to type question content they would like to ask, user's username and email. Upon clicking sumbit button, user's question has been added. Users can use searchbar to find their questions.
+
+The Add answers modal will be popped up after clicking add answer link on the right side of each question. It will require users to type answer content they would like to give to this specific product, user's nickname and email. It's optional to upoload image files within answers. If users add images, their images will be uploaded to [Cloudinary](https://cloudinary.com/documentation/upload_widget_tutorial). The max numeber of images which can be added is 5. Upon clicking sumbit button, user's answer has been added. User can click left-sided load more answer link to find their newest answers. After clicking load more answer link, another 5 answers will appear. If all the answers have been displayed, the load more answer link will change to collapse answers. Click collapse answers, the answer list will go back to original state (2 answers with highest helpfulness. However, seller's answer will be displayed at the first).
+
+
+Unlike the related products list that appears first, the products which appear in this list will not be determined internally, but will be unique to each user. Items will be added to the list only when a user explicitly selects them to be added.
+
+Also unlike the related products list, the first card that appears on the left hand side of the list should not contain a product. Instead the card should display a ‘+’ icon and read “Add to Outfit”. This card will act as a button that adds the currently viewed product to the outfit list.
+
+A product can only be added to an outfit once. While the card to “Add to Outfit” should remain visible, clicking it will not add the item a second time. There is no maximum limit on the number of items a user may add to their outfit.
+Each customer will have one outfit list. This list will be the same regardless of which product detail page they are viewing. Therefore, the list items should persist across page navigation.
+The list should persist for each customer even if they exit the website and return at a later time.
+
+The action button on cards within the Related Products list will appear as an ‘X’ icon. The button will remove the product from the Outfit list.
