@@ -24,7 +24,7 @@ const OVERLAY_STYLES = {
   zIndex: 1000
 }
 
-const ProductComparison = ({ sortedProduct, originalProductFeatures, rating, close, originalName }) => {
+const ProductComparison = ({ sortedProduct, originalProductFeatures, rating, close, originalName, originalReviews }) => {
 
   const findFeaturevalue = () => {
     sortedProduct.styleArray
@@ -38,6 +38,15 @@ const ProductComparison = ({ sortedProduct, originalProductFeatures, rating, clo
     }
     return sizeContainer
   }
+
+  const getRating = (originalReviews) => {
+    let sum = 0;
+    for (let i = 0; i < originalReviews.results.length; i++) {
+      sum += originalReviews.results[i].rating
+    }
+    return sum / originalReviews.results.length
+  }
+
 
   const checkmark = (<FontAwesomeIcon icon={icon({ name: 'check' })}/>)
   return (
@@ -77,7 +86,7 @@ const ProductComparison = ({ sortedProduct, originalProductFeatures, rating, clo
             <td>{(sortedProduct.styleArray.results.length > 0) ? <span><Answer>{checkmark}</Answer></span> : <span><Answer>{null}</Answer></span>}</td>
           </tr>
           <tr>
-            <td><Answer>4.3</Answer></td>
+            <td><Answer>{getRating(originalReviews)}</Answer></td>
             <td><Answer>Rating</Answer></td>
             <td><Answer>{rating}</Answer></td>
           </tr>
