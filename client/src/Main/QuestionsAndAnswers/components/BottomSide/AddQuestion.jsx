@@ -20,7 +20,7 @@ const AddQuestion = (props) => {
   },[props.productid])
 
   return(
-    <div  onClick={() => props.ClicksRef.current.addClicks('QASession', 'addQuestion')}>
+    <div>
         <AddQContainer onClick={(e) => {e.preventDefault();setIsOpen(true)}}>Add a question +</AddQContainer>
         <Modal
         productid={props.productid}

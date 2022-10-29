@@ -51,7 +51,7 @@ function Modal(props) {
     axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions', data, { headers: { "Authorization": gitToken } })
     .then(function (response) {
       console.log('your add question request has been succeed');
-      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${props.productid}&count=100`,
+      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${props.productid}&count=300`,
       { headers: { "Authorization": gitToken } })
       .then((response) => {
         sortingAll(response.data.results);

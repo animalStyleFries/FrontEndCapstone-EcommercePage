@@ -19,7 +19,7 @@ import ExpandImage from "../client/src/Main/WidgetRandy/Components/SmallerCompon
 
 import Question1 from "./Q&A/testQuestionData.js";
 import Answer1 from "./Q&A/testAnswerData.js";
-import MainMonica from "../client/src/Main/WidgetMonica/main.jsx";
+import QuestionsAndAnswers from "../client/src/Main/QuestionsAndAnswers/main.jsx";
 import axios from "axios";
 //third party testing library (https://github.com/testing-library/react-testing-library)
 import { screen, render } from '@testing-library/react'
@@ -42,7 +42,7 @@ it("should fetch correct product questions and answers", async () => {
   var product_id = '40346';
   axios.get.mockImplementation((url) => {
     switch (url) {
-      case `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}&count=100`:
+      case `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}&count=300`:
 
         {
           console.log("resolve 1", Question1)
@@ -64,7 +64,7 @@ it("should fetch correct product questions and answers", async () => {
     }
   })
 
-  render(<MainMonica product_id={product_id} />);
+  render(<QuestionsAndAnswers product_id={product_id} />);
   expect(await screen.findByText(/awesome, but how much/i)).toBeInTheDocument()
   expect(await screen.findByText(/Answer 1/i)).toBeInTheDocument()
 });

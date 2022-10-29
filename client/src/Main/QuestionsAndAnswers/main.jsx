@@ -9,14 +9,14 @@ import styled from 'styled-components';
 import gitToken from '../../hidden.js' ;// dotenv substitute
 
 
-const MainMonica = ({ product_id, ClicksRef}) => {
+const QuestionsAndAnswers = ({ product_id, ClicksRef}) => {
   // console.log('QA part', product_id)
   const [questions, setQuestions] = useState([])
   const [questionNumber, setQuestionNumber] = useState(2)
   const [entry, setEntry] = useState('');
 
   useEffect(() => {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}&count=100`,
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}&count=300`,
      { headers: { "Authorization": gitToken } })
     .then((response) => {
       // console.log('Injected response of product',product_id, response)
@@ -98,4 +98,4 @@ const BottomPart = styled.div`
   justify-content: center;
   width: 100%;
 `
-export default MainMonica
+export default QuestionsAndAnswers
