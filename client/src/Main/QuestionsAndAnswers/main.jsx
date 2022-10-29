@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { useState, useRef} from 'react';
+import { useState, useRef } from 'react';
 import axios from 'axios';
 import QuestionsList from './components/MiddleSide/QuestionsList.jsx';
 import SearchBar from './components/FrontSide/SearchBar.jsx';
 import AddQuestion from './components/BottomSide/AddQuestion.jsx';
 import MoreAnsweredQuestions from './components/BottomSide/MoreAnsweredQuestions.jsx';
 import styled from 'styled-components';
-import gitToken from '../../hidden.js' ;// dotenv substitute
+import gitToken from '../../hidden.js';// dotenv substitute
 
 
 const QuestionsAndAnswers = ({ product_id, ClicksRef }) => {
@@ -17,20 +17,20 @@ const QuestionsAndAnswers = ({ product_id, ClicksRef }) => {
 
   useEffect(() => {
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${product_id}&count=300`,
-     { headers: { "Authorization": gitToken } })
-    .then((response) => {
-      // console.log('Injected response of product',product_id, response)
-      setQuestions(response.data.results);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+      { headers: { "Authorization": gitToken } })
+      .then((response) => {
+        // console.log('Injected response of product',product_id, response)
+        setQuestions(response.data.results);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }, [product_id])
 
   // do the filter for how many questions we want to get
   var filterByNumber = function (number, all) {
     var res = [];
-    for (var i = 0; i < Math.min(number,all.length); i++) {
+    for (var i = 0; i < Math.min(number, all.length); i++) {
       res.push(all[i]);
     }
     return res;
@@ -63,7 +63,7 @@ const QuestionsAndAnswers = ({ product_id, ClicksRef }) => {
     <br></br>
     <ContainerQuestionList>
       {/*filter the content at first, then filter by number */}
-      <QuestionsList questions={filterByNumber(questionNumber,filterByContent(entry, questions))} productid={product_id} ClicksRef={ClicksRef}></QuestionsList>
+      <QuestionsList questions={filterByNumber(questionNumber, filterByContent(entry, questions))} productid={product_id} ClicksRef={ClicksRef}></QuestionsList>
     </ContainerQuestionList>
     <br></br>
     <BottomPart>

@@ -42,13 +42,6 @@ const App = () => {
         relatedProductList: 0,
         yourOutfitList: 0,
         Total: 0
-      },
-      RelatedCards: {
-        relatedProductCards: 0,
-        listBehavior: 0,
-        relatedProductList: 0,
-        yourOutfitList: 0,
-        Total: 0
       }
     },
     addClicks: (mod, ele) => {
@@ -121,7 +114,7 @@ const App = () => {
         {APIResults.product.id ? <QuestionsAndAnswers product_id={APIResults.product.id} ClicksRef={ClicksRef} /> : null}
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
-        {APIResults ? <RelatedItemsWidget APIResults={APIResults} ClicksRef={ClicksRef}ClicksRef={ClicksRef}/> : null}
+        {APIResults ? <RelatedItemsWidget APIResults={APIResults} ClicksRef={ClicksRef}/> : null}
       </Suspense>
       {devMode && <ContainerDev>
         Dev Tool:
