@@ -7,3 +7,4 @@ bundle.js.gz
 package-lock.json
 .gz
 .LICENSE
+client/dist/bundle.js
