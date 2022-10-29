@@ -709,7 +709,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n// change file name to hidden.js\n\nvar gitToken = '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';\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (gitToken);\n\n//# sourceURL=webpack:///./client/src/hidden.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n// change file name to hidden.js\n\nvar gitToken = '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';\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (gitToken);\n\n//# sourceURL=webpack:///./client/src/hidden.js?");
 
 /***/ }),
 
