@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect, useRef, Suspense } from 'react'
 import styled from 'styled-components'
-import MainEric from './WidgetEric/main.jsx'
+import RelatedItemsWidget from './RelatedItemsWidget/main.jsx'
 import MainMonica from './WidgetMonica/main.jsx'
 import MainRandy from './WidgetRandy/main.jsx'
 import axios from 'axios'
@@ -16,7 +16,7 @@ const App = () => {
 
   // set up react lazy
   const MainMonica = React.lazy(() => import('./WidgetMonica/main.jsx'))
-  const MainEric = React.lazy(() => import('./WidgetEric/main.jsx'))
+  const RelatedItemsWidget = React.lazy(() => import('./RelatedItemsWidget/main.jsx'))
 
   // set up initial ref
   const initialClicks = {
@@ -114,7 +114,7 @@ const App = () => {
         {APIResults.product.id ? <MainMonica product_id={APIResults.product.id} ClicksRef={ClicksRef} /> : null}
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
-        {APIResults ? <MainEric APIResults={APIResults} ClicksRef={ClicksRef}/> : null}
+        {APIResults ? <RelatedItemsWidget APIResults={APIResults} ClicksRef={ClicksRef}/> : null}
       </Suspense>
       {devMode && <ContainerDev>
         Dev Tool:
