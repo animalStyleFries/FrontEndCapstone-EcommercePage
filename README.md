@@ -1,5 +1,7 @@
 # FrontEndCapstone-EcommercePage
 
+![Alt text](./SneakPeak.png "Preview")
+
 The goal of this project was to create a front end page that could be used for an ecommerce website.
 
 Main tech stack:
